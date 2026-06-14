@@ -16,13 +16,14 @@
       --gold: #c9a84c;
       --gold-light: #e0c070;
       --white: #f5f3ef;
-      --muted: #999;
+      --muted: #888;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'Montserrat', sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--black);
       color: var(--white);
@@ -30,7 +31,133 @@
       font-weight: 300;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      cursor: none;
+      overflow-x: hidden;
     }
+    body:not(.loaded) { overflow: hidden; }
+
+    /* ── GRAIN OVERLAY ── */
+    #grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9997;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      will-change: transform;
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      opacity: 0.6;
+      transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), opacity 0.2s;
+      will-change: transform;
+    }
+    body.cursor-hover #cursor-ring { width: 52px; height: 52px; opacity: 0.4; }
+    body.cursor-hover #cursor-dot { width: 3px; height: 3px; }
+
+    /* ── PRELOADER ── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+    }
+    .pre-curtain {
+      position: absolute;
+      left: 0; right: 0;
+      background: var(--black);
+      transition: transform 1.3s var(--ease-in-out-quart);
+    }
+    .pre-curtain-top {
+      top: 0;
+      height: 51vh; /* slight overlap to avoid gap */
+      transform-origin: top;
+    }
+    .pre-curtain-bottom {
+      bottom: 0;
+      height: 51vh;
+      transform-origin: bottom;
+    }
+    .pre-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .pre-maison {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      letter-spacing: 0.55em;
+      color: var(--white);
+      display: block;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: preFadeUp 0.9s 0.2s var(--ease-out-expo) forwards;
+    }
+    .pre-gold-line {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 18px auto 14px;
+      animation: preLineExpand 1.1s 0.5s ease forwards;
+    }
+    .pre-subtitle {
+      font-family: var(--sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.65em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: preFadeUp 0.8s 0.8s var(--ease-out-expo) forwards;
+    }
+    .pre-counter {
+      position: fixed;
+      bottom: 44px;
+      right: 52px;
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(201,168,76,0.12);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      pointer-events: none;
+    }
+    @keyframes preFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes preLineExpand {
+      to { width: 100px; }
+    }
+    #preloader.exit .pre-curtain-top { transform: translateY(-100%); }
+    #preloader.exit .pre-curtain-bottom { transform: translateY(100%); }
+    #preloader.exit .pre-content { opacity: 0; transition-duration: 0.3s; }
+    #preloader.gone { display: none; }
 
     /* ── NAV ── */
     nav {
@@ -40,30 +167,39 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 48px;
+      padding: 0 52px;
       height: 72px;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0);
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background 0.5s, border-color 0.5s, backdrop-filter 0.5s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.93);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
     }
     .nav-logo {
       font-family: var(--serif);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 300;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--white);
       text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
     .nav-logo span { color: var(--gold); }
+    body.loaded .nav-logo { opacity: 1; transition-delay: 0.8s; }
     .nav-links {
       display: flex;
       gap: 36px;
       list-style: none;
     }
     .nav-links a {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
@@ -72,49 +208,102 @@
     .nav-links a:hover { color: var(--white); }
     .nav-cta {
       font-family: var(--sans);
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
       text-decoration: none;
       border: 1px solid var(--gold);
-      padding: 8px 20px;
+      padding: 8px 22px;
       transition: all 0.25s;
+      opacity: 0;
     }
     .nav-cta:hover { background: var(--gold); color: var(--black); }
+    body.loaded .nav-cta { opacity: 1; transition-delay: 0.9s; }
 
     /* ── HERO ── */
     .hero {
       position: relative;
       height: 100vh;
-      min-height: 680px;
+      min-height: 700px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      text-align: center;
       overflow: hidden;
     }
-    .hero-bg {
+    .hero-video-wrap {
       position: absolute;
       inset: 0;
-      background: #0a0a0a;
+      overflow: hidden;
     }
-    .hero-content { position: relative; z-index: 1; padding: 0 24px; }
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      transform: scale(1.06);
+      transition: opacity 2s ease;
+    }
+    .hero-video-wrap video.ready { opacity: 0.18; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(10,10,10,0.96) 40%, rgba(10,10,10,0.5) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, transparent 30%, rgba(10,10,10,0.6) 100%);
+    }
+    /* Gold vertical accent line */
+    .hero-accent-line {
+      position: absolute;
+      left: 52px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 0;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      transition: height 1.4s 1.2s var(--ease-out-expo);
+    }
+    body.loaded .hero-accent-line { height: 280px; }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 80px 0 80px;
+      max-width: 860px;
+    }
+    /* Clip-path reveal for each hero element */
+    .hero-reveal {
+      overflow: hidden;
+    }
+    .hero-reveal-inner {
+      transform: translateY(105%);
+      transition: transform 1.1s var(--ease-out-expo);
+    }
+    body.loaded .hero-reveal-inner { transform: translateY(0); }
+    body.loaded .hero-reveal-inner:nth-child(1) { transition-delay: 0.1s; }
+
+    /* Stagger each reveal */
+    .hero-r1 .hero-reveal-inner { transition-delay: 0.05s; }
+    .hero-r2 .hero-reveal-inner { transition-delay: 0.2s; }
+    .hero-r3 .hero-reveal-inner { transition-delay: 0.32s; }
+    .hero-r4 .hero-reveal-inner { transition-delay: 0.44s; }
+    .hero-r5 .hero-reveal-inner { transition-delay: 0.58s; }
+    .hero-r6 .hero-reveal-inner { transition-delay: 0.72s; }
+
     .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
+      font-size: 0.6rem;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
     .hero-headline {
       font-family: var(--serif);
-      font-size: clamp(4rem, 10vw, 9rem);
+      font-size: clamp(4.5rem, 10vw, 9.5rem);
       font-weight: 300;
-      line-height: 0.95;
-      letter-spacing: 0.06em;
+      line-height: 0.92;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 36px;
     }
@@ -123,387 +312,557 @@
       color: var(--gold-light);
     }
     .hero-sub {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(245,243,239,0.6);
+      color: rgba(245,243,239,0.55);
       margin-bottom: 52px;
+      line-height: 1.9;
     }
-    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
     .btn-primary {
       display: inline-block;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--black);
       background: var(--gold);
-      padding: 16px 36px;
+      padding: 16px 38px;
       text-decoration: none;
-      transition: background 0.25s;
+      transition: background 0.25s, transform 0.25s;
     }
     .btn-primary:hover { background: var(--gold-light); }
     .btn-outline {
       display: inline-block;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--white);
-      border: 1px solid rgba(245,243,239,0.4);
-      padding: 16px 36px;
+      border: 1px solid rgba(245,243,239,0.35);
+      padding: 16px 38px;
       text-decoration: none;
       transition: all 0.25s;
     }
-    .btn-outline:hover { border-color: var(--white); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Magnetic button wrapper */
+    .btn-magnetic {
+      display: inline-block;
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+
     .hero-scroll {
       position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 40px;
+      right: 52px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
+      gap: 10px;
+      color: rgba(245,243,239,0.3);
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.6s 1.6s;
     }
+    body.loaded .hero-scroll { opacity: 1; }
     .hero-scroll-line {
       width: 1px;
-      height: 40px;
+      height: 48px;
       background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollLine 1.8s ease-in-out infinite;
+      animation: scrollPulse 2s ease-in-out infinite;
     }
-    @keyframes scrollLine {
-      0% { transform: scaleY(0); transform-origin: top; }
-      50% { transform: scaleY(1); transform-origin: top; }
-      100% { transform: scaleY(1); opacity: 0; }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── BRAND TICKER ── */
+    .ticker-section {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--charcoal);
+      padding: 0;
+      user-select: none;
+    }
+    .ticker-row {
+      display: flex;
+      white-space: nowrap;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .ticker-row:last-child { border-bottom: none; }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: tickerLeft 28s linear infinite;
+    }
+    .ticker-row.reverse .ticker-track {
+      animation: tickerRight 32s linear infinite;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 32px;
+      font-size: 0.52rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.5);
+      font-family: var(--sans);
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    .ticker-item::after {
+      content: '◆';
+      font-size: 0.3rem;
+      margin-left: 32px;
+      color: rgba(201,168,76,0.25);
+    }
+    @keyframes tickerLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes tickerRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
     }
 
     /* ── STATS BAR ── */
     .stats-bar {
-      background: var(--charcoal);
-      border-top: 1px solid var(--border);
+      background: var(--black);
       border-bottom: 1px solid var(--border);
-      padding: 28px 48px;
-      display: flex;
-      justify-content: center;
-      gap: 80px;
+      padding: 52px 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
     }
-    .stat { text-align: center; }
+    .stat {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
     .stat-number {
       font-family: var(--serif);
-      font-size: 2rem;
+      font-size: 3.2rem;
       font-weight: 300;
       color: var(--gold);
       display: block;
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
     }
     .stat-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.32s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+    /* Clip-path reveal for section titles */
+    .reveal-clip {
+      overflow: hidden;
+    }
+    .reveal-clip-inner {
+      transform: translateY(100%);
+      transition: transform 1s var(--ease-out-expo);
+    }
+    .reveal-clip.visible .reveal-clip-inner {
+      transform: translateY(0);
+    }
+
     /* ── SECTION COMMONS ── */
-    section { padding: 100px 48px; }
+    section { padding: 110px 80px; }
     .section-eyebrow {
-      font-size: 0.62rem;
-      letter-spacing: 0.4em;
+      font-size: 0.58rem;
+      letter-spacing: 0.45em;
       text-transform: uppercase;
       color: var(--gold);
       display: block;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .section-title {
       font-family: var(--serif);
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
       font-weight: 300;
-      line-height: 1.1;
+      line-height: 1.08;
       margin-bottom: 24px;
     }
     .divider {
       width: 48px;
       height: 1px;
       background: var(--gold);
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
 
     /* ── ABOUT ── */
+    #about { background: var(--charcoal); }
     .about {
-      background: var(--charcoal);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 100px;
       align-items: center;
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: -20px;
+      right: 20px; bottom: 20px;
+      border: 1px solid rgba(201,168,76,0.2);
+      z-index: 0;
+      pointer-events: none;
     }
     .about-img {
       aspect-ratio: 3/4;
       object-fit: cover;
       width: 100%;
-      filter: brightness(0.9);
+      filter: brightness(0.85) contrast(1.05);
+      position: relative;
+      z-index: 1;
+      transform: scale(1.04);
+      transition: transform 1.2s var(--ease-out-expo);
     }
+    .about-img-wrap.visible .about-img { transform: scale(1); }
     .about-text p {
-      color: rgba(245,243,239,0.75);
-      font-size: 0.9rem;
+      color: rgba(245,243,239,0.72);
+      font-size: 0.88rem;
       margin-bottom: 20px;
-      line-height: 1.9;
+      line-height: 1.95;
     }
-    .about-text p:last-of-type { margin-bottom: 32px; }
+    .about-text p:last-of-type { margin-bottom: 36px; }
 
     /* ── SERVICES ── */
-    #services { background: var(--black); max-width: 1200px; margin: 0 auto; }
-    .services-header { text-align: center; margin-bottom: 64px; }
-    .services-header .divider { margin: 0 auto 32px; }
+    #services { background: var(--black); }
+    .services-inner { max-width: 1240px; margin: 0 auto; }
+    .services-header { text-align: center; margin-bottom: 72px; }
+    .services-header .divider { margin: 0 auto 36px; }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
+      background: var(--border);
     }
     .service-card {
       position: relative;
       overflow: hidden;
       aspect-ratio: 3/4;
-      cursor: pointer;
+      cursor: none;
+      background: var(--black);
     }
     .service-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
-      filter: brightness(0.55);
+      transition: transform 0.8s var(--ease-out-expo), filter 0.5s;
+      filter: brightness(0.5) saturate(0.8);
     }
-    .service-card:hover img { transform: scale(1.04); filter: brightness(0.4); }
+    .service-card:hover img { transform: scale(1.06); filter: brightness(0.35) saturate(0.6); }
     .service-card-content {
       position: absolute;
       inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 36px 32px;
+      padding: 40px 36px;
     }
     .service-tag {
-      font-size: 0.58rem;
-      letter-spacing: 0.35em;
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .service-name {
       font-family: var(--serif);
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 300;
       line-height: 1.1;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .service-desc {
-      font-size: 0.78rem;
-      color: rgba(245,243,239,0.7);
-      line-height: 1.7;
-      margin-bottom: 24px;
-      max-width: 260px;
+      font-size: 0.76rem;
+      color: rgba(245,243,239,0.68);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 280px;
       opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.35s ease;
+      transform: translateY(12px);
+      transition: all 0.4s ease;
     }
-    .service-card:hover .service-desc {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .service-card:hover .service-desc { opacity: 1; transform: translateY(0); }
     .service-link {
-      font-size: 0.62rem;
-      letter-spacing: 0.25em;
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--gold);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .service-link::after {
       content: '→';
-      transition: transform 0.2s;
+      font-size: 1rem;
+      transition: transform 0.25s;
     }
-    .service-card:hover .service-link::after { transform: translateX(4px); }
+    .service-card:hover .service-link::after { transform: translateX(6px); }
+    /* Gold corner accent on hover */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px; height: 40px;
+      border-top: 1px solid var(--gold);
+      border-left: 1px solid var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s, width 0.4s, height 0.4s;
+      z-index: 2;
+    }
+    .service-card:hover::before { opacity: 1; width: 60px; height: 60px; }
 
     /* ── PROCESS ── */
-    .process-section {
-      background: var(--charcoal);
-      text-align: center;
-    }
-    .process-section .section-title { margin-bottom: 60px; }
+    .process-section { background: var(--charcoal); text-align: center; }
+    .process-inner { max-width: 1100px; margin: 0 auto; }
     .process-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 48px;
-      max-width: 1000px;
-      margin: 0 auto;
+      gap: 0;
+      margin-top: 72px;
+      position: relative;
     }
-    .process-step { text-align: center; }
+    /* Connecting line */
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), var(--border), transparent);
+      pointer-events: none;
+    }
+    .process-step { padding: 0 24px; }
     .step-number {
       font-family: var(--serif);
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       font-weight: 300;
-      color: var(--border);
+      color: var(--gold);
+      opacity: 0.18;
       line-height: 1;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .step-title {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--white);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .step-desc {
       font-size: 0.78rem;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     /* ── TESTIMONIALS ── */
     .testimonials-section { background: var(--black); }
-    .testimonials-header { text-align: center; margin-bottom: 60px; }
-    .testimonials-header .divider { margin: 0 auto 32px; }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testimonials-header { text-align: center; margin-bottom: 72px; }
+    .testimonials-header .divider { margin: 0 auto 36px; }
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto 48px;
+      gap: 2px;
+      background: var(--border);
+      margin-bottom: 60px;
     }
     .testimonial-card {
       background: var(--card);
-      border: 1px solid var(--border);
-      padding: 40px 36px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .testimonial-card:hover { background: #202020; }
+    /* Gold corner */
+    .testimonial-card::after {
+      content: '"';
+      position: absolute;
+      top: 24px; right: 32px;
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(201,168,76,0.08);
+      line-height: 1;
+      pointer-events: none;
     }
     .stars {
       color: var(--gold);
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      margin-bottom: 20px;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      margin-bottom: 24px;
+      display: block;
     }
     .testimonial-quote {
       font-family: var(--serif);
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-style: italic;
       font-weight: 300;
-      line-height: 1.8;
+      line-height: 1.85;
       color: rgba(245,243,239,0.9);
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
-    .testimonial-meta { display: flex; align-items: center; gap: 14px; }
+    .testimonial-meta { display: flex; align-items: center; gap: 16px; }
     .testimonial-avatar {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: var(--border);
-      border: 1px solid var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--serif);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--gold);
       flex-shrink: 0;
     }
     .testimonial-name {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--white);
     }
     .testimonial-location {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       color: var(--muted);
-      margin-top: 2px;
+      margin-top: 3px;
     }
     .testimonials-cta { text-align: center; }
 
     /* ── CONTACT ── */
     .contact-section { background: var(--charcoal); }
     .contact-inner {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 100px;
     }
-    .contact-info h2 { margin-bottom: 24px; }
-    .contact-info .divider { margin-bottom: 32px; }
+    .contact-info h2 { margin-bottom: 28px; }
+    .contact-info .divider { margin-bottom: 36px; }
     .contact-info p {
-      color: rgba(245,243,239,0.7);
-      font-size: 0.85rem;
-      margin-bottom: 36px;
-      line-height: 1.9;
+      color: rgba(245,243,239,0.68);
+      font-size: 0.86rem;
+      margin-bottom: 40px;
+      line-height: 1.95;
     }
     .contact-detail {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 40px;
+      gap: 14px;
+      margin-bottom: 44px;
     }
     .contact-line {
       font-size: 0.78rem;
       color: var(--muted);
       display: flex;
-      gap: 12px;
+      gap: 16px;
+      align-items: baseline;
     }
-    .contact-line strong { color: var(--white); min-width: 80px; }
-    .social-row { display: flex; gap: 16px; }
-    .social-btn {
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
+    .contact-line strong {
+      color: rgba(245,243,239,0.6);
+      min-width: 80px;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--white);
+      font-weight: 400;
+    }
+    .social-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-btn {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
       border: 1px solid var(--border);
-      padding: 10px 18px;
+      padding: 10px 20px;
       text-decoration: none;
       transition: all 0.2s;
     }
     .social-btn:hover { border-color: var(--gold); color: var(--gold); }
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(245,243,239,0.4);
     }
     .form-input, .form-select, .form-textarea {
-      background: var(--black);
+      background: rgba(10,10,10,0.6);
       border: 1px solid var(--border);
+      border-bottom-color: rgba(201,168,76,0.3);
       color: var(--white);
       font-family: var(--sans);
       font-size: 0.82rem;
-      padding: 14px 16px;
+      padding: 14px 0;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.3s;
       width: 100%;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-radius: 0;
+      background: transparent;
     }
     .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: var(--gold);
+      border-bottom-color: var(--gold);
     }
-    .form-input::placeholder, .form-textarea::placeholder { color: #444; }
-    .form-select { appearance: none; cursor: pointer; }
-    .form-select option { background: var(--black); }
-    .form-textarea { min-height: 110px; resize: vertical; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(245,243,239,0.2); }
+    .form-select { appearance: none; cursor: none; }
+    .form-select option { background: var(--charcoal); color: var(--white); }
+    .form-textarea { min-height: 100px; resize: none; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .form-submit {
       font-family: var(--sans);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--black);
       background: var(--gold);
       border: none;
-      padding: 16px 36px;
-      cursor: pointer;
+      padding: 18px 44px;
+      cursor: none;
       transition: background 0.2s;
       align-self: flex-start;
-      margin-top: 4px;
+      margin-top: 8px;
     }
     .form-submit:hover { background: var(--gold-light); }
 
@@ -511,84 +870,128 @@
     footer {
       background: var(--black);
       border-top: 1px solid var(--border);
-      padding: 60px 48px 36px;
+      padding: 72px 80px 44px;
     }
     .footer-top {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 56px;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
     }
     .footer-logo {
       font-family: var(--serif);
       font-size: 1.1rem;
       font-weight: 300;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--white);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      display: block;
     }
     .footer-logo span { color: var(--gold); }
     .footer-tagline {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 24px;
-      max-width: 260px;
+      line-height: 1.9;
+      margin-bottom: 28px;
+      max-width: 280px;
     }
     .footer-col-title {
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      display: block;
     }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .footer-links a {
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--white); }
     .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 28px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 24px;
+      gap: 40px;
     }
-    .footer-copy { font-size: 0.65rem; color: var(--muted); }
+    .footer-copy { font-size: 0.62rem; color: rgba(245,243,239,0.3); }
     .footer-legal {
-      font-size: 0.6rem;
-      color: #444;
-      line-height: 1.7;
-      max-width: 700px;
+      font-size: 0.58rem;
+      color: rgba(245,243,239,0.2);
+      line-height: 1.8;
+      max-width: 620px;
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      section { padding: 88px 48px; }
+      .hero-content { padding: 0 60px; }
+      .hero-accent-line { left: 40px; }
+      nav { padding: 0 36px; }
+      .stats-bar { padding: 48px 48px; }
+      footer { padding: 60px 48px 36px; }
+    }
     @media (max-width: 900px) {
+      body { cursor: auto; }
+      #cursor-dot, #cursor-ring { display: none; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
-      section { padding: 72px 24px; }
-      .about { grid-template-columns: 1fr; gap: 40px; }
+      section { padding: 72px 28px; }
+      .hero-content { padding: 0 28px; }
+      .hero-accent-line { display: none; }
+      .hero-headline { font-size: clamp(3.5rem, 12vw, 6rem); }
+      .about { grid-template-columns: 1fr; gap: 48px; }
       .about-img { aspect-ratio: 16/9; }
       .services-grid { grid-template-columns: 1fr; }
       .service-card { aspect-ratio: 4/3; }
-      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .process-grid::before { display: none; }
       .testimonials-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .stats-bar { gap: 32px; flex-wrap: wrap; padding: 24px; }
-      .footer-bottom { flex-direction: column; }
+      .contact-inner { grid-template-columns: 1fr; gap: 56px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 20px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 40px 28px; gap: 24px; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 0; }
+      .stat:nth-child(2n) { border-right: none; }
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
     }
   </style>
 </head>
 <body>
 
+<!-- ── GRAIN OVERLAY ── -->
+<svg id="grain" aria-hidden="true">
+  <filter id="noise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" seed="2" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#noise)"/>
+</svg>
+
+<!-- ── CUSTOM CURSOR ── -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ── PRELOADER ── -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-curtain pre-curtain-top"></div>
+  <div class="pre-curtain pre-curtain-bottom"></div>
+  <div class="pre-content">
+    <span class="pre-maison">Maison</span>
+    <div class="pre-gold-line"></div>
+    <span class="pre-subtitle">Black Label &nbsp;·&nbsp; West Palm Beach</span>
+  </div>
+  <div class="pre-counter"><span id="pre-num">0</span></div>
+</div>
+
 <!-- ── NAV ── -->
-<nav>
+<nav id="nav">
   <a class="nav-logo" href="#"><span>Maison</span> Black Label</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -602,95 +1005,175 @@
 
 <!-- ── HERO ── -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
+  <!-- Video background: skeleton watch mechanism — cinematic, dark, editorial -->
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline id="hero-video" poster="https://images.pexels.com/videos/6867654/black-background-clock-shield-luxury-silver-6867654.jpeg?auto=compress&cs=tinysrgb&w=1200">
+      <source src="https://videos.pexels.com/video-files/6867654/6867654-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-accent-line"></div>
+
   <div class="hero-content">
-    <p class="hero-eyebrow">West Palm Beach, FL &nbsp;&middot;&nbsp; Est. Luxury Watch & Asset Specialists</p>
-    <h1 class="hero-headline">Art.<br /><em>Assets.</em><br />Aura.</h1>
-    <p class="hero-sub">Curating the world's most exclusive timepieces & exotic assets</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="collection.html">View Curated Collection</a>
-      <a class="btn-outline" href="#contact">Inquire Now</a>
+    <div class="hero-reveal hero-r1">
+      <p class="hero-eyebrow hero-reveal-inner">West Palm Beach, FL &nbsp;·&nbsp; Luxury Watch &amp; Asset Specialists</p>
+    </div>
+
+    <div class="hero-headline">
+      <div class="hero-reveal hero-r2">
+        <span class="hero-reveal-inner" style="display:block;">Art.</span>
+      </div>
+      <div class="hero-reveal hero-r3">
+        <span class="hero-reveal-inner" style="display:block;"><em>Assets.</em></span>
+      </div>
+      <div class="hero-reveal hero-r4">
+        <span class="hero-reveal-inner" style="display:block;">Aura.</span>
+      </div>
+    </div>
+
+    <div class="hero-reveal hero-r5">
+      <p class="hero-sub hero-reveal-inner">Curating the world's most exclusive timepieces &amp; exotic assets</p>
+    </div>
+
+    <div class="hero-reveal hero-r6">
+      <div class="hero-actions hero-reveal-inner">
+        <span class="btn-magnetic"><a class="btn-primary" href="collection.html">View Curated Collection</a></span>
+        <span class="btn-magnetic"><a class="btn-outline" href="#contact">Inquire Now</a></span>
+      </div>
     </div>
   </div>
+
   <div class="hero-scroll">
     <span>Scroll</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
 
+<!-- ── BRAND TICKER ── -->
+<div class="ticker-section" aria-hidden="true">
+  <div class="ticker-row">
+    <div class="ticker-track">
+      <span class="ticker-item">Patek Philippe</span>
+      <span class="ticker-item">Rolex</span>
+      <span class="ticker-item">Audemars Piguet</span>
+      <span class="ticker-item">Vacheron Constantin</span>
+      <span class="ticker-item">Richard Mille</span>
+      <span class="ticker-item">A. Lange &amp; Söhne</span>
+      <span class="ticker-item">Hublot</span>
+      <span class="ticker-item">IWC Schaffhausen</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item">Patek Philippe</span>
+      <span class="ticker-item">Rolex</span>
+      <span class="ticker-item">Audemars Piguet</span>
+      <span class="ticker-item">Vacheron Constantin</span>
+      <span class="ticker-item">Richard Mille</span>
+      <span class="ticker-item">A. Lange &amp; Söhne</span>
+      <span class="ticker-item">Hublot</span>
+      <span class="ticker-item">IWC Schaffhausen</span>
+    </div>
+  </div>
+  <div class="ticker-row reverse">
+    <div class="ticker-track">
+      <span class="ticker-item">Breguet</span>
+      <span class="ticker-item">Jaeger-LeCoultre</span>
+      <span class="ticker-item">Panerai</span>
+      <span class="ticker-item">F.P. Journe</span>
+      <span class="ticker-item">Zenith</span>
+      <span class="ticker-item">Cartier</span>
+      <span class="ticker-item">Chopard</span>
+      <span class="ticker-item">Blancpain</span>
+      <!-- Duplicate -->
+      <span class="ticker-item">Breguet</span>
+      <span class="ticker-item">Jaeger-LeCoultre</span>
+      <span class="ticker-item">Panerai</span>
+      <span class="ticker-item">F.P. Journe</span>
+      <span class="ticker-item">Zenith</span>
+      <span class="ticker-item">Cartier</span>
+      <span class="ticker-item">Chopard</span>
+      <span class="ticker-item">Blancpain</span>
+    </div>
+  </div>
+</div>
+
 <!-- ── STATS BAR ── -->
 <div class="stats-bar">
-  <div class="stat">
-    <span class="stat-number">500+</span>
+  <div class="stat reveal reveal-delay-1">
+    <span class="stat-number" data-target="500" data-suffix="+">500+</span>
     <span class="stat-label">Transactions Completed</span>
   </div>
-  <div class="stat">
-    <span class="stat-number">100%</span>
+  <div class="stat reveal reveal-delay-2">
+    <span class="stat-number" data-target="100" data-suffix="%">100%</span>
     <span class="stat-label">Insured Shipping</span>
   </div>
-  <div class="stat">
-    <span class="stat-number">24hr</span>
+  <div class="stat reveal reveal-delay-3">
+    <span class="stat-number" data-target="24" data-suffix="hr">24hr</span>
     <span class="stat-label">Quote Turnaround</span>
   </div>
-  <div class="stat">
-    <span class="stat-number">5&#9733;</span>
-    <span class="stat-label">Client Rating</span>
+  <div class="stat reveal reveal-delay-4">
+    <span class="stat-number" data-target="5" data-suffix="★">5★</span>
+    <span class="stat-label">Client Satisfaction</span>
   </div>
 </div>
 
 <!-- ── ABOUT ── -->
-<section id="about" style="background: var(--charcoal);">
+<section id="about">
   <div class="about">
-    <img
-      class="about-img"
-      src="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=800"
-      alt="Luxury timepiece"
-    />
+    <div class="about-img-wrap reveal">
+      <img
+        class="about-img"
+        src="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=800"
+        alt="Luxury timepiece"
+      />
+    </div>
     <div class="about-text">
-      <span class="section-eyebrow">About Maison Black Label</span>
-      <h2 class="section-title">A Trusted Partner for the Discerning Collector</h2>
-      <div class="divider"></div>
-      <p>At Maison Black Label, we specialize in curating and delivering the world's most exclusive exotic assets and luxury timepieces. Our mission is rooted in trust, precision, and excellence — ensuring every client receives not just a purchase, but an experience worthy of the pieces we represent.</p>
-      <p>From first inquiry to delivery, every detail is handled with discretion and care. Clear communication, streamlined transactions, and fully insured expedited shipping are the standard — not the exception.</p>
-      <p>We are more than a marketplace. We are the trusted partner that discerning collectors and enthusiasts worldwide turn to, again and again.</p>
-      <a class="btn-primary" href="#contact" style="margin-top: 8px;">Start a Conversation</a>
+      <div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><span class="section-eyebrow">About Maison Black Label</span></div></div>
+      <div class="reveal-clip reveal reveal-delay-2"><div class="reveal-clip-inner"><h2 class="section-title">A Trusted Partner for the Discerning Collector</h2></div></div>
+      <div class="reveal reveal-delay-2"><div class="divider"></div></div>
+      <div class="reveal reveal-delay-3">
+        <p>At Maison Black Label, we specialize in curating and delivering the world's most exclusive exotic assets and luxury timepieces. Our mission is rooted in trust, precision, and excellence — ensuring every client receives not just a purchase, but an experience worthy of the pieces we represent.</p>
+        <p>From first inquiry to delivery, every detail is handled with discretion and care. Clear communication, streamlined transactions, and fully insured expedited shipping are the standard — not the exception.</p>
+        <p>We are more than a marketplace. We are the trusted partner that discerning collectors and enthusiasts worldwide turn to, again and again.</p>
+        <a class="btn-primary btn-magnetic" href="#contact" style="margin-top: 8px; display:inline-block;">Start a Conversation</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ── SERVICES ── -->
 <section id="services">
-  <div class="services-header">
-    <span class="section-eyebrow">What We Do</span>
-    <h2 class="section-title">Our Services</h2>
-    <div class="divider"></div>
-  </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <img src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Source a Timepiece" />
-      <div class="service-card-content">
-        <span class="service-tag">Service 01</span>
-        <h3 class="service-name">Source</h3>
-        <p class="service-desc">Looking for a specific reference, limited edition, or historically significant piece? We leverage an exclusive network to locate virtually any timepiece — quickly and reliably.</p>
-        <a class="service-link" href="#contact">Find My Watch</a>
-      </div>
+  <div class="services-inner">
+    <div class="services-header">
+      <div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow">What We Do</span></div></div>
+      <div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title">Our Services</h2></div></div>
+      <div class="reveal reveal-delay-2"><div class="divider"></div></div>
     </div>
-    <div class="service-card">
-      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Buy Sell Trade" />
-      <div class="service-card-content">
-        <span class="service-tag">Service 02</span>
-        <h3 class="service-name">Buy &middot; Sell &middot; Trade</h3>
-        <p class="service-desc">Whether you're acquiring, offloading, or upgrading your collection, our BST program is open to all. Submit your details and receive a response within 24 hours.</p>
-        <a class="service-link" href="#contact">Make a Deal</a>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Source a Timepiece" />
+        <div class="service-card-content">
+          <span class="service-tag">Service 01</span>
+          <h3 class="service-name">Source</h3>
+          <p class="service-desc">Looking for a specific reference, limited edition, or historically significant piece? We leverage an exclusive network to locate virtually any timepiece — quickly and reliably.</p>
+          <a class="service-link" href="#contact">Find My Watch</a>
+        </div>
       </div>
-    </div>
-    <div class="service-card">
-      <img src="https://images.pexels.com/photos/17351225/pexels-photo-17351225.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Consignment" />
-      <div class="service-card-content">
-        <span class="service-tag">Service 03</span>
-        <h3 class="service-name">Consignment</h3>
-        <p class="service-desc">If the market is moving against your piece, our consignment program helps you achieve your target price. Submit photos and details — we'll handle the rest.</p>
-        <a class="service-link" href="#contact">Consign My Watch</a>
+      <div class="service-card reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Buy Sell Trade" />
+        <div class="service-card-content">
+          <span class="service-tag">Service 02</span>
+          <h3 class="service-name">Buy &middot; Sell &middot; Trade</h3>
+          <p class="service-desc">Whether you're acquiring, offloading, or upgrading your collection, our BST program is open to all. Submit your details and receive a response within 24 hours.</p>
+          <a class="service-link" href="#contact">Make a Deal</a>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <img src="https://images.pexels.com/photos/17351225/pexels-photo-17351225.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Consignment" />
+        <div class="service-card-content">
+          <span class="service-tag">Service 03</span>
+          <h3 class="service-name">Consignment</h3>
+          <p class="service-desc">If the market is moving against your piece, our consignment program helps you achieve your target price. Submit photos and details — we'll handle the rest.</p>
+          <a class="service-link" href="#contact">Consign My Watch</a>
+        </div>
       </div>
     </div>
   </div>
@@ -698,77 +1181,81 @@
 
 <!-- ── PROCESS ── -->
 <section class="process-section" id="process">
-  <span class="section-eyebrow" style="display:block; text-align:center; margin-bottom:16px;">How It Works</span>
-  <h2 class="section-title" style="text-align:center;">Simple. Transparent. Secure.</h2>
-  <div class="divider" style="margin: 0 auto 60px;"></div>
-  <div class="process-grid">
-    <div class="process-step">
-      <div class="step-number">01</div>
-      <div class="step-title">Inquire</div>
-      <p class="step-desc">Reach out via our form, phone, or DM. Tell us what you're looking for or what you have.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-number">02</div>
-      <div class="step-title">Quote</div>
-      <p class="step-desc">We respond within 24 hours with a competitive, transparent offer — no games, no lowballs.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-number">03</div>
-      <div class="step-title">Transact</div>
-      <p class="step-desc">Secure, streamlined payment. Every transaction is handled with discretion and care.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-number">04</div>
-      <div class="step-title">Deliver</div>
-      <p class="step-desc">Fully insured, expedited shipping directly to your door. Safe every step of the way.</p>
+  <div class="process-inner">
+    <div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow" style="display:block; text-align:center;">How It Works</span></div></div>
+    <div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title" style="text-align:center;">Simple. Transparent. Secure.</h2></div></div>
+    <div class="reveal reveal-delay-2" style="display:flex; justify-content:center;"><div class="divider"></div></div>
+    <div class="process-grid">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-number">01</div>
+        <div class="step-title">Inquire</div>
+        <p class="step-desc">Reach out via our form, phone, or DM. Tell us what you're looking for or what you have.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-number">02</div>
+        <div class="step-title">Quote</div>
+        <p class="step-desc">We respond within 24 hours with a competitive, transparent offer — no games, no lowballs.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-number">03</div>
+        <div class="step-title">Transact</div>
+        <p class="step-desc">Secure, streamlined payment. Every transaction is handled with discretion and care.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-number">04</div>
+        <div class="step-title">Deliver</div>
+        <p class="step-desc">Fully insured, expedited shipping directly to your door. Safe every step of the way.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ── TESTIMONIALS ── -->
 <section class="testimonials-section" id="testimonials">
-  <div class="testimonials-header">
-    <span class="section-eyebrow">Client Testimonials</span>
-    <h2 class="section-title">What Our Clients Say</h2>
-    <div class="divider"></div>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="testimonial-quote">"Makoa is extremely knowledgeable and went over and beyond helping me sell my watch. The process was seamless from start to finish."</p>
-      <div class="testimonial-meta">
-        <div class="testimonial-avatar">CT</div>
-        <div>
-          <div class="testimonial-name">Corey T.</div>
-          <div class="testimonial-location">Verified Client</div>
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow">Client Testimonials</span></div></div>
+      <div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title">What Our Clients Say</h2></div></div>
+      <div class="reveal reveal-delay-2"><div class="divider"></div></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <span class="stars">★★★★★</span>
+        <p class="testimonial-quote">"Makoa is extremely knowledgeable and went over and beyond helping me sell my watch. The process was seamless from start to finish."</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">CT</div>
+          <div>
+            <div class="testimonial-name">Corey T.</div>
+            <div class="testimonial-location">Verified Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <span class="stars">★★★★★</span>
+        <p class="testimonial-quote">"Wanted a very specific piece on a short timeline and he pulled through. Made the whole process easy and safe as an out-of-state buyer."</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">TS</div>
+          <div>
+            <div class="testimonial-name">Travis S.</div>
+            <div class="testimonial-location">Verified Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <span class="stars">★★★★★</span>
+        <p class="testimonial-quote">"I've spent hundreds of thousands with Makoa and trust him completely every time. Very transparent and helpful on every transaction. 10 out of 10."</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">VS</div>
+          <div>
+            <div class="testimonial-name">Vito S.</div>
+            <div class="testimonial-location">Verified Client &middot; Seasoned Collector</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="testimonial-quote">"Wanted a very specific piece on a short timeline and he pulled through. Made the whole process easy and safe as an out-of-state buyer. Highly recommend."</p>
-      <div class="testimonial-meta">
-        <div class="testimonial-avatar">TS</div>
-        <div>
-          <div class="testimonial-name">Travis S.</div>
-          <div class="testimonial-location">Verified Client</div>
-        </div>
-      </div>
+    <div class="testimonials-cta reveal">
+      <a class="btn-outline btn-magnetic" href="https://share.google/pDrUYRPC0NdYfxpxY" target="_blank">Read All Reviews on Google</a>
     </div>
-    <div class="testimonial-card">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="testimonial-quote">"I've spent hundreds of thousands with Makoa and trust him completely every time. Very transparent and helpful on every transaction. 10 out of 10."</p>
-      <div class="testimonial-meta">
-        <div class="testimonial-avatar">VS</div>
-        <div>
-          <div class="testimonial-name">Vito S.</div>
-          <div class="testimonial-location">Verified Client &middot; Seasoned Collector</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="testimonials-cta">
-    <a class="btn-outline" href="https://share.google/pDrUYRPC0NdYfxpxY" target="_blank">Read All Reviews on Google</a>
   </div>
 </section>
 
@@ -776,47 +1263,49 @@
 <section class="contact-section" id="contact">
   <div class="contact-inner">
     <div class="contact-info">
-      <span class="section-eyebrow">Get in Touch</span>
-      <h2 class="section-title">Let's Find Your Next Piece</h2>
-      <div class="divider"></div>
-      <p>Whether you're buying, selling, trading, or consigning, we respond to every inquiry within 24 hours. Reach out directly or fill in the form and we'll take it from there.</p>
-      <div class="contact-detail">
-        <div class="contact-line"><strong>Phone</strong> <span><a href="tel:5613897382" style="color:inherit; text-decoration:none;">(561) 389-7382</a></span></div>
-        <div class="contact-line"><strong>Email</strong> <span><a href="mailto:makoa@maisonblacklabel.com" style="color:inherit; text-decoration:none;">makoa@maisonblacklabel.com</a></span></div>
-        <div class="contact-line"><strong>Location</strong> <span>West Palm Beach, FL</span></div>
-        <div class="contact-line"><strong>Hours</strong> <span>Mon&ndash;Sat 9am&ndash;6pm &nbsp;&middot;&nbsp; Sun 10am&ndash;3pm</span></div>
-      </div>
-      <div class="social-row">
-        <a class="social-btn" href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a>
-        <a class="social-btn" href="https://www.facebook.com/MaisonBlackLabel" target="_blank">Facebook</a>
-        <a class="social-btn" href="https://linktr.ee/maisonblacklabel" target="_blank">All Links</a>
+      <div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow">Get in Touch</span></div></div>
+      <div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title">Let's Find Your Next Piece</h2></div></div>
+      <div class="reveal reveal-delay-2"><div class="divider"></div></div>
+      <div class="reveal reveal-delay-2">
+        <p>Whether you're buying, selling, trading, or consigning, we respond to every inquiry within 24 hours. Reach out directly or fill in the form and we'll take it from there.</p>
+        <div class="contact-detail">
+          <div class="contact-line"><strong>Phone</strong><span><a href="tel:5613897382" style="color:inherit; text-decoration:none;">(561) 389-7382</a></span></div>
+          <div class="contact-line"><strong>Email</strong><span><a href="mailto:makoa@maisonblacklabel.com" style="color:inherit; text-decoration:none;">makoa@maisonblacklabel.com</a></span></div>
+          <div class="contact-line"><strong>Location</strong><span>West Palm Beach, FL</span></div>
+          <div class="contact-line"><strong>Hours</strong><span>Mon–Sat 9am–6pm &nbsp;·&nbsp; Sun 10am–3pm</span></div>
+        </div>
+        <div class="social-row">
+          <a class="social-btn" href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a>
+          <a class="social-btn" href="https://www.facebook.com/MaisonBlackLabel" target="_blank">Facebook</a>
+          <a class="social-btn" href="https://linktr.ee/maisonblacklabel" target="_blank">All Links</a>
+        </div>
       </div>
     </div>
-    <div>
+    <div class="reveal reveal-delay-2">
       <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="contact" />
         <input type="hidden" name="bot-field" />
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">First Name</label>
-            <input class="form-input" type="text" placeholder="John" />
+            <input class="form-input" type="text" name="first-name" placeholder="John" />
           </div>
           <div class="form-group">
             <label class="form-label">Last Name</label>
-            <input class="form-input" type="text" placeholder="Doe" />
+            <input class="form-input" type="text" name="last-name" placeholder="Doe" />
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="your@email.com" />
+          <input class="form-input" type="email" name="email" placeholder="your@email.com" />
         </div>
         <div class="form-group">
           <label class="form-label">Phone</label>
-          <input class="form-input" type="tel" placeholder="(555) 000-0000" />
+          <input class="form-input" type="tel" name="phone" placeholder="(555) 000-0000" />
         </div>
         <div class="form-group">
           <label class="form-label">Service</label>
-          <select class="form-select form-input">
+          <select class="form-select" name="service">
             <option value="" disabled selected>Select a service...</option>
             <option>Source a Timepiece</option>
             <option>Buy / Sell / Trade</option>
@@ -826,9 +1315,9 @@
         </div>
         <div class="form-group">
           <label class="form-label">Message</label>
-          <textarea class="form-textarea" placeholder="Tell us about the piece you're interested in, or what you're looking to do..."></textarea>
+          <textarea class="form-textarea" name="message" placeholder="Tell us about the piece you're looking for..."></textarea>
         </div>
-        <button class="form-submit" type="submit">Send Inquiry &rarr;</button>
+        <button class="form-submit" type="submit">Send Inquiry →</button>
       </form>
     </div>
   </div>
@@ -837,30 +1326,30 @@
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <div class="footer-logo"><span>Maison</span> Black Label</div>
+    <div>
+      <span class="footer-logo"><span>Maison</span> Black Label</span>
       <p class="footer-tagline">Curating the world's most exclusive timepieces and exotic assets from West Palm Beach, FL.</p>
     </div>
     <div>
-      <div class="footer-col-title">Services</div>
+      <span class="footer-col-title">Services</span>
       <ul class="footer-links">
         <li><a href="#services">Source a Timepiece</a></li>
-        <li><a href="#services">Buy &middot; Sell &middot; Trade</a></li>
+        <li><a href="#services">Buy · Sell · Trade</a></li>
         <li><a href="#services">Consignment</a></li>
-        <li><a href="collection.html">View Curated Collection</a></li>
+        <li><a href="collection.html">Curated Collection</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">Info</div>
+      <span class="footer-col-title">Info</span>
       <ul class="footer-links">
         <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">FAQs</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li><a href="#contact">Shipping Policy</a></li>
         <li><a href="#contact">Return Policy</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">Connect</div>
+      <span class="footer-col-title">Connect</span>
       <ul class="footer-links">
         <li><a href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a></li>
         <li><a href="https://www.facebook.com/MaisonBlackLabel" target="_blank">Facebook</a></li>
@@ -870,12 +1359,12 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">&copy; 2026 Maison Black Label. All Rights Reserved.</p>
+    <p class="footer-copy">© 2026 Maison Black Label. All Rights Reserved.</p>
     <p class="footer-legal">Maison Black Label specializes in the retail of premium Swiss luxury watches. We are not an authorized dealer for Rolex, Audemars Piguet, Richard Mille, or any other brands listed on this website. All trademarks are property of their respective owners, which have no affiliation with Maison Black Label. Warranties are exclusively offered by Maison Black Label and are not associated with original manufacturers.</p>
   </div>
 </footer>
 
-<!-- Netlify Identity Widget — handles invite/login tokens in the URL hash -->
+<!-- ── NETLIFY IDENTITY WIDGET ── -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
@@ -887,6 +1376,154 @@
       }
     });
   }
+</script>
+
+<!-- ── ANIMATION ENGINE ── -->
+<script>
+(function() {
+
+  /* ── PRELOADER ── */
+  const preNum = document.getElementById('pre-num');
+  const preloader = document.getElementById('preloader');
+  let count = 0;
+  let startTime = null;
+  const duration = 2400; // ms
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  }
+
+  function tickCounter(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    count = Math.floor(easeInOut(progress) * 100);
+    preNum.textContent = count;
+    if (progress < 1) {
+      requestAnimationFrame(tickCounter);
+    } else {
+      preNum.textContent = 100;
+      setTimeout(revealSite, 320);
+    }
+  }
+
+  function revealSite() {
+    preloader.classList.add('exit');
+    setTimeout(() => {
+      preloader.classList.add('gone');
+      document.body.classList.add('loaded');
+    }, 1300);
+  }
+
+  requestAnimationFrame(tickCounter);
+
+  /* ── CUSTOM CURSOR ── */
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0;
+  let rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+  });
+
+  function lerpCursor() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(lerpCursor);
+  }
+  lerpCursor();
+
+  // Hover states
+  document.querySelectorAll('a, button, .service-card, .testimonial-card').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  /* ── NAV SCROLL STATE ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── GRAIN ANIMATION ── */
+  const turbulence = document.querySelector('#noise feTurbulence');
+  let seed = 0;
+  setInterval(() => {
+    seed = (seed + 1) % 500;
+    turbulence.setAttribute('seed', seed);
+  }, 80);
+
+  /* ── SCROLL REVEALS ── */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Special: about image
+        if (entry.target.classList.contains('about-img-wrap')) {
+          entry.target.classList.add('visible');
+        }
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-clip, .about-img-wrap').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  /* ── STAT COUNT-UP ── */
+  const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const numEl = entry.target.querySelector('.stat-number');
+      if (!numEl || numEl.dataset.counted) return;
+      numEl.dataset.counted = '1';
+      const target = parseInt(numEl.dataset.target, 10);
+      const suffix = numEl.dataset.suffix || '';
+      let start = null;
+      const dur = 1800;
+      function step(ts) {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // ease out cubic
+        numEl.textContent = Math.floor(eased * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      statObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat').forEach(el => statObserver.observe(el));
+
+  /* ── MAGNETIC BUTTONS ── */
+  document.querySelectorAll('.btn-magnetic').forEach(wrap => {
+    wrap.addEventListener('mousemove', e => {
+      const rect = wrap.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      wrap.style.transform = `translate(${x * 0.28}px, ${y * 0.28}px)`;
+    });
+    wrap.addEventListener('mouseleave', () => {
+      wrap.style.transform = '';
+      wrap.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(() => { wrap.style.transition = ''; }, 550);
+    });
+  });
+
+  /* ── HERO VIDEO READY ── */
+  const heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    heroVideo.addEventListener('canplay', () => heroVideo.classList.add('ready'));
+  }
+
+})();
 </script>
 
 </body>
