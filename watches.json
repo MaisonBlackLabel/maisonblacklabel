@@ -32,6 +32,17 @@
       "condition": "Very Good",
       "image": "/uploads/dsc02376.jpg",
       "year": "2020"
+    },
+    {
+      "brand": "Breitling",
+      "price": "3149",
+      "model": "Superocean 44mm",
+      "boxPapers": "Watch Only",
+      "status": "available",
+      "ref": "C13341 / Two-Tone Rose Gold & Stainless",
+      "condition": "Very Good",
+      "image": "/uploads/dsc02402.jpg",
+      "year": "Unknown"
     }
   ]
 }
