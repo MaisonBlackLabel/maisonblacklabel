@@ -13,7 +13,7 @@
     },
     {
       "brand": "Panerai",
-      "price": "$9049",
+      "price": "$9,049",
       "model": "Luminor GMT",
       "boxPapers": "Full Set",
       "status": "available",
@@ -24,7 +24,7 @@
     },
     {
       "brand": "Rolex",
-      "price": "18249",
+      "price": "$18,249",
       "model": "Ladies Datejust 36",
       "boxPapers": "Full Set",
       "status": "available",
@@ -35,7 +35,7 @@
     },
     {
       "brand": "Breitling",
-      "price": "3149",
+      "price": "$3,149",
       "model": "Superocean 44mm",
       "boxPapers": "Watch Only",
       "status": "available",
