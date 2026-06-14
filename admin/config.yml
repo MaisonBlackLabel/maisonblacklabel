@@ -20,10 +20,16 @@ collections:
             fields:
               - {label: "Brand", name: "brand", widget: "string"}
               - {label: "Model", name: "model", widget: "string"}
-              - {label: "Reference & Material", name: "ref", widget: "string"}
-              - {label: "Year", name: "year", widget: "string"}
-              - {label: "Condition", name: "condition", widget: "select", options: ["Unworn", "Mint", "Excellent", "Very Good", "Good"]}
-              - {label: "Box & Papers", name: "boxPapers", widget: "select", options: ["Full Set", "Watch Only", "Box Only", "Papers Only"]}
-              - {label: "Price", name: "price", widget: "string", hint: "leave blank if Inquire to Source"}
+              - {label: "Reference & Material", name: "ref", widget: "string", required: false}
+              - {label: "Year", name: "year", widget: "string", required: false}
+              - {label: "Condition", name: "condition", widget: "select", options: ["Unworn", "Mint", "Excellent", "Very Good", "Good"], required: false}
+              - {label: "Box & Papers", name: "boxPapers", widget: "select", options: ["Full Set", "Watch Only", "Box Only", "Papers Only"], required: false, hint: "Leave blank for Inquire to Source listings"}
+              - {label: "Price", name: "price", widget: "string", required: false, hint: "Leave blank for Inquire to Source listings"}
               - {label: "Status", name: "status", widget: "select", options: [{label: "Available Now", value: "available"}, {label: "Inquire to Source", value: "sold"}]}
-              - {label: "Photo", name: "image", widget: "image"}
+              - {label: "Primary Photo", name: "image", widget: "image"}
+              - label: "Additional Photos"
+                name: "images"
+                widget: "list"
+                required: false
+                hint: "Add extra photos — visitors can click through them in a carousel"
+                field: {label: "Photo", name: "photo", widget: "image"}
