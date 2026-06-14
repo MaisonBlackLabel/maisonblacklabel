@@ -98,7 +98,6 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      
       background: #0a0a0a;
     }
     .hero-content { position: relative; z-index: 1; padding: 0 24px; }
@@ -191,9 +190,7 @@
       justify-content: center;
       gap: 80px;
     }
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
     .stat-number {
       font-family: var(--serif);
       font-size: 2rem;
@@ -367,9 +364,7 @@
     }
 
     /* ── TESTIMONIALS ── */
-    .testimonials-section {
-      background: var(--black);
-    }
+    .testimonials-section { background: var(--black); }
     .testimonials-header { text-align: center; margin-bottom: 60px; }
     .testimonials-header .divider { margin: 0 auto 32px; }
     .testimonials-grid {
@@ -428,9 +423,7 @@
     .testimonials-cta { text-align: center; }
 
     /* ── CONTACT ── */
-    .contact-section {
-      background: var(--charcoal);
-    }
+    .contact-section { background: var(--charcoal); }
     .contact-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -459,10 +452,7 @@
       gap: 12px;
     }
     .contact-line strong { color: var(--white); min-width: 80px; }
-    .social-row {
-      display: flex;
-      gap: 16px;
-    }
+    .social-row { display: flex; gap: 16px; }
     .social-btn {
       font-size: 0.62rem;
       letter-spacing: 0.2em;
@@ -496,9 +486,7 @@
     .form-input:focus, .form-select:focus, .form-textarea:focus {
       border-color: var(--gold);
     }
-    .form-input::placeholder, .form-textarea::placeholder {
-      color: #444;
-    }
+    .form-input::placeholder, .form-textarea::placeholder { color: #444; }
     .form-select { appearance: none; cursor: pointer; }
     .form-select option { background: var(--black); }
     .form-textarea { min-height: 110px; resize: vertical; }
@@ -531,7 +519,6 @@
       gap: 48px;
       margin-bottom: 56px;
     }
-    .footer-brand {}
     .footer-logo {
       font-family: var(--serif);
       font-size: 1.1rem;
@@ -572,26 +559,12 @@
       align-items: flex-start;
       gap: 24px;
     }
-    .footer-copy {
-      font-size: 0.65rem;
-      color: var(--muted);
-    }
+    .footer-copy { font-size: 0.65rem; color: var(--muted); }
     .footer-legal {
       font-size: 0.6rem;
       color: #444;
       line-height: 1.7;
       max-width: 700px;
-    }
-
-    /* ── NOTE BANNER ── */
-    .note-banner {
-      background: #1a1500;
-      border: 1px solid #c9a84c44;
-      color: #c9a84c;
-      font-size: 0.72rem;
-      padding: 14px 24px;
-      text-align: center;
-      letter-spacing: 0.05em;
     }
 
     /* ── RESPONSIVE ── */
@@ -614,7 +587,6 @@
 </head>
 <body>
 
-
 <!-- ── NAV ── -->
 <nav>
   <a class="nav-logo" href="#"><span>Maison</span> Black Label</a>
@@ -632,7 +604,7 @@
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">West Palm Beach, FL &nbsp;·&nbsp; Est. Luxury Watch & Asset Specialists</p>
+    <p class="hero-eyebrow">West Palm Beach, FL &nbsp;&middot;&nbsp; Est. Luxury Watch & Asset Specialists</p>
     <h1 class="hero-headline">Art.<br /><em>Assets.</em><br />Aura.</h1>
     <p class="hero-sub">Curating the world's most exclusive timepieces & exotic assets</p>
     <div class="hero-actions">
@@ -661,7 +633,7 @@
     <span class="stat-label">Quote Turnaround</span>
   </div>
   <div class="stat">
-    <span class="stat-number">5★</span>
+    <span class="stat-number">5&#9733;</span>
     <span class="stat-label">Client Rating</span>
   </div>
 </div>
@@ -694,12 +666,8 @@
     <div class="divider"></div>
   </div>
   <div class="services-grid">
-    <!-- Source -->
     <div class="service-card">
-      <img
-        src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800"
-        alt="Source a Timepiece"
-      />
+      <img src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Source a Timepiece" />
       <div class="service-card-content">
         <span class="service-tag">Service 01</span>
         <h3 class="service-name">Source</h3>
@@ -707,25 +675,17 @@
         <a class="service-link" href="#contact">Find My Watch</a>
       </div>
     </div>
-    <!-- B/S/T -->
     <div class="service-card">
-      <img
-        src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800"
-        alt="Buy Sell Trade"
-      />
+      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Buy Sell Trade" />
       <div class="service-card-content">
         <span class="service-tag">Service 02</span>
-        <h3 class="service-name">Buy · Sell · Trade</h3>
+        <h3 class="service-name">Buy &middot; Sell &middot; Trade</h3>
         <p class="service-desc">Whether you're acquiring, offloading, or upgrading your collection, our BST program is open to all. Submit your details and receive a response within 24 hours.</p>
         <a class="service-link" href="#contact">Make a Deal</a>
       </div>
     </div>
-    <!-- Consignment -->
     <div class="service-card">
-      <img
-        src="https://images.pexels.com/photos/17351225/pexels-photo-17351225.jpeg?auto=compress&cs=tinysrgb&w=800"
-        alt="Consignment"
-      />
+      <img src="https://images.pexels.com/photos/17351225/pexels-photo-17351225.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Consignment" />
       <div class="service-card-content">
         <span class="service-tag">Service 03</span>
         <h3 class="service-name">Consignment</h3>
@@ -774,7 +734,7 @@
   </div>
   <div class="testimonials-grid">
     <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <p class="testimonial-quote">"Makoa is extremely knowledgeable and went over and beyond helping me sell my watch. The process was seamless from start to finish."</p>
       <div class="testimonial-meta">
         <div class="testimonial-avatar">CT</div>
@@ -785,7 +745,7 @@
       </div>
     </div>
     <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <p class="testimonial-quote">"Wanted a very specific piece on a short timeline and he pulled through. Made the whole process easy and safe as an out-of-state buyer. Highly recommend."</p>
       <div class="testimonial-meta">
         <div class="testimonial-avatar">TS</div>
@@ -796,13 +756,13 @@
       </div>
     </div>
     <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <p class="testimonial-quote">"I've spent hundreds of thousands with Makoa and trust him completely every time. Very transparent and helpful on every transaction. 10 out of 10."</p>
       <div class="testimonial-meta">
         <div class="testimonial-avatar">VS</div>
         <div>
           <div class="testimonial-name">Vito S.</div>
-          <div class="testimonial-location">Verified Client · Seasoned Collector</div>
+          <div class="testimonial-location">Verified Client &middot; Seasoned Collector</div>
         </div>
       </div>
     </div>
@@ -824,7 +784,7 @@
         <div class="contact-line"><strong>Phone</strong> <span><a href="tel:5613897382" style="color:inherit; text-decoration:none;">(561) 389-7382</a></span></div>
         <div class="contact-line"><strong>Email</strong> <span><a href="mailto:makoa@maisonblacklabel.com" style="color:inherit; text-decoration:none;">makoa@maisonblacklabel.com</a></span></div>
         <div class="contact-line"><strong>Location</strong> <span>West Palm Beach, FL</span></div>
-        <div class="contact-line"><strong>Hours</strong> <span>Mon–Sat 9am–6pm &nbsp;·&nbsp; Sun 10am–3pm</span></div>
+        <div class="contact-line"><strong>Hours</strong> <span>Mon&ndash;Sat 9am&ndash;6pm &nbsp;&middot;&nbsp; Sun 10am&ndash;3pm</span></div>
       </div>
       <div class="social-row">
         <a class="social-btn" href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a>
@@ -868,7 +828,7 @@
           <label class="form-label">Message</label>
           <textarea class="form-textarea" placeholder="Tell us about the piece you're interested in, or what you're looking to do..."></textarea>
         </div>
-        <button class="form-submit" type="submit">Send Inquiry →</button>
+        <button class="form-submit" type="submit">Send Inquiry &rarr;</button>
       </form>
     </div>
   </div>
@@ -885,7 +845,7 @@
       <div class="footer-col-title">Services</div>
       <ul class="footer-links">
         <li><a href="#services">Source a Timepiece</a></li>
-        <li><a href="#services">Buy · Sell · Trade</a></li>
+        <li><a href="#services">Buy &middot; Sell &middot; Trade</a></li>
         <li><a href="#services">Consignment</a></li>
         <li><a href="collection.html">View Curated Collection</a></li>
       </ul>
@@ -910,10 +870,24 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Maison Black Label. All Rights Reserved.</p>
+    <p class="footer-copy">&copy; 2026 Maison Black Label. All Rights Reserved.</p>
     <p class="footer-legal">Maison Black Label specializes in the retail of premium Swiss luxury watches. We are not an authorized dealer for Rolex, Audemars Piguet, Richard Mille, or any other brands listed on this website. All trademarks are property of their respective owners, which have no affiliation with Maison Black Label. Warranties are exclusively offered by Maison Black Label and are not associated with original manufacturers.</p>
   </div>
 </footer>
+
+<!-- Netlify Identity Widget — handles invite/login tokens in the URL hash -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function() {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
