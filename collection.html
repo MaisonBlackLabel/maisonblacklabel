@@ -1,204 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Curate — Maison Black Label</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Curate — Maison Black Label</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --black: #0a0a0a;
-      --charcoal: #141414;
-      --card: #1a1a1a;
-      --border: #2a2a2a;
-      --gold: #c9a84c;
-      --gold-light: #e0c070;
-      --white: #f5f3ef;
-      --muted: #999;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'Montserrat', sans-serif;
-    }
+:root {
+  --black: #0a0a0a;
+  --charcoal: #141414;
+  --card: #1a1a1a;
+  --border: #2a2a2a;
+  --gold: #c9a84c;
+  --gold-light: #e0c070;
+  --white: #f5f3ef;
+  --muted: #999;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Montserrat', sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
-      background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: var(--serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); text-decoration: none; }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
-    .nav-links a.active { color: var(--gold); }
-    .nav-cta { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); padding: 8px 20px; transition: all 0.25s; }
-    .nav-cta:hover { background: var(--gold); color: var(--black); }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 72px;
+  background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a.active { color: var(--gold); }
+.nav-cta { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); padding: 8px 20px; transition: all 0.25s; }
+.nav-cta:hover { background: var(--gold); color: var(--black); }
 
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 160px 48px 80px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .page-eyebrow { font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 20px; }
-    .page-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
-    .page-sub { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); max-width: 480px; margin: 0 auto; }
+.page-header { padding: 160px 48px 80px; text-align: center; border-bottom: 1px solid var(--border); }
+.page-eyebrow { font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 20px; }
+.page-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+.page-sub { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); max-width: 480px; margin: 0 auto; }
 
-    /* ── FILTERS ── */
-    .filters {
-      display: flex; justify-content: center; gap: 12px;
-      padding: 40px 48px;
-      border-bottom: 1px solid var(--border);
-    }
-    .filter-btn {
-      font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 10px 24px; border: 1px solid var(--border); background: none;
-      color: var(--muted); cursor: pointer; transition: all 0.2s;
-    }
-    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .filter-btn.active { border-color: var(--gold); background: var(--gold); color: var(--black); }
+.filters { display: flex; justify-content: center; gap: 12px; padding: 40px 48px; border-bottom: 1px solid var(--border); }
+.filter-btn { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 10px 24px; border: 1px solid var(--border); background: none; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { border-color: var(--gold); background: var(--gold); color: var(--black); }
 
-    /* ── GRID ── */
-    .collection-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      margin: 0;
-      padding: 0;
-    }
+.collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
 
-    /* ── WATCH CARD ── */
-    .watch-card {
-      background: var(--card);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.2s;
-    }
-    .watch-card:hover { background: #202020; }
-    .watch-img-wrap {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      background: #111;
-    }
-    .watch-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .watch-card:hover .watch-img-wrap img { transform: scale(1.04); }
+.watch-card { background: var(--card); position: relative; overflow: hidden; display: flex; flex-direction: column; transition: background 0.2s; }
+.watch-card:hover { background: #202020; }
+.watch-img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; background: #111; cursor: pointer; }
+.watch-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.watch-card:hover .watch-img-wrap img { transform: scale(1.04); }
 
-    /* Inquire to Source banner */
-    .sold-banner {
-      position: absolute;
-      top: 24px; right: -36px;
-      background: var(--charcoal);
-      color: var(--gold);
-      font-family: var(--sans);
-      font-size: 0.52rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      padding: 6px 48px;
-      transform: rotate(45deg);
-      border-top: 1px solid var(--gold);
-      border-bottom: 1px solid var(--gold);
-      white-space: nowrap;
-      z-index: 2;
-    }
-    /* Overlay on sold-out images */
-    .watch-card.sold-out .watch-img-wrap::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: rgba(10,10,10,0.45);
-    }
+.img-count-badge { position: absolute; bottom: 12px; right: 12px; background: rgba(10,10,10,0.75); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 10px; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(4px); z-index: 2; pointer-events: none; }
+.img-count-badge svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; }
 
-    .watch-info {
-      padding: 24px 28px 28px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .watch-brand {
-      font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 6px;
-    }
-    .watch-model {
-      font-family: var(--serif); font-size: 1.3rem; font-weight: 300;
-      line-height: 1.2; margin-bottom: 8px;
-    }
-    .watch-ref {
-      font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted);
-      margin-bottom: 16px;
-    }
-    .watch-details {
-      display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
-    }
-    .watch-detail {
-      font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
-    }
-    .watch-detail strong { color: rgba(245,243,239,0.7); display: block; margin-bottom: 2px; font-weight: 400; font-size: 0.65rem; }
-    .watch-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: auto; padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .watch-price {
-      font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white);
-    }
-    .watch-price.sourcing { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-    .watch-btn {
-      font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 10px 20px; text-decoration: none; transition: all 0.2s; white-space: nowrap;
-    }
-    .watch-btn-primary { background: var(--gold); color: var(--black); }
-    .watch-btn-primary:hover { background: var(--gold-light); }
-    .watch-btn-outline { border: 1px solid var(--border); color: var(--muted); }
-    .watch-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.sold-banner { position: absolute; top: 24px; right: -36px; background: var(--charcoal); color: var(--gold); font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 6px 48px; transform: rotate(45deg); border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); white-space: nowrap; z-index: 2; }
+.watch-card.sold-out .watch-img-wrap::after { content: ''; position: absolute; inset: 0; background: rgba(10,10,10,0.45); }
 
-    /* ── INQUIRE SECTION ── */
-    .inquire-band {
-      padding: 80px 48px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      background: var(--charcoal);
-    }
-    .inquire-band p { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
-    .inquire-band h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 12px; }
-    .btn-primary {
-      display: inline-block; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--black); background: var(--gold); padding: 16px 40px; text-decoration: none; transition: background 0.25s;
-    }
-    .btn-primary:hover { background: var(--gold-light); }
+.watch-info { padding: 24px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+.watch-brand { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.watch-model { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; line-height: 1.2; margin-bottom: 8px; }
+.watch-ref { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 16px; }
+.watch-details { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.watch-detail { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.watch-detail strong { color: rgba(245,243,239,0.7); display: block; margin-bottom: 2px; font-weight: 400; font-size: 0.65rem; }
+.watch-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); }
+.watch-price { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white); }
+.watch-price.sourcing { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.watch-btn { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 20px; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+.watch-btn-primary { background: var(--gold); color: var(--black); }
+.watch-btn-primary:hover { background: var(--gold-light); }
+.watch-btn-outline { border: 1px solid var(--border); color: var(--muted); }
+.watch-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--charcoal);
-      border-top: 1px solid var(--border);
-      padding: 32px 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted);
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--gold); }
+#lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.94); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+#lightbox.open { opacity: 1; pointer-events: all; }
+.lb-inner { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 88vw; max-height: 92vh; }
+.lb-img-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
+#lb-img { max-width: 82vw; max-height: 78vh; object-fit: contain; display: block; user-select: none; transition: opacity 0.18s ease; }
+#lb-img.fading { opacity: 0; }
+.lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,10,0.7); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; user-select: none; }
+.lb-arrow:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); }
+.lb-arrow.prev { left: -60px; }
+.lb-arrow.next { right: -60px; }
+.lb-arrow.hidden { opacity: 0; pointer-events: none; }
+.lb-dots { display: flex; gap: 8px; margin-top: 20px; justify-content: center; min-height: 14px; }
+.lb-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.25); border: 1px solid rgba(201,168,76,0.4); cursor: pointer; transition: background 0.2s; padding: 0; }
+.lb-dot.active { background: var(--gold); }
+.lb-caption { margin-top: 16px; text-align: center; }
+.lb-brand-text { font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); }
+.lb-model-text { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white); }
+.lb-counter { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 4px; min-height: 1em; }
+.lb-close { position: fixed; top: 24px; right: 28px; width: 40px; height: 40px; background: rgba(10,10,10,0.7); border: 1px solid var(--border); color: var(--muted); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; z-index: 10000; line-height: 1; }
+.lb-close:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* ── HIDDEN FILTER ── */
-    .watch-card[data-status="sold"] { display: none; }
-    .watch-card[data-status="sold"].show { display: flex; }
-    .watch-card[data-status="available"].hide { display: none; }
-  </style>
+.inquire-band { padding: 80px 48px; text-align: center; border-top: 1px solid var(--border); background: var(--charcoal); }
+.inquire-band p { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.inquire-band h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 12px; }
+.btn-primary { display: inline-block; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 16px 40px; text-decoration: none; transition: background 0.25s; }
+.btn-primary:hover { background: var(--gold-light); }
+
+footer { background: var(--charcoal); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); }
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .collection-grid { grid-template-columns: 1fr 1fr; }
+  .filters { padding: 28px 24px; flex-wrap: wrap; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .lb-arrow.prev { left: -46px; } .lb-arrow.next { right: -46px; }
+}
+@media (max-width: 600px) {
+  .collection-grid { grid-template-columns: 1fr; }
+  .lb-arrow.prev { left: 6px; } .lb-arrow.next { right: 6px; }
+  #lb-img { max-width: 94vw; max-height: 65vh; }
+}
+</style>
 </head>
 <body>
-
-<!-- ── NAV ── -->
 <nav>
   <a class="nav-logo" href="index.html"><span>Maison</span> Black Label</a>
   <ul class="nav-links">
@@ -210,92 +139,84 @@
   </ul>
   <a class="nav-cta" href="index.html#contact">Get in Touch</a>
 </nav>
-
-<!-- ── PAGE HEADER ── -->
 <div class="page-header">
   <span class="page-eyebrow">Maison Black Label — West Palm Beach, FL</span>
   <h1 class="page-title">Curate</h1>
   <p class="page-sub">A selection of the world's most sought-after timepieces — available now and available to source</p>
 </div>
-
-<!-- ── FILTERS ── -->
 <div class="filters">
   <button class="filter-btn active" onclick="filterWatches('all', this)">All Pieces</button>
   <button class="filter-btn" onclick="filterWatches('available', this)">Available Now</button>
   <button class="filter-btn" onclick="filterWatches('sold', this)">Inquire to Source</button>
 </div>
-
-<!-- ── COLLECTION GRID ── -->
-<div class="collection-grid" id="grid">
-  <!-- Cards injected by JS from watches.json -->
-</div><!-- /grid -->
-
-<!-- ── INQUIRE BAND ── -->
+<div class="collection-grid" id="grid"></div>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lb-close" aria-label="Close">&#x2715;</button>
+  <div class="lb-inner">
+    <div class="lb-img-wrap">
+      <button class="lb-arrow prev hidden" id="lb-prev" aria-label="Previous">&#8592;</button>
+      <img id="lb-img" src="" alt="" />
+      <button class="lb-arrow next hidden" id="lb-next" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="lb-dots" id="lb-dots"></div>
+    <div class="lb-caption">
+      <div class="lb-brand-text" id="lb-brand"></div>
+      <div class="lb-model-text" id="lb-model"></div>
+      <div class="lb-counter" id="lb-counter"></div>
+    </div>
+  </div>
+</div>
 <div class="inquire-band">
   <p>Don't see what you're looking for?</p>
-  <h2>We'll Find It For You</h2>
-  <br />
+  <h2>We'll Find It For You</h2><br />
   <a class="btn-primary" href="index.html#contact">Submit a Request</a>
 </div>
-
-<!-- ── FOOTER ── -->
 <footer>
-  <span>© 2025 Maison Black Label. All rights reserved.</span>
+  <span>© 2026 Maison Black Label. All rights reserved.</span>
   <span>West Palm Beach, FL &nbsp;·&nbsp; <a href="tel:5613897382">(561) 389-7382</a> &nbsp;·&nbsp; <a href="mailto:makoa@maisonblacklabel.com">makoa@maisonblacklabel.com</a></span>
 </footer>
-
 <script>
-  let allWatches = [];
-  let activeFilter = 'all';
-
-  function renderCards(watches) {
-    const grid = document.getElementById('grid');
-    grid.innerHTML = watches.map(w => {
-      const isSold = w.status === 'sold';
-      return `
-      <div class="watch-card${isSold ? ' sold-out' : ''}" data-status="${w.status}">
-        ${isSold ? '<div class="sold-banner">Inquire to Source</div>' : ''}
-        <div class="watch-img-wrap">
-          <img src="${w.image}" alt="${w.brand} ${w.model}" loading="lazy" />
-        </div>
-        <div class="watch-info">
-          <span class="watch-brand">${w.brand}</span>
-          <h3 class="watch-model">${w.model}</h3>
-          <p class="watch-ref">${w.ref}</p>
-          <div class="watch-details">
-            <div class="watch-detail"><strong>Year</strong>${w.year}</div>
-            <div class="watch-detail"><strong>Condition</strong>${w.condition}</div>
-            <div class="watch-detail"><strong>Box &amp; Papers</strong>${w.boxPapers}</div>
-          </div>
-          <div class="watch-footer">
-            ${isSold
-              ? '<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="index.html#contact">Source This</a>'
-              : `<span class="watch-price">${w.price}</span><a class="watch-btn watch-btn-primary" href="index.html#contact">Inquire</a>`
-            }
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  function filterWatches(status, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeFilter = status;
-    const filtered = status === 'all' ? allWatches : allWatches.filter(w => w.status === status);
-    renderCards(filtered);
-  }
-
-  // Load inventory from watches.json
-  fetch('watches.json')
-    .then(r => r.json())
-    .then(data => {
-      allWatches = data.watches || [];
-      renderCards(allWatches);
-    })
-    .catch(() => {
-      document.getElementById('grid').innerHTML = '<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">Unable to load inventory. Please contact us directly.</p>';
-    });
+let allWatches = [], currentWatches = [];
+let lbImages = [], lbIdx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbPrev = document.getElementById('lb-prev');
+const lbNext = document.getElementById('lb-next');
+const lbDots = document.getElementById('lb-dots');
+const lbBrand = document.getElementById('lb-brand');
+const lbModel = document.getElementById('lb-model');
+const lbCounter = document.getElementById('lb-counter');
+function openLightbox(images, brand, model) { lbImages=images; lbIdx=0; lbBrand.textContent=brand; lbModel.textContent=model; syncLightbox(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow=''; }
+function syncLightbox() { var total=lbImages.length; lbImg.src=lbImages[lbIdx]; lbCounter.textContent=total>1?'Photo '+(lbIdx+1)+' of '+total:''; lbPrev.classList.toggle('hidden',lbIdx===0); lbNext.classList.toggle('hidden',lbIdx===total-1); lbDots.innerHTML=''; if(total>1){lbImages.forEach(function(_,i){var d=document.createElement('button');d.className='lb-dot'+(i===lbIdx?' active':'');d.setAttribute('aria-label','Photo '+(i+1));d.onclick=function(){goTo(i);};lbDots.appendChild(d);}); } }
+function goTo(i) { if(i<0||i>=lbImages.length)return; lbImg.classList.add('fading'); setTimeout(function(){lbIdx=i;syncLightbox();lbImg.classList.remove('fading');},160); }
+document.getElementById('lb-close').onclick=closeLightbox;
+lbPrev.onclick=function(){goTo(lbIdx-1);};
+lbNext.onclick=function(){goTo(lbIdx+1);};
+lb.onclick=function(e){if(e.target===lb)closeLightbox();};
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='ArrowLeft')goTo(lbIdx-1);if(e.key==='ArrowRight')goTo(lbIdx+1);if(e.key==='Escape')closeLightbox();});
+function getImages(w){var p=w.image?[w.image]:[];var x=Array.isArray(w.images)?w.images:[];return p.concat(x).filter(function(v,i,a){return v&&a.indexOf(v)===i;});}
+var camIcon='<svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>';
+function renderCards(watches){
+  var grid=document.getElementById('grid');
+  if(!watches.length){grid.innerHTML='<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">No pieces found.</p>';return;}
+  grid.innerHTML=watches.map(function(w,i){
+    var isSold=w.status==='sold';
+    var images=getImages(w);
+    var imgSrc=images[0]||'';
+    var badge=images.length>1?'<div class="img-count-badge">'+camIcon+' '+images.length+' photos</div>':'';
+    var soldTag=isSold?'<div class="sold-banner">Inquire to Source</div>':'';
+    var details='';
+    if(w.year)details+='<div class="watch-detail"><strong>Year</strong>'+w.year+'</div>';
+    if(w.condition)details+='<div class="watch-detail"><strong>Condition</strong>'+w.condition+'</div>';
+    if(w.boxPapers)details+='<div class="watch-detail"><strong>Box &amp; Papers</strong>'+w.boxPapers+'</div>';
+    var footer=isSold?'<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="index.html#contact">Source This</a>':'<span class="watch-price">'+(w.price||'')+'</span><a class="watch-btn watch-btn-primary" href="index.html#contact">Inquire</a>';
+    return '<div class="watch-card'+(isSold?' sold-out':'')+'" data-status="'+w.status+'">'+soldTag+'<div class="watch-img-wrap" onclick="handleClick('+i+')"><img src="'+imgSrc+'" alt="'+w.brand+' '+w.model+'" loading="lazy" />'+badge+'</div><div class="watch-info"><span class="watch-brand">'+(w.brand||'')+'</span><h3 class="watch-model">'+(w.model||'')+'</h3><p class="watch-ref">'+(w.ref||'')+'</p><div class="watch-details">'+details+'</div><div class="watch-footer">'+footer+'</div></div></div>';
+  }).join('');
+}
+function handleClick(i){var w=currentWatches[i];if(!w)return;var images=getImages(w);if(!images.length)return;openLightbox(images,w.brand||'',w.model||'');}
+function filterWatches(status,btn){document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');currentWatches=status==='all'?allWatches:allWatches.filter(function(w){return w.status===status;});renderCards(currentWatches);}
+fetch('watches.json').then(function(r){return r.json();}).then(function(data){allWatches=data.watches||[];currentWatches=allWatches;renderCards(currentWatches);}).catch(function(){document.getElementById('grid').innerHTML='<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">Unable to load inventory. Please contact us directly.</p>';});
 </script>
 </body>
 </html>
