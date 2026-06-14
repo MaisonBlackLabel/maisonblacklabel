@@ -1,0 +1,29 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "watches"
+    label: "Watch Inventory"
+    files:
+      - label: "All Watches"
+        name: "watches"
+        file: "watches.json"
+        fields:
+          - label: "Watches"
+            name: "watches"
+            widget: "list"
+            summary: "{{fields.brand}} — {{fields.model}}"
+            fields:
+              - {label: "Brand", name: "brand", widget: "string"}
+              - {label: "Model", name: "model", widget: "string"}
+              - {label: "Reference & Material", name: "ref", widget: "string"}
+              - {label: "Year", name: "year", widget: "string"}
+              - {label: "Condition", name: "condition", widget: "select", options: ["Unworn", "Mint", "Excellent", "Very Good", "Good"]}
+              - {label: "Box & Papers", name: "boxPapers", widget: "select", options: ["Full Set", "Watch Only", "Box Only", "Papers Only"]}
+              - {label: "Price", name: "price", widget: "string", hint: "leave blank if Inquire to Source"}
+              - {label: "Status", name: "status", widget: "select", options: [{label: "Available Now", value: "available"}, {label: "Inquire to Source", value: "sold"}]}
+              - {label: "Photo", name: "image", widget: "image"}
