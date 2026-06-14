@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Black Label — Art. Assets. Aura.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --charcoal: #141414;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --gold: #c9a84c;
+      --gold-light: #e0c070;
+      --white: #f5f3ef;
+      --muted: #999;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      padding: 8px 20px;
+      transition: all 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      
+      background: #0a0a0a;
+    }
+    .hero-content { position: relative; z-index: 1; padding: 0 24px; }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,243,239,0.6);
+      margin-bottom: 52px;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(245,243,239,0.4);
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--white); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      100% { transform: scaleY(1); opacity: 0; }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--charcoal);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 100px 48px; }
+    .section-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--charcoal);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-img {
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      width: 100%;
+      filter: brightness(0.9);
+    }
+    .about-text p {
+      color: rgba(245,243,239,0.75);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      line-height: 1.9;
+    }
+    .about-text p:last-of-type { margin-bottom: 32px; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--black); max-width: 1200px; margin: 0 auto; }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header .divider { margin: 0 auto 32px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+    .service-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: brightness(0.55);
+    }
+    .service-card:hover img { transform: scale(1.04); filter: brightness(0.4); }
+    .service-card-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 32px;
+    }
+    .service-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .service-name {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 0.78rem;
+      color: rgba(245,243,239,0.7);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 260px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.35s ease;
+    }
+    .service-card:hover .service-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .service-link {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .service-link::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .service-card:hover .service-link::after { transform: translateX(4px); }
+
+    /* ── PROCESS ── */
+    .process-section {
+      background: var(--charcoal);
+      text-align: center;
+    }
+    .process-section .section-title { margin-bottom: 60px; }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .process-step { text-align: center; }
+    .step-number {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      background: var(--black);
+    }
+    .testimonials-header { text-align: center; margin-bottom: 60px; }
+    .testimonials-header .divider { margin: 0 auto 32px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 48px;
+    }
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 40px 36px;
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+    .testimonial-quote {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(245,243,239,0.9);
+      margin-bottom: 28px;
+    }
+    .testimonial-meta { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .testimonial-location {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .testimonials-cta { text-align: center; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--charcoal);
+    }
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .contact-info h2 { margin-bottom: 24px; }
+    .contact-info .divider { margin-bottom: 32px; }
+    .contact-info p {
+      color: rgba(245,243,239,0.7);
+      font-size: 0.85rem;
+      margin-bottom: 36px;
+      line-height: 1.9;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .contact-line {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      gap: 12px;
+    }
+    .contact-line strong { color: var(--white); min-width: 80px; }
+    .social-row {
+      display: flex;
+      gap: 16px;
+    }
+    .social-btn {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--black);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: #444;
+    }
+    .form-select { appearance: none; cursor: pointer; }
+    .form-select option { background: var(--black); }
+    .form-textarea { min-height: 110px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      border: none;
+      padding: 16px 36px;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .form-submit:hover { background: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 60px 48px 36px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .footer-brand {}
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      max-width: 260px;
+    }
+    .footer-col-title {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .footer-copy {
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .footer-legal {
+      font-size: 0.6rem;
+      color: #444;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    /* ── NOTE BANNER ── */
+    .note-banner {
+      background: #1a1500;
+      border: 1px solid #c9a84c44;
+      color: #c9a84c;
+      font-size: 0.72rem;
+      padding: 14px 24px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .about-img { aspect-ratio: 16/9; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { aspect-ratio: 4/3; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .stats-bar { gap: 32px; flex-wrap: wrap; padding: 24px; }
+      .footer-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#"><span>Maison</span> Black Label</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="collection.html" style="color:var(--gold);">Curate</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Get in Touch</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">West Palm Beach, FL &nbsp;·&nbsp; Est. Luxury Watch & Asset Specialists</p>
+    <h1 class="hero-headline">Art.<br /><em>Assets.</em><br />Aura.</h1>
+    <p class="hero-sub">Curating the world's most exclusive timepieces & exotic assets</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="collection.html">View Curated Collection</a>
+      <a class="btn-outline" href="#contact">Inquire Now</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-number">500+</span>
+    <span class="stat-label">Transactions Completed</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">100%</span>
+    <span class="stat-label">Insured Shipping</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">24hr</span>
+    <span class="stat-label">Quote Turnaround</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">5★</span>
+    <span class="stat-label">Client Rating</span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about" style="background: var(--charcoal);">
+  <div class="about">
+    <img
+      class="about-img"
+      src="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=800"
+      alt="Luxury timepiece"
+    />
+    <div class="about-text">
+      <span class="section-eyebrow">About Maison Black Label</span>
+      <h2 class="section-title">A Trusted Partner for the Discerning Collector</h2>
+      <div class="divider"></div>
+      <p>At Maison Black Label, we specialize in curating and delivering the world's most exclusive exotic assets and luxury timepieces. Our mission is rooted in trust, precision, and excellence — ensuring every client receives not just a purchase, but an experience worthy of the pieces we represent.</p>
+      <p>From first inquiry to delivery, every detail is handled with discretion and care. Clear communication, streamlined transactions, and fully insured expedited shipping are the standard — not the exception.</p>
+      <p>We are more than a marketplace. We are the trusted partner that discerning collectors and enthusiasts worldwide turn to, again and again.</p>
+      <a class="btn-primary" href="#contact" style="margin-top: 8px;">Start a Conversation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="services-header">
+    <span class="section-eyebrow">What We Do</span>
+    <h2 class="section-title">Our Services</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="services-grid">
+    <!-- Source -->
+    <div class="service-card">
+      <img
+        src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800"
+        alt="Source a Timepiece"
+      />
+      <div class="service-card-content">
+        <span class="service-tag">Service 01</span>
+        <h3 class="service-name">Source</h3>
+        <p class="service-desc">Looking for a specific reference, limited edition, or historically significant piece? We leverage an exclusive network to locate virtually any timepiece — quickly and reliably.</p>
+        <a class="service-link" href="#contact">Find My Watch</a>
+      </div>
+    </div>
+    <!-- B/S/T -->
+    <div class="service-card">
+      <img
+        src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800"
+        alt="Buy Sell Trade"
+      />
+      <div class="service-card-content">
+        <span class="service-tag">Service 02</span>
+        <h3 class="service-name">Buy · Sell · Trade</h3>
+        <p class="service-desc">Whether you're acquiring, offloading, or upgrading your collection, our BST program is open to all. Submit your details and receive a response within 24 hours.</p>
+        <a class="service-link" href="#contact">Make a Deal</a>
+      </div>
+    </div>
+    <!-- Consignment -->
+    <div class="service-card">
+      <img
+        src="https://images.pexels.com/photos/17351225/pexels-photo-17351225.jpeg?auto=compress&cs=tinysrgb&w=800"
+        alt="Consignment"
+      />
+      <div class="service-card-content">
+        <span class="service-tag">Service 03</span>
+        <h3 class="service-name">Consignment</h3>
+        <p class="service-desc">If the market is moving against your piece, our consignment program helps you achieve your target price. Submit photos and details — we'll handle the rest.</p>
+        <a class="service-link" href="#contact">Consign My Watch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section class="process-section" id="process">
+  <span class="section-eyebrow" style="display:block; text-align:center; margin-bottom:16px;">How It Works</span>
+  <h2 class="section-title" style="text-align:center;">Simple. Transparent. Secure.</h2>
+  <div class="divider" style="margin: 0 auto 60px;"></div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-number">01</div>
+      <div class="step-title">Inquire</div>
+      <p class="step-desc">Reach out via our form, phone, or DM. Tell us what you're looking for or what you have.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">02</div>
+      <div class="step-title">Quote</div>
+      <p class="step-desc">We respond within 24 hours with a competitive, transparent offer — no games, no lowballs.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">03</div>
+      <div class="step-title">Transact</div>
+      <p class="step-desc">Secure, streamlined payment. Every transaction is handled with discretion and care.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-number">04</div>
+      <div class="step-title">Deliver</div>
+      <p class="step-desc">Fully insured, expedited shipping directly to your door. Safe every step of the way.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section" id="testimonials">
+  <div class="testimonials-header">
+    <span class="section-eyebrow">Client Testimonials</span>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"Makoa is extremely knowledgeable and went over and beyond helping me sell my watch. The process was seamless from start to finish."</p>
+      <div class="testimonial-meta">
+        <div class="testimonial-avatar">CT</div>
+        <div>
+          <div class="testimonial-name">Corey T.</div>
+          <div class="testimonial-location">Verified Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"Wanted a very specific piece on a short timeline and he pulled through. Made the whole process easy and safe as an out-of-state buyer. Highly recommend."</p>
+      <div class="testimonial-meta">
+        <div class="testimonial-avatar">TS</div>
+        <div>
+          <div class="testimonial-name">Travis S.</div>
+          <div class="testimonial-location">Verified Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-quote">"I've spent hundreds of thousands with Makoa and trust him completely every time. Very transparent and helpful on every transaction. 10 out of 10."</p>
+      <div class="testimonial-meta">
+        <div class="testimonial-avatar">VS</div>
+        <div>
+          <div class="testimonial-name">Vito S.</div>
+          <div class="testimonial-location">Verified Client · Seasoned Collector</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="testimonials-cta">
+    <a class="btn-outline" href="https://share.google/pDrUYRPC0NdYfxpxY" target="_blank">Read All Reviews on Google</a>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <span class="section-eyebrow">Get in Touch</span>
+      <h2 class="section-title">Let's Find Your Next Piece</h2>
+      <div class="divider"></div>
+      <p>Whether you're buying, selling, trading, or consigning, we respond to every inquiry within 24 hours. Reach out directly or fill in the form and we'll take it from there.</p>
+      <div class="contact-detail">
+        <div class="contact-line"><strong>Phone</strong> <span><a href="tel:5613897382" style="color:inherit; text-decoration:none;">(561) 389-7382</a></span></div>
+        <div class="contact-line"><strong>Email</strong> <span><a href="mailto:makoa@maisonblacklabel.com" style="color:inherit; text-decoration:none;">makoa@maisonblacklabel.com</a></span></div>
+        <div class="contact-line"><strong>Location</strong> <span>West Palm Beach, FL</span></div>
+        <div class="contact-line"><strong>Hours</strong> <span>Mon–Sat 9am–6pm &nbsp;·&nbsp; Sun 10am–3pm</span></div>
+      </div>
+      <div class="social-row">
+        <a class="social-btn" href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a>
+        <a class="social-btn" href="https://www.facebook.com/MaisonBlackLabel" target="_blank">Facebook</a>
+        <a class="social-btn" href="https://linktr.ee/maisonblacklabel" target="_blank">All Links</a>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="bot-field" />
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input class="form-input" type="text" placeholder="John" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" type="text" placeholder="Doe" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input class="form-input" type="tel" placeholder="(555) 000-0000" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service</label>
+          <select class="form-select form-input">
+            <option value="" disabled selected>Select a service...</option>
+            <option>Source a Timepiece</option>
+            <option>Buy / Sell / Trade</option>
+            <option>Consignment</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us about the piece you're interested in, or what you're looking to do..."></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send Inquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo"><span>Maison</span> Black Label</div>
+      <p class="footer-tagline">Curating the world's most exclusive timepieces and exotic assets from West Palm Beach, FL.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Source a Timepiece</a></li>
+        <li><a href="#services">Buy · Sell · Trade</a></li>
+        <li><a href="#services">Consignment</a></li>
+        <li><a href="collection.html">View Curated Collection</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Info</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">FAQs</a></li>
+        <li><a href="#contact">Shipping Policy</a></li>
+        <li><a href="#contact">Return Policy</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a></li>
+        <li><a href="https://www.facebook.com/MaisonBlackLabel" target="_blank">Facebook</a></li>
+        <li><a href="https://linktr.ee/maisonblacklabel" target="_blank">Linktree</a></li>
+        <li><a href="https://share.google/pDrUYRPC0NdYfxpxY" target="_blank">Google Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Maison Black Label. All Rights Reserved.</p>
+    <p class="footer-legal">Maison Black Label specializes in the retail of premium Swiss luxury watches. We are not an authorized dealer for Rolex, Audemars Piguet, Richard Mille, or any other brands listed on this website. All trademarks are property of their respective owners, which have no affiliation with Maison Black Label. Warranties are exclusively offered by Maison Black Label and are not associated with original manufacturers.</p>
+  </div>
+</footer>
+
+</body>
+</html>
