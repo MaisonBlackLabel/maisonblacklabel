@@ -46,10 +46,14 @@
     },
     {
       "brand": "Rolex",
+      "price": "$17,149",
       "model": "Datejust 41",
+      "boxPapers": "Full Set",
+      "status": "available",
       "ref": "126334 / Stainless Steel",
-      "status": "sold",
-      "image": "/uploads/dsc02219.jpg"
+      "condition": "Very Good",
+      "image": "/uploads/dsc02219.jpg",
+      "year": "2026"
     },
     {
       "brand": "Rolex",
