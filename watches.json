@@ -45,38 +45,11 @@
       "year": "Unknown"
     },
     {
-      "brand": "Audemars Piguet",
-      "price": "Inquire to Source",
-      "model": "Royal Oak Offshore Chronograph",
-      "boxPapers": "Full Set",
-      "status": "sold",
-      "ref": "26238ST / Stainless Steel",
-      "condition": "Very Good",
-      "image": "/uploads/dsc00756.jpg",
-      "year": "2025"
-    },
-    {
-      "brand": "Blancpain",
-      "model": "Villeret Complete Calendar",
-      "ref": "6654A-1127-55B / Stainless Steel",
-      "condition": "Good",
-      "status": "sold",
-      "image": "/uploads/dsc02272.jpg"
-    },
-    {
       "brand": "Rolex",
       "model": "Datejust 41",
       "ref": "126334 / Stainless Steel",
       "status": "sold",
       "image": "/uploads/dsc02219.jpg"
-    },
-    {
-      "brand": "Rolex",
-      "model": "Day-Date 40",
-      "ref": "228239 / White Gold",
-      "boxPapers": "Full Set",
-      "status": "sold",
-      "image": "/uploads/dsc02104.jpg"
     },
     {
       "brand": "Rolex",
@@ -101,6 +74,25 @@
       "year": "2026"
     },
     {
+      "brand": "Audemars Piguet",
+      "price": "Inquire to Source",
+      "model": "Royal Oak Offshore Chronograph",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "26238ST / Stainless Steel",
+      "condition": "Very Good",
+      "image": "/uploads/dsc00756.jpg",
+      "year": "2025"
+    },
+    {
+      "brand": "Rolex",
+      "model": "Day-Date 40",
+      "ref": "228239 / White Gold",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "image": "/uploads/dsc02104.jpg"
+    },
+    {
       "brand": "Rolex",
       "model": "Day-Date 40 \"Money Green\"",
       "ref": "228238 / Yellow Gold",
@@ -109,6 +101,22 @@
       "boxPapers": "Full Set",
       "status": "sold",
       "image": "/uploads/img_3489.jpg"
+    },
+    {
+      "brand": "Rolex",
+      "model": "Daytona \"Beach Green\"",
+      "ref": "116509 / White Gold",
+      "condition": "Very Good",
+      "status": "sold",
+      "image": "/uploads/img_0094.jpg"
+    },
+    {
+      "brand": "Blancpain",
+      "model": "Villeret Complete Calendar",
+      "ref": "6654A-1127-55B / Stainless Steel",
+      "condition": "Good",
+      "status": "sold",
+      "image": "/uploads/dsc02272.jpg"
     }
   ]
 }
