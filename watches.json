@@ -24,11 +24,21 @@
     },
     {
       "brand": "Rolex",
+      "model": "Datejust 36mm",
+      "ref": "126231 / Two-Tone Everose Gold & Stainless",
+      "year": "2024",
+      "condition": "Very Good",
+      "price": "20149",
+      "status": "available",
+      "image": "/uploads/dsc02345.jpg"
+    },
+    {
+      "brand": "Rolex",
       "price": "$18,249",
-      "model": "Ladies Datejust 36",
+      "model": "Datejust 36mm",
       "boxPapers": "Full Set",
       "status": "available",
-      "ref": "126231 / Two-Tone Everose & Stainless",
+      "ref": "126231 / Two-Tone Everose Gold & Stainless",
       "condition": "Very Good",
       "image": "/uploads/dsc02345.jpg",
       "year": "2020"
