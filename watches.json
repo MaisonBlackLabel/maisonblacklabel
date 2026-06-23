@@ -131,6 +131,16 @@
       "condition": "Good",
       "status": "sold",
       "image": "/uploads/dsc02272.jpg"
+    },
+    {
+      "brand": "TAG",
+      "model": "Aquaracer",
+      "ref": "CAY218B / Titanium",
+      "condition": "Very Good",
+      "boxPapers": "Watch Only",
+      "price": "2250",
+      "status": "available",
+      "image": "/uploads/dsc02424.jpg"
     }
   ]
 }
