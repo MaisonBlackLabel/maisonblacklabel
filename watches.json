@@ -55,6 +55,17 @@
       "year": "Unknown"
     },
     {
+      "brand": "TAG",
+      "price": "$2,250",
+      "model": "Aquaracer",
+      "boxPapers": "Watch Only",
+      "status": "available",
+      "ref": "CAY218B / Titanium",
+      "condition": "Very Good",
+      "image": "/uploads/dsc02424.jpg",
+      "year": "Unknown"
+    },
+    {
       "brand": "Rolex",
       "price": "$17,149",
       "model": "Datejust 41",
@@ -131,16 +142,6 @@
       "condition": "Good",
       "status": "sold",
       "image": "/uploads/dsc02272.jpg"
-    },
-    {
-      "brand": "TAG",
-      "model": "Aquaracer",
-      "ref": "CAY218B / Titanium",
-      "condition": "Very Good",
-      "boxPapers": "Watch Only",
-      "price": "2250",
-      "status": "available",
-      "image": "/uploads/dsc02424.jpg"
     }
   ]
 }
