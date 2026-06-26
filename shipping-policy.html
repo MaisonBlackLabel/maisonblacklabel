@@ -53,10 +53,19 @@ nav {
 .policy-content a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.4); }
 .policy-content a:hover { color: var(--gold-light); }
 .policy-meta { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; }
-.stat-row { display: flex; gap: 32px; margin: 36px 0 8px; flex-wrap: wrap; }
-.stat-pill { border: 1px solid rgba(201,168,76,0.35); padding: 16px 22px; flex: 1; min-width: 160px; }
-.stat-pill strong { display: block; font-family: var(--serif); color: var(--gold); font-size: 1.3rem; margin-bottom: 4px; }
-.stat-pill span { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.process-section { text-align: center; padding: 8px 0 64px; }
+.process-eyebrow { font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: block; }
+.process-title { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 300; color: var(--white); margin-bottom: 24px; letter-spacing: 0.02em; }
+.process-divider { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 48px; }
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; position: relative; }
+.process-grid::before { content: ''; position: absolute; top: 16px; left: 0; right: 0; height: 1px; background: var(--border); z-index: 0; }
+.process-col { position: relative; z-index: 1; }
+.process-num { font-family: var(--serif); font-size: 2.2rem; color: rgba(201,168,76,0.4); margin-bottom: 14px; background: var(--black); display: inline-block; padding: 0 10px; }
+.process-label { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white); margin-bottom: 10px; }
+.process-desc { font-size: 0.8rem; color: rgba(245,243,239,0.6); line-height: 1.7; padding: 0 6px; }
+@media (max-width: 700px) {
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 36px 16px; }
+}
 footer { background: var(--charcoal); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); }
 footer a { color: var(--muted); text-decoration: none; }
 footer a:hover { color: var(--gold); }
@@ -86,10 +95,32 @@ footer a:hover { color: var(--gold); }
 <div class="policy-content">
   <p class="policy-meta">Effective Date: June 26, 2026</p>
 
-  <div class="stat-row">
-    <div class="stat-pill"><strong>100%</strong><span>Insured Shipping</span></div>
-    <div class="stat-pill"><strong>Signature</strong><span>Required on Delivery</span></div>
-    <div class="stat-pill"><strong>Tracked</strong><span>Every Shipment</span></div>
+  <div class="process-section">
+    <span class="process-eyebrow">How Shipping Works</span>
+    <h2 class="process-title" style="margin:0 0 24px;">Insured. Tracked. Delivered.</h2>
+    <div class="process-divider"></div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="process-num">01</div>
+        <div class="process-label">Confirm</div>
+        <div class="process-desc">Payment is confirmed and your purchase is finalized.</div>
+      </div>
+      <div class="process-col">
+        <div class="process-num">02</div>
+        <div class="process-label">Pack</div>
+        <div class="process-desc">Your piece is carefully packaged with full documentation.</div>
+      </div>
+      <div class="process-col">
+        <div class="process-num">03</div>
+        <div class="process-label">Insure</div>
+        <div class="process-desc">Shipped fully insured at our cost, every time.</div>
+      </div>
+      <div class="process-col">
+        <div class="process-num">04</div>
+        <div class="process-label">Deliver</div>
+        <div class="process-desc">Tracked, signature-required delivery to your door.</div>
+      </div>
+    </div>
   </div>
 
   <h2>Insured Shipping at Our Cost</h2>
@@ -108,7 +139,7 @@ footer a:hover { color: var(--gold); }
   <p>Because every shipment is fully insured, risk of loss or damage in transit is covered until the item is delivered and signed for.</p>
 
   <h2>Accepted Payment Methods</h2>
-  <p>We accept wire transfer, Zelle, and cash as our standard payment methods. Cryptocurrency and other payment arrangements may be accepted on a case-by-case basis at our discretion. Credit card payments are reserved for established, repeat clients.</p>
+  <p>We accept Wire Transfer, Zelle, and cash as our standard payment methods. Cryptocurrency and other payment arrangements may be accepted on a case-by-case basis at our discretion. Credit card payments are reserved for established, repeat clients.</p>
 
   <h2>Questions</h2>
   <p>For questions about a shipment in progress or our shipping practices, reach us at <a href="mailto:makoa@maisonblacklabel.com">makoa@maisonblacklabel.com</a> or <a href="tel:5613897382">(561) 389-7382</a>.</p>
