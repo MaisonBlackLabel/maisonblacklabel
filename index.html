@@ -4,7 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maison Black Label &mdash; Art. Assets. Aura.</title>
+  <meta name="description" content="Maison Black Label is a luxury watch and exotic asset specialist in West Palm Beach, FL. Buy, sell, trade, consign, or source rare timepieces from Rolex, Patek Philippe, Audemars Piguet and more — with fully insured, white-glove service." />
+  <meta property="og:title" content="Maison Black Label — Art. Assets. Aura." />
+  <meta property="og:description" content="Luxury watch and exotic asset specialists in West Palm Beach, FL. Buy, sell, trade, consign, or source the world's most exclusive timepieces." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://maisonblacklabel.com/" />
+  <meta property="og:image" content="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maison Black Label — Art. Assets. Aura." />
+  <meta name="twitter:description" content="Luxury watch and exotic asset specialists in West Palm Beach, FL." />
+  <meta name="twitter:image" content="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/%3E%3Ctext x=%2250%22 y=%2270%22 font-size=%2260%22 font-family=%22Georgia,serif%22 fill=%22%23c9a84c%22 text-anchor=%22middle%22%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID (create one free at analytics.google.com) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -961,6 +982,12 @@
       .stat:nth-child(2n) { border-right: none; }
       .stat:nth-last-child(-n+2) { border-bottom: none; }
     }
+
+    /* ── QUICK CONTACT BUTTONS ── */
+    .quick-contact { position: fixed; bottom: 28px; right: 28px; z-index: 500; display: flex; flex-direction: column; gap: 12px; }
+    .qc-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--black); border: 1px solid var(--gold); color: var(--gold); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.25s; box-shadow: 0 4px 14px rgba(0,0,0,0.4); font-family: var(--sans); font-size: 0.56rem; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; }
+    .qc-btn:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+    @media (max-width: 900px) { .quick-contact { bottom: 18px; right: 18px; } .qc-btn { width: 46px; height: 46px; font-size: 0.5rem; } }
   </style>
 </head>
 <body>
@@ -1007,8 +1034,8 @@
 <section class="hero" id="home">
   <!-- Video background: skeleton watch mechanism &mdash; cinematic, dark, editorial -->
   <div class="hero-video-wrap">
-    <video autoplay muted loop playsinline id="hero-video" poster="https://cdn.pixabay.com/video/2020/04/03/34855-403777679_tiny.jpg">
-      <source src="https://cdn.pixabay.com/video/2020/04/03/34855-403777679_large.mp4" type="video/mp4">
+    <video muted loop playsinline preload="none" id="hero-video" poster="https://cdn.pixabay.com/video/2020/04/03/34855-403777679_tiny.jpg">
+      <source data-src="https://cdn.pixabay.com/video/2020/04/03/34855-403777679_large.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-overlay"></div>
@@ -1123,6 +1150,8 @@
         class="about-img"
         src="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=800"
         alt="Luxury timepiece"
+        loading="lazy"
+        decoding="async"
       />
     </div>
     <div class="about-text">
@@ -1149,7 +1178,7 @@
     </div>
     <div class="services-grid">
       <div class="service-card reveal reveal-delay-1">
-        <img src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Source a Timepiece" />
+        <img src="https://images.unsplash.com/photo-1663564305613-c40450f29903?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Source a Timepiece" loading="lazy" decoding="async" />
         <div class="service-card-content">
           <span class="service-tag">Service 01</span>
           <h3 class="service-name">Source</h3>
@@ -1158,7 +1187,7 @@
         </div>
       </div>
       <div class="service-card reveal reveal-delay-2">
-        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Buy Sell Trade" />
+        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Buy Sell Trade" loading="lazy" decoding="async" />
         <div class="service-card-content">
           <span class="service-tag">Service 02</span>
           <h3 class="service-name">Buy &middot; Sell &middot; Trade</h3>
@@ -1167,7 +1196,7 @@
         </div>
       </div>
       <div class="service-card reveal reveal-delay-3">
-        <img src="https://images.unsplash.com/photo-1636289026470-cb40ece1ebc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Consignment" />
+        <img src="https://images.unsplash.com/photo-1636289026470-cb40ece1ebc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=800" alt="Consignment" loading="lazy" decoding="async" />
         <div class="service-card-content">
           <span class="service-tag">Service 03</span>
           <h3 class="service-name">Consignment</h3>
@@ -1344,8 +1373,9 @@
       <ul class="footer-links">
         <li><a href="#about">About Us</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact">Shipping Policy</a></li>
-        <li><a href="#contact">Return Policy</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="shipping-policy.html">Shipping Policy</a></li>
+        <li><a href="return-policy.html">Return Policy</a></li>
       </ul>
     </div>
     <div>
@@ -1364,8 +1394,14 @@
   </div>
 </footer>
 
+<div class="quick-contact" aria-label="Quick contact options">
+  <a class="qc-btn" href="https://wa.me/15613897382?text=Hi%20Maison%20Black%20Label%2C%20I%20have%20a%20question%20about%20a%20watch." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp">WA</a>
+  <a class="qc-btn" href="https://ig.me/m/maisonblacklabel" target="_blank" rel="noopener" aria-label="Message on Instagram" title="Instagram DM">IG</a>
+  <a class="qc-btn" href="sms:+15613897382" aria-label="Text us" title="Text Us">SMS</a>
+</div>
+
 <!-- &#9472;&#9472; NETLIFY IDENTITY WIDGET &#9472;&#9472; -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", function(user) {
@@ -1521,6 +1557,14 @@
   const heroVideo = document.getElementById('hero-video');
   if (heroVideo) {
     heroVideo.addEventListener('canplay', () => heroVideo.classList.add('ready'));
+    window.addEventListener('load', () => {
+      const src = heroVideo.querySelector('source[data-src]');
+      if (src) {
+        src.src = src.dataset.src;
+        heroVideo.load();
+        heroVideo.play().catch(() => {});
+      }
+    });
   }
 
 })();
