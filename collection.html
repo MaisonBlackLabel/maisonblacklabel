@@ -4,7 +4,27 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Curate — Maison Black Label</title>
+<meta name="description" content="Browse Maison Black Label's curated collection of luxury timepieces — available now and available to source. Rolex, Patek Philippe, Audemars Piguet and more, fully insured and shipped from West Palm Beach, FL." />
+<meta property="og:title" content="Curate — Maison Black Label" />
+<meta property="og:description" content="A selection of the world's most sought-after timepieces — available now and available to source." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://maisonblacklabel.com/collection.html" />
+<meta property="og:image" content="https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Curate — Maison Black Label" />
+<meta name="twitter:description" content="A selection of the world's most sought-after timepieces — available now and available to source." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%230a0a0a%22/%3E%3Ctext x=%2250%22 y=%2270%22 font-size=%2260%22 font-family=%22Georgia,serif%22 fill=%22%23c9a84c%22 text-anchor=%22middle%22%3EM%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!-- Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID (create one free at analytics.google.com) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-XXXXXXXXXX");
+</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -108,7 +128,11 @@ nav {
 .btn-primary { display: inline-block; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 16px 40px; text-decoration: none; transition: background 0.25s; }
 .btn-primary:hover { background: var(--gold-light); }
 
-footer { background: var(--charcoal); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); }
+footer { background: var(--charcoal); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); }
+.quick-contact { position: fixed; bottom: 28px; right: 28px; z-index: 500; display: flex; flex-direction: column; gap: 12px; }
+.qc-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--black); border: 1px solid var(--gold); color: var(--gold); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.25s; box-shadow: 0 4px 14px rgba(0,0,0,0.4); font-family: var(--sans); font-size: 0.56rem; font-weight: 600; letter-spacing: 0.04em; }
+.qc-btn:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+@media (max-width: 900px) { .quick-contact { bottom: 18px; right: 18px; } .qc-btn { width: 46px; height: 46px; font-size: 0.5rem; } }
 footer a { color: var(--muted); text-decoration: none; }
 footer a:hover { color: var(--gold); }
 
@@ -173,8 +197,14 @@ footer a:hover { color: var(--gold); }
 </div>
 <footer>
   <span>© 2026 Maison Black Label. All rights reserved.</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="shipping-policy.html">Shipping Policy</a> &nbsp;·&nbsp; <a href="return-policy.html">Return Policy</a></span>
   <span>West Palm Beach, FL &nbsp;·&nbsp; <a href="tel:5613897382">(561) 389-7382</a> &nbsp;·&nbsp; <a href="mailto:makoa@maisonblacklabel.com">makoa@maisonblacklabel.com</a></span>
 </footer>
+<div class="quick-contact" aria-label="Quick contact options">
+  <a class="qc-btn" href="https://wa.me/15613897382?text=Hi%20Maison%20Black%20Label%2C%20I%20have%20a%20question%20about%20a%20watch." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp">WA</a>
+  <a class="qc-btn" href="https://ig.me/m/maisonblacklabel" target="_blank" rel="noopener" aria-label="Message on Instagram" title="Instagram DM">IG</a>
+  <a class="qc-btn" href="sms:+15613897382" aria-label="Text us" title="Text Us">SMS</a>
+</div>
 <script>
 let allWatches = [], currentWatches = [];
 let lbImages = [], lbIdx = 0;
