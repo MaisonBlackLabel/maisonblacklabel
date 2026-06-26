@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page Not Found — Maison Black Label</title>
+<meta name="robots" content="noindex, follow" />
+<link rel="canonical" href="https://maisonblacklabel.com/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #141414;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --gold: #c9a84c;
+    --gold-light: #e0c070;
+    --white: #f5f3ef;
+    --muted: #888;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Montserrat', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  .nf-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .nf-num {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(5rem, 16vw, 10rem);
+    line-height: 1;
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+  }
+  .nf-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin: 18px 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .nf-sub {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 40px;
+  }
+  .nf-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nf-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .nf-btn:hover { background: var(--gold); color: var(--black); }
+  .nf-btn.solid { background: var(--gold); color: var(--black); }
+  .nf-btn.solid:hover { background: var(--gold-light); }
+  .nf-logo {
+    margin-top: 64px;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .nf-logo span { color: var(--gold); }
+</style>
+</head>
+<body>
+  <p class="nf-eyebrow">Maison Black Label</p>
+  <div class="nf-num">404</div>
+  <h1 class="nf-title">This Piece Isn't In Our Collection</h1>
+  <p class="nf-sub">The page you're looking for has been moved, sold, or never existed. Let's get you back to something worth seeing.</p>
+  <div class="nf-actions">
+    <a class="nf-btn solid" href="/">Return Home</a>
+    <a class="nf-btn" href="/collection.html">View Collection</a>
+  </div>
+  <a class="nf-logo" href="/"><span>Maison</span> Black Label</a>
+</body>
+</html>
