@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Curate — Maison Black Label</title>
+<link rel="canonical" href="https://maisonblacklabel.com/collection.html" />
 <meta name="description" content="Browse Maison Black Label's curated collection of luxury timepieces — available now and available to source. Rolex, Patek Philippe, Audemars Piguet and more, fully insured and shipped from West Palm Beach, FL." />
 <meta property="og:title" content="Curate — Maison Black Label" />
 <meta property="og:description" content="A selection of the world's most sought-after timepieces — available now and available to source." />
@@ -201,7 +202,7 @@ footer a:hover { color: var(--gold); }
   <span>West Palm Beach, FL &nbsp;·&nbsp; <a href="tel:5613897382">(561) 389-7382</a> &nbsp;·&nbsp; <a href="mailto:makoa@maisonblacklabel.com">makoa@maisonblacklabel.com</a></span>
 </footer>
 <div class="quick-contact" aria-label="Quick contact options">
-  <a class="qc-btn" href="https://wa.me/15613897382?text=Hi%20Maison%20Black%20Label%2C%20I%20have%20a%20question%20about%20a%20watch." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp">WA</a>
+  <a class="qc-btn" href="https://wa.me/15616325092?text=Hi%20Maison%20Black%20Label%2C%20I%20have%20a%20question%20about%20a%20watch." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp">WA</a>
   <a class="qc-btn" href="https://ig.me/m/maisonblacklabel" target="_blank" rel="noopener" aria-label="Message on Instagram" title="Instagram DM">IG</a>
   <a class="qc-btn" href="sms:+15613897382" aria-label="Text us" title="Text Us">SMS</a>
 </div>
@@ -218,7 +219,7 @@ const lbModel = document.getElementById('lb-model');
 const lbCounter = document.getElementById('lb-counter');
 function openLightbox(images, brand, model) { lbImages=images; lbIdx=0; lbBrand.textContent=brand; lbModel.textContent=model; syncLightbox(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow=''; }
-function syncLightbox() { var total=lbImages.length; lbImg.src=lbImages[lbIdx]; lbCounter.textContent=total>1?'Photo '+(lbIdx+1)+' of '+total:''; lbPrev.classList.toggle('hidden',lbIdx===0); lbNext.classList.toggle('hidden',lbIdx===total-1); lbDots.innerHTML=''; if(total>1){lbImages.forEach(function(_,i){var d=document.createElement('button');d.className='lb-dot'+(i===lbIdx?' active':'');d.setAttribute('aria-label','Photo '+(i+1));d.onclick=function(){goTo(i);};lbDots.appendChild(d);}); } }
+function syncLightbox() { var total=lbImages.length; lbImg.src=lbImages[lbIdx]; lbImg.alt=(((lbBrand.textContent||'')+' '+(lbModel.textContent||'')).trim()||'Watch detail photo')+' — photo '+(lbIdx+1)+' of '+total; lbCounter.textContent=total>1?'Photo '+(lbIdx+1)+' of '+total:''; lbPrev.classList.toggle('hidden',lbIdx===0); lbNext.classList.toggle('hidden',lbIdx===total-1); lbDots.innerHTML=''; if(total>1){lbImages.forEach(function(_,i){var d=document.createElement('button');d.className='lb-dot'+(i===lbIdx?' active':'');d.setAttribute('aria-label','Photo '+(i+1));d.onclick=function(){goTo(i);};lbDots.appendChild(d);}); } }
 function goTo(i) { if(i<0||i>=lbImages.length)return; lbImg.classList.add('fading'); setTimeout(function(){lbIdx=i;syncLightbox();lbImg.classList.remove('fading');},160); }
 document.getElementById('lb-close').onclick=closeLightbox;
 lbPrev.onclick=function(){goTo(lbIdx-1);};
