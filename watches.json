@@ -12,15 +12,14 @@
       "year": "2018"
     },
     {
-      "brand": "TAG",
-      "price": "$2,450",
-      "model": "Aquaracer",
-      "boxPapers": "Watch Only",
-      "status": "available",
-      "ref": "CAY218B / Titanium",
+      "brand": "Rolex",
+      "model": "Datejust 36mm",
+      "ref": "126231 / Two-Tone Everose Gold & Stainless",
+      "year": "2024",
       "condition": "Very Good",
-      "image": "/uploads/dsc02424.jpg",
-      "year": "Unknown"
+      "price": "$19,149",
+      "status": "available",
+      "image": "/uploads/dsc02345.jpg"
     },
     {
       "brand": "Rolex",
@@ -35,16 +34,6 @@
     },
     {
       "brand": "Rolex",
-      "model": "Datejust 36mm",
-      "ref": "126231 / Two-Tone Everose Gold & Stainless",
-      "year": "2024",
-      "condition": "Very Good",
-      "price": "$19,149",
-      "status": "available",
-      "image": "/uploads/dsc02345.jpg"
-    },
-    {
-      "brand": "Rolex",
       "price": "$14,450",
       "model": "Submariner \"No-Date\"",
       "boxPapers": "Full Set",
@@ -53,6 +42,17 @@
       "condition": "Very Good",
       "image": "/uploads/dsc01969.jpg",
       "year": "2026"
+    },
+    {
+      "brand": "TAG",
+      "price": "$2,450",
+      "model": "Aquaracer",
+      "boxPapers": "Watch Only",
+      "status": "available",
+      "ref": "CAY218B / Titanium",
+      "condition": "Very Good",
+      "image": "/uploads/dsc02424.jpg",
+      "year": "Unknown"
     },
     {
       "brand": "Rolex",
