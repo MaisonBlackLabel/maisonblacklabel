@@ -12,38 +12,6 @@
       "year": "2018"
     },
     {
-      "brand": "Panerai",
-      "price": "$9,649",
-      "model": "Luminor GMT",
-      "boxPapers": "Full Set",
-      "status": "available",
-      "ref": "Ref. PAM00986 / Stainless Steel",
-      "condition": "Very Good",
-      "image": "/uploads/dsc02376.jpg",
-      "year": "2020"
-    },
-    {
-      "brand": "Rolex",
-      "model": "Datejust 36mm",
-      "ref": "126231 / Two-Tone Everose Gold & Stainless",
-      "year": "2024",
-      "condition": "Very Good",
-      "price": "$19,149",
-      "status": "available",
-      "image": "/uploads/dsc02345.jpg"
-    },
-    {
-      "brand": "Rolex",
-      "price": "",
-      "model": "Datejust 36mm",
-      "boxPapers": "Full Set",
-      "status": "sold",
-      "ref": "126231 / Two-Tone Everose Gold & Stainless",
-      "condition": "Very Good",
-      "image": "/uploads/dsc02345.jpg",
-      "year": "2020"
-    },
-    {
       "brand": "TAG",
       "price": "$2,450",
       "model": "Aquaracer",
@@ -64,6 +32,16 @@
       "condition": "Very Good",
       "image": "/uploads/dsc02219.jpg",
       "year": "2026"
+    },
+    {
+      "brand": "Rolex",
+      "model": "Datejust 36mm",
+      "ref": "126231 / Two-Tone Everose Gold & Stainless",
+      "year": "2024",
+      "condition": "Very Good",
+      "price": "$19,149",
+      "status": "available",
+      "image": "/uploads/dsc02345.jpg"
     },
     {
       "brand": "Rolex",
@@ -118,6 +96,17 @@
       "year": "Unknown"
     },
     {
+      "brand": "Panerai",
+      "price": "",
+      "model": "Luminor GMT",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "Ref. PAM00986 / Stainless Steel",
+      "condition": "Very Good",
+      "image": "/uploads/dsc02376.jpg",
+      "year": "2020"
+    },
+    {
       "brand": "Rolex",
       "model": "Day-Date 40 \"Money Green\"",
       "ref": "228238 / Yellow Gold",
@@ -134,6 +123,17 @@
       "condition": "Very Good",
       "status": "sold",
       "image": "/uploads/img_0094.jpg"
+    },
+    {
+      "brand": "Rolex",
+      "price": "",
+      "model": "Datejust 36mm",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "126231 / Two-Tone Everose Gold & Stainless",
+      "condition": "Very Good",
+      "image": "/uploads/dsc02345.jpg",
+      "year": "2020"
     },
     {
       "brand": "Blancpain",
