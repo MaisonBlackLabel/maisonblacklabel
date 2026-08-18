@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#07070a"/>
+  <g transform="translate(50,36)" fill="#c9a84c">
+    <ellipse rx="3.2" ry="20" transform="rotate(0)"/>
+    <ellipse rx="3.2" ry="20" transform="rotate(90)"/>
+    <ellipse rx="2.2" ry="14" transform="rotate(45)"/>
+    <ellipse rx="2.2" ry="14" transform="rotate(135)"/>
+  </g>
+  <text x="50" y="76" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="bold" letter-spacing="3" fill="#c9a84c">MBL</text>
+</svg>
