@@ -6,7 +6,7 @@
       "model": "GMT-Master II \"Meteorite Pepsi\"",
       "boxPapers": "Full Set",
       "status": "available",
-      "ref": "126719BLRO",
+      "ref": "126719BLRO / 18k White Gold",
       "images": [
         "/uploads/dsc02733.jpg",
         "/uploads/dsc02732.jpg",
@@ -15,6 +15,43 @@
       "condition": "Excellent",
       "image": "/uploads/dsc02721.jpg",
       "year": "2020"
+    },
+    {
+      "brand": "Rolex",
+      "price": "$131,250",
+      "model": "Ice Blue Platinum Baguette Daytona",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "126506 / Platinum",
+      "condition": "Mint",
+      "image": "/uploads/img_4704.jpg",
+      "year": "2024"
+    },
+    {
+      "brand": "Rolex",
+      "price": "$84,000",
+      "model": "Ice Blue Platinum Day-Date",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "228236",
+      "condition": "Mint",
+      "image": "/uploads/dsc02695.jpg",
+      "year": "2023"
+    },
+    {
+      "brand": "Audemars Piguet",
+      "price": "$40,750",
+      "model": "Royal Oak",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "15500ST Grey Dial / Stainless steel",
+      "images": [
+        "/uploads/dsc02704.jpg",
+        "/uploads/img_4641.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02702.jpg",
+      "year": "2021"
     },
     {
       "brand": "Patek Philippe",
@@ -40,6 +77,23 @@
     },
     {
       "brand": "Rolex",
+      "price": "$13,750",
+      "model": "GMT-Master II",
+      "boxPapers": "Papers Only",
+      "status": "available",
+      "ref": "16760 Coke \"Fat Lady\" / Stainless Steel",
+      "images": [
+        "/uploads/dsc02691.jpg",
+        "/uploads/dsc02692.jpg",
+        "/uploads/dsc02690.jpg",
+        "/uploads/img_0543.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02687.jpg",
+      "year": "1987"
+    },
+    {
+      "brand": "Rolex",
       "price": "$14,450",
       "model": "Submariner \"No-Date\"",
       "boxPapers": "Full Set",
@@ -48,6 +102,21 @@
       "condition": "Very Good",
       "image": "/uploads/dsc01969.jpg",
       "year": "2026"
+    },
+    {
+      "brand": "Tudor",
+      "price": "$4,450",
+      "model": "Black Bay 41 Monochrome",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "M7941A1 / Stainless Steel",
+      "images": [
+        "/uploads/dsc02675.jpg",
+        "/uploads/img_0542.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02673.jpg",
+      "year": "2025"
     },
     {
       "brand": "TAG",
