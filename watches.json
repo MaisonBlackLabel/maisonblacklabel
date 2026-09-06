@@ -18,17 +18,6 @@
     },
     {
       "brand": "Rolex",
-      "price": "$131,250",
-      "model": "Ice Blue Platinum Baguette Daytona",
-      "boxPapers": "Full Set",
-      "status": "available",
-      "ref": "126506 / Platinum",
-      "condition": "Mint",
-      "image": "/uploads/img_4704.jpg",
-      "year": "2024"
-    },
-    {
-      "brand": "Rolex",
       "price": "$84,000",
       "model": "Ice Blue Platinum Day-Date",
       "boxPapers": "Full Set",
@@ -150,6 +139,17 @@
       "condition": "Good",
       "image": "/uploads/patek-philippe-aquanaut-5164a-001-travel-time-stainless-steel-2023-patek-philippe-41472501580020_800x.webp",
       "year": "2018"
+    },
+    {
+      "brand": "Rolex",
+      "price": "",
+      "model": "Ice Blue Platinum Baguette Daytona",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "126506 / Platinum",
+      "condition": null,
+      "image": "/uploads/img_0372.webp",
+      "year": ""
     },
     {
       "brand": "Audemars Piguet",
