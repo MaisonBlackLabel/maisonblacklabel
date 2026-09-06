@@ -1,36 +1,31 @@
 {
   "watches": [
     {
-      "brand": "Patek Philippe",
-      "price": "$92,449",
-      "model": "Aquanaut Dual Time",
+      "brand": "Rolex ",
+      "price": "$59,500",
+      "model": "GMT-Master II \"Meteorite Pepsi\"",
       "boxPapers": "Full Set",
       "status": "available",
-      "ref": "Ref. 5164A · Stainless Steel",
-      "condition": "Good",
-      "image": "/uploads/patek-philippe-aquanaut-5164a-001-travel-time-stainless-steel-2023-patek-philippe-41472501580020_800x.webp",
-      "year": "2018"
+      "ref": "126719BLRO",
+      "images": [
+        "/uploads/dsc02733.jpg",
+        "/uploads/dsc02732.jpg",
+        "/uploads/dsc02731.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02721.jpg",
+      "year": "2020"
     },
     {
       "brand": "Patek Philippe",
-      "price": "$27,549",
+      "price": "$28,549",
       "model": "Calatrava",
       "boxPapers": "Full Set",
       "status": "available",
       "ref": "5227G 18k White Gold",
       "condition": "Excellent",
       "image": "/uploads/dsc02577.jpg",
-      "year": "2019"
-    },
-    {
-      "brand": "Rolex",
-      "model": "Datejust 36mm",
-      "ref": "126231 / Two-Tone Everose Gold & Stainless",
-      "year": "2024",
-      "condition": "Very Good",
-      "price": "$19,149",
-      "status": "available",
-      "image": "/uploads/dsc02345.jpg"
+      "year": ""
     },
     {
       "brand": "Rolex",
@@ -42,20 +37,6 @@
       "condition": "Very Good",
       "image": "/uploads/dsc02219.jpg",
       "year": "2026"
-    },
-    {
-      "brand": "Cartier",
-      "price": "$5,889",
-      "model": "Drive De Cartier Moonphase",
-      "boxPapers": "Full Set",
-      "status": "available",
-      "ref": "WSNM0017",
-      "images": [
-        "/uploads/dsc02594.jpg"
-      ],
-      "condition": "Excellent",
-      "image": "/uploads/dsc02583.jpg",
-      "year": "2020"
     },
     {
       "brand": "Rolex",
@@ -89,6 +70,17 @@
       "condition": "Very Good",
       "image": "/uploads/dsc01966.jpg",
       "year": "2026"
+    },
+    {
+      "brand": "Patek Philippe",
+      "price": "",
+      "model": "Aquanaut Dual Time",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "Ref. 5164A · Stainless Steel",
+      "condition": "Good",
+      "image": "/uploads/patek-philippe-aquanaut-5164a-001-travel-time-stainless-steel-2023-patek-philippe-41472501580020_800x.webp",
+      "year": "2018"
     },
     {
       "brand": "Audemars Piguet",
@@ -151,14 +143,13 @@
     },
     {
       "brand": "Rolex",
-      "price": "",
       "model": "Datejust 36mm",
-      "boxPapers": "Full Set",
-      "status": "sold",
       "ref": "126231 / Two-Tone Everose Gold & Stainless",
+      "year": "2024",
       "condition": "Very Good",
-      "image": "/uploads/dsc02345.jpg",
-      "year": "2020"
+      "price": "",
+      "status": "sold",
+      "image": "/uploads/dsc02345.jpg"
     },
     {
       "brand": "Blancpain",
@@ -167,6 +158,20 @@
       "condition": "Good",
       "status": "sold",
       "image": "/uploads/dsc02272.jpg"
+    },
+    {
+      "brand": "Cartier",
+      "price": "",
+      "model": "Drive De Cartier Moonphase",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "WSNM0017",
+      "images": [
+        "/uploads/dsc02594.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02583.jpg",
+      "year": "2020"
     }
   ]
 }
