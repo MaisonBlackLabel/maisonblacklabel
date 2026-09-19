@@ -1,6 +1,17 @@
 {
   "watches": [
     {
+      "brand": "Audemars Piguet",
+      "price": "$47,549",
+      "model": "Royal Oak Offshore",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "26420CE / Ceramic",
+      "condition": "Mint",
+      "image": "/uploads/dsc02815.jpg",
+      "year": "2023"
+    },
+    {
       "brand": "Rolex ",
       "price": "$59,500",
       "model": "GMT-Master II \"Meteorite Pepsi\"",
