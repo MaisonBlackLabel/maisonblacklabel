@@ -89,6 +89,26 @@ nav {
 .sold-banner { position: absolute; top: 40px; right: -34px; background: var(--charcoal); color: var(--gold); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 50px; transform: rotate(45deg); border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); white-space: nowrap; z-index: 2; }
 .watch-card.sold-out .watch-img-wrap::after { content: ''; position: absolute; inset: 0; background: rgba(10,10,10,0.45); }
 
+.new-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(10,10,10,0.82);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.48rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  backdrop-filter: blur(4px);
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  animation: badgeFade 0.5s ease both;
+}
+@keyframes badgeFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.watch-card:hover .new-badge { opacity: 0; }
+
 .watch-info { padding: 24px 28px 28px; display: flex; flex-direction: column; flex: 1; }
 .watch-brand { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 .watch-model { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; line-height: 1.2; margin-bottom: 8px; }
@@ -229,6 +249,8 @@ lbPrev.onclick=function(){goTo(lbIdx-1);};
 lbNext.onclick=function(){goTo(lbIdx+1);};
 lb.onclick=function(e){if(e.target===lb)closeLightbox();};
 document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='ArrowLeft')goTo(lbIdx-1);if(e.key==='ArrowRight')goTo(lbIdx+1);if(e.key==='Escape')closeLightbox();});
+var NEW_DAYS=14;
+function isNew(d){if(!d)return false;var a=new Date(d),n=new Date(),diff=(n-a)/(864e5);return diff>=0&&diff<=NEW_DAYS;}
 function getImages(w){var p=w.image?[w.image]:[];var x=Array.isArray(w.images)?w.images:[];return p.concat(x).filter(function(v,i,a){return v&&a.indexOf(v)===i;});}
 var camIcon='<svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>';
 function renderCards(watches){
@@ -239,13 +261,13 @@ function renderCards(watches){
     var images=getImages(w);
     var imgSrc=images[0]||'';
     var badge=images.length>1?'<div class="img-count-badge">'+camIcon+' '+images.length+' photos</div>':'';
-    var soldTag=isSold?'<div class="sold-banner">Inquire to Source</div>':'';
+    var soldTag=isSold?'<div class="sold-banner">Inquire to Source</div>':''; var newTag=(!isSold&&isNew(w.date_added))?'<div class="new-badge">New</div>':'';
     var details='';
     if(w.year)details+='<div class="watch-detail"><strong>Year</strong>'+w.year+'</div>';
     if(w.condition)details+='<div class="watch-detail"><strong>Condition</strong>'+w.condition+'</div>';
     if(w.boxPapers)details+='<div class="watch-detail"><strong>Box &amp; Papers</strong>'+w.boxPapers+'</div>';
     var footer=isSold?'<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="index.html#contact">Source This</a>':'<span class="watch-price">'+(w.price||'')+'</span><a class="watch-btn watch-btn-primary" href="index.html#contact">Inquire</a>';
-    return '<div class="watch-card'+(isSold?' sold-out':'')+'" data-status="'+w.status+'">'+soldTag+'<div class="watch-img-wrap" onclick="handleClick('+i+')"><img src="'+imgSrc+'" alt="'+w.brand+' '+w.model+'" loading="lazy" />'+badge+'</div><div class="watch-info"><span class="watch-brand">'+(w.brand||'')+'</span><h3 class="watch-model">'+(w.model||'')+'</h3><p class="watch-ref">'+(w.ref||'')+'</p><div class="watch-details">'+details+'</div><div class="watch-footer">'+footer+'</div></div></div>';
+    return '<div class="watch-card'+(isSold?' sold-out':'')+'" data-status="'+w.status+'">'+soldTag+'<div class="watch-img-wrap" onclick="handleClick('+i+')">'+newTag+'<img src="'+imgSrc+'" alt="'+w.brand+' '+w.model+'" loading="lazy" />'+badge+'</div><div class="watch-info"><span class="watch-brand">'+(w.brand||'')+'</span><h3 class="watch-model">'+(w.model||'')+'</h3><p class="watch-ref">'+(w.ref||'')+'</p><div class="watch-details">'+details+'</div><div class="watch-footer">'+footer+'</div></div></div>';
   }).join('');
 }
 function handleClick(i){var w=currentWatches[i];if(!w)return;var images=getImages(w);if(!images.length)return;openLightbox(images,w.brand||'',w.model||'');}
