@@ -125,26 +125,57 @@ nav {
 .watch-btn-outline { border: 1px solid var(--border); color: var(--muted); }
 .watch-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-#lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.94); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-#lightbox.open { opacity: 1; pointer-events: all; }
-.lb-inner { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 88vw; max-height: 92vh; }
-.lb-img-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
-#lb-img { max-width: 82vw; max-height: 78vh; object-fit: contain; display: block; user-select: none; transition: opacity 0.18s ease; }
-#lb-img.fading { opacity: 0; }
-.lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,10,0.7); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; user-select: none; }
-.lb-arrow:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); }
-.lb-arrow.prev { left: -60px; }
-.lb-arrow.next { right: -60px; }
-.lb-arrow.hidden { opacity: 0; pointer-events: none; }
-.lb-dots { display: flex; gap: 8px; margin-top: 20px; justify-content: center; min-height: 14px; }
-.lb-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.25); border: 1px solid rgba(201,168,76,0.4); cursor: pointer; transition: background 0.2s; padding: 0; }
-.lb-dot.active { background: var(--gold); }
-.lb-caption { margin-top: 16px; text-align: center; }
-.lb-brand-text { font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); }
-.lb-model-text { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--white); }
-.lb-counter { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 4px; min-height: 1em; }
-.lb-close { position: fixed; top: 24px; right: 28px; width: 40px; height: 40px; background: rgba(10,10,10,0.7); border: 1px solid var(--border); color: var(--muted); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; z-index: 10000; line-height: 1; }
-.lb-close:hover { border-color: var(--gold); color: var(--gold); }
+.new-badge { position: absolute; top: 14px; left: 14px; background: rgba(10,10,10,0.82); border: 1px solid var(--gold); color: var(--gold); font-size: 0.48rem; letter-spacing: 0.32em; text-transform: uppercase; padding: 5px 10px; backdrop-filter: blur(4px); z-index: 3; pointer-events: none; transition: opacity 0.3s ease; animation: badgeFade 0.5s ease both; }
+@keyframes badgeFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.watch-card:hover .new-badge { opacity: 0; }
+
+/* ── DETAIL OVERLAY ── */
+#detail-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(10,10,10,0); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease, background 0.4s ease; }
+#detail-overlay.open { opacity: 1; pointer-events: all; background: rgba(10,10,10,0.92); }
+.detail-panel { display: flex; width: 92vw; max-width: 1280px; height: 88vh; max-height: 820px; background: var(--charcoal); border: 1px solid var(--border); transform: translateY(28px) scale(0.98); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+#detail-overlay.open .detail-panel { transform: translateY(0) scale(1); }
+.detail-close { position: absolute; top: 20px; right: 20px; z-index: 10; width: 38px; height: 38px; background: rgba(10,10,10,0.7); border: 1px solid var(--border); color: var(--muted); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.detail-close:hover { border-color: var(--gold); color: var(--gold); }
+.detail-left { flex: 0 0 58%; position: relative; background: #0d0d0d; display: flex; flex-direction: column; overflow: hidden; }
+.main-img-wrap { flex: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+#d-main-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.2s ease; user-select: none; }
+#d-main-img.fading { opacity: 0; }
+.d-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; background: rgba(10,10,10,0.7); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 3; }
+.d-arrow:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+.d-arrow.prev-a { left: 16px; } .d-arrow.next-a { right: 16px; }
+.d-arrow.hidden { opacity: 0; pointer-events: none; }
+.d-photo-count { position: absolute; bottom: 14px; right: 16px; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); background: rgba(10,10,10,0.65); padding: 4px 10px; backdrop-filter: blur(4px); }
+.thumb-strip { display: flex; gap: 6px; padding: 12px 14px; background: var(--black); border-top: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+.thumb-strip::-webkit-scrollbar { display: none; }
+.thumb-item { flex: 0 0 62px; height: 62px; cursor: pointer; overflow: hidden; border: 1px solid transparent; opacity: 0.5; transition: opacity 0.2s, border-color 0.2s; }
+.thumb-item:hover { opacity: 0.85; }
+.thumb-item.active { border-color: var(--gold); opacity: 1; }
+.thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+.detail-right { flex: 1; display: flex; flex-direction: column; padding: 40px 40px 32px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.detail-right::-webkit-scrollbar { width: 4px; }
+.detail-right::-webkit-scrollbar-thumb { background: var(--border); }
+.d-eyebrow { font-size: 0.55rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.d-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+.d-model-name { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 300; line-height: 1.1; letter-spacing: 0.04em; margin-bottom: 10px; }
+.d-ref-line { font-size: 0.62rem; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 26px; }
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); margin-bottom: 26px; }
+.spec-item { padding: 13px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+.spec-item:nth-child(even) { border-right: none; }
+.spec-item:nth-last-child(-n+2) { border-bottom: none; }
+.spec-label { font-size: 0.5rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.spec-value { font-size: 0.8rem; letter-spacing: 0.06em; }
+.d-price-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+.d-price { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; }
+.d-price-note { font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.d-cta-primary { display: block; width: 100%; text-align: center; font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase; background: var(--gold); color: var(--black); padding: 15px 24px; text-decoration: none; margin-bottom: 10px; transition: background 0.2s; cursor: pointer; border: none; font-family: var(--sans); }
+.d-cta-primary:hover { background: var(--gold-light); }
+.d-cta-secondary { display: block; width: 100%; text-align: center; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); padding: 13px 24px; text-decoration: none; margin-bottom: 24px; transition: all 0.2s; cursor: pointer; background: none; font-family: var(--sans); }
+.d-cta-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.d-guarantee { display: flex; border: 1px solid var(--border); margin-top: auto; }
+.d-guarantee-item { flex: 1; padding: 12px 8px; text-align: center; border-right: 1px solid var(--border); }
+.d-guarantee-item:last-child { border-right: none; }
+.d-g-icon { font-size: 0.85rem; margin-bottom: 3px; }
+.d-g-text { font-size: 0.46rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 1.4; }
 
 .inquire-band { padding: 80px 48px; text-align: center; border-top: 1px solid var(--border); background: var(--charcoal); }
 .inquire-band p { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
@@ -166,12 +197,17 @@ footer a:hover { color: var(--gold); }
   .collection-grid { grid-template-columns: 1fr 1fr; }
   .filters { padding: 28px 24px; flex-wrap: wrap; }
   footer { flex-direction: column; gap: 12px; text-align: center; }
-  .lb-arrow.prev { left: -46px; } .lb-arrow.next { right: -46px; }
+  .detail-panel { flex-direction: column; width: 96vw; height: 92vh; max-height: none; }
+  .detail-left { flex: 0 0 46%; }
+  .detail-right { padding: 24px; }
 }
 @media (max-width: 600px) {
   .collection-grid { grid-template-columns: 1fr; }
-  .lb-arrow.prev { left: 6px; } .lb-arrow.next { right: 6px; }
-  #lb-img { max-width: 94vw; max-height: 65vh; }
+  .detail-panel { width: 100vw; height: 100vh; border: none; }
+  .spec-grid { grid-template-columns: 1fr; }
+  .spec-item { border-right: none !important; }
+  .spec-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .spec-item:last-child { border-bottom: none; }
 }
 </style>
 </head>
@@ -198,19 +234,36 @@ footer a:hover { color: var(--gold); }
   <button class="filter-btn" onclick="filterWatches('sold', this)">Inquire to Source</button>
 </div>
 <div class="collection-grid" id="grid"></div>
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button class="lb-close" id="lb-close" aria-label="Close">&#x2715;</button>
-  <div class="lb-inner">
-    <div class="lb-img-wrap">
-      <button class="lb-arrow prev hidden" id="lb-prev" aria-label="Previous">&#8592;</button>
-      <img id="lb-img" src="" alt="" />
-      <button class="lb-arrow next hidden" id="lb-next" aria-label="Next">&#8594;</button>
+<!-- DETAIL OVERLAY -->
+<div id="detail-overlay" role="dialog" aria-modal="true" aria-label="Watch detail">
+  <div class="detail-panel">
+    <button class="detail-close" id="d-close" aria-label="Close">&#x2715;</button>
+    <div class="detail-left">
+      <div class="main-img-wrap">
+        <button class="d-arrow prev-a hidden" id="d-prev" aria-label="Previous">&#8592;</button>
+        <img id="d-main-img" src="" alt="" />
+        <button class="d-arrow next-a hidden" id="d-next" aria-label="Next">&#8594;</button>
+        <div class="d-photo-count" id="d-count"></div>
+      </div>
+      <div class="thumb-strip" id="d-thumbs"></div>
     </div>
-    <div class="lb-dots" id="lb-dots"></div>
-    <div class="lb-caption">
-      <div class="lb-brand-text" id="lb-brand"></div>
-      <div class="lb-model-text" id="lb-model"></div>
-      <div class="lb-counter" id="lb-counter"></div>
+    <div class="detail-right">
+      <div class="d-eyebrow" id="d-brand"></div>
+      <h2 class="d-model-name" id="d-model"></h2>
+      <p class="d-ref-line" id="d-ref"></p>
+      <div class="spec-grid" id="d-specs"></div>
+      <div class="d-price-row">
+        <span class="d-price" id="d-price"></span>
+        <span class="d-price-note" id="d-price-note"></span>
+      </div>
+      <button class="d-cta-primary" id="d-inquire">Inquire About This Watch</button>
+      <button class="d-cta-secondary" id="d-photos">Request Additional Photos</button>
+      <div class="d-guarantee">
+        <div class="d-guarantee-item"><div class="d-g-icon">&#x1F512;</div><div class="d-g-text">100%<br>Authenticated</div></div>
+        <div class="d-guarantee-item"><div class="d-g-icon">&#x1F4E6;</div><div class="d-g-text">Insured<br>Shipping</div></div>
+        <div class="d-guarantee-item"><div class="d-g-icon">&#x2736;</div><div class="d-g-text">24hr Quote<br>Turnaround</div></div>
+        <div class="d-guarantee-item"><div class="d-g-icon">&#x2605;</div><div class="d-g-text">5-Star<br>Rated</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -230,48 +283,98 @@ footer a:hover { color: var(--gold); }
   <a class="qc-btn" href="sms:+15613897382" aria-label="Text us" title="Text Us">SMS</a>
 </div>
 <script>
-let allWatches = [], currentWatches = [];
-let lbImages = [], lbIdx = 0;
-const lb = document.getElementById('lightbox');
-const lbImg = document.getElementById('lb-img');
-const lbPrev = document.getElementById('lb-prev');
-const lbNext = document.getElementById('lb-next');
-const lbDots = document.getElementById('lb-dots');
-const lbBrand = document.getElementById('lb-brand');
-const lbModel = document.getElementById('lb-model');
-const lbCounter = document.getElementById('lb-counter');
-function openLightbox(images, brand, model) { lbImages=images; lbIdx=0; lbBrand.textContent=brand; lbModel.textContent=model; syncLightbox(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
-function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow=''; }
-function syncLightbox() { var total=lbImages.length; lbImg.src=lbImages[lbIdx]; lbImg.alt=(((lbBrand.textContent||'')+' '+(lbModel.textContent||'')).trim()||'Watch detail photo')+' — photo '+(lbIdx+1)+' of '+total; lbCounter.textContent=total>1?'Photo '+(lbIdx+1)+' of '+total:''; lbPrev.classList.toggle('hidden',lbIdx===0); lbNext.classList.toggle('hidden',lbIdx===total-1); lbDots.innerHTML=''; if(total>1){lbImages.forEach(function(_,i){var d=document.createElement('button');d.className='lb-dot'+(i===lbIdx?' active':'');d.setAttribute('aria-label','Photo '+(i+1));d.onclick=function(){goTo(i);};lbDots.appendChild(d);}); } }
-function goTo(i) { if(i<0||i>=lbImages.length)return; lbImg.classList.add('fading'); setTimeout(function(){lbIdx=i;syncLightbox();lbImg.classList.remove('fading');},160); }
-document.getElementById('lb-close').onclick=closeLightbox;
-lbPrev.onclick=function(){goTo(lbIdx-1);};
-lbNext.onclick=function(){goTo(lbIdx+1);};
-lb.onclick=function(e){if(e.target===lb)closeLightbox();};
-document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='ArrowLeft')goTo(lbIdx-1);if(e.key==='ArrowRight')goTo(lbIdx+1);if(e.key==='Escape')closeLightbox();});
-var NEW_DAYS=14;
-function isNew(d){if(!d)return false;var a=new Date(d),n=new Date(),diff=(n-a)/(864e5);return diff>=0&&diff<=NEW_DAYS;}
-function getImages(w){var p=w.image?[w.image]:[];var x=Array.isArray(w.images)?w.images:[];return p.concat(x).filter(function(v,i,a){return v&&a.indexOf(v)===i;});}
-var camIcon='<svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>';
-function renderCards(watches){
-  var grid=document.getElementById('grid');
-  if(!watches.length){grid.innerHTML='<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">No pieces found.</p>';return;}
-  grid.innerHTML=watches.map(function(w,i){
-    var isSold=w.status==='sold';
-    var images=getImages(w);
-    var imgSrc=images[0]||'';
-    var badge=images.length>1?'<div class="img-count-badge">'+camIcon+' '+images.length+' photos</div>':'';
-    var soldTag=isSold?'<div class="sold-banner">Inquire to Source</div>':''; var newTag=(!isSold&&isNew(w.date_added))?'<div class="new-badge">New</div>':'';
-    var details='';
-    if(w.year)details+='<div class="watch-detail"><strong>Year</strong>'+w.year+'</div>';
-    if(w.condition)details+='<div class="watch-detail"><strong>Condition</strong>'+w.condition+'</div>';
-    if(w.boxPapers)details+='<div class="watch-detail"><strong>Box &amp; Papers</strong>'+w.boxPapers+'</div>';
-    var footer=isSold?'<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="index.html#contact">Source This</a>':'<span class="watch-price">'+(w.price||'')+'</span><a class="watch-btn watch-btn-primary" href="index.html#contact">Inquire</a>';
+var NEW_DAYS = 14;
+function isNew(d) { if (!d) return false; var a = new Date(d), n = new Date(), diff = (n - a) / 864e5; return diff >= 0 && diff <= NEW_DAYS; }
+
+var allWatches = [], currentWatches = [];
+var dImages = [], dIdx = 0;
+var overlay = document.getElementById('detail-overlay');
+var dMainImg = document.getElementById('d-main-img');
+var dPrev = document.getElementById('d-prev');
+var dNext = document.getElementById('d-next');
+var dCount = document.getElementById('d-count');
+var dThumbs = document.getElementById('d-thumbs');
+
+function openDetail(i) {
+  var w = currentWatches[i];
+  if (!w) return;
+  var imgs = getImages(w);
+  if (!imgs.length) return;
+  dImages = imgs; dIdx = 0;
+  document.getElementById('d-brand').textContent = w.brand || '';
+  document.getElementById('d-model').textContent = w.model || '';
+  document.getElementById('d-ref').textContent = w.ref || '';
+  var isSold = w.status === 'sold';
+  var priceEl = document.getElementById('d-price');
+  var noteEl = document.getElementById('d-price-note');
+  if (isSold) { priceEl.textContent = 'Available to Source'; priceEl.style.fontFamily = 'var(--sans)'; priceEl.style.fontSize = '1rem'; noteEl.textContent = ''; }
+  else { priceEl.textContent = w.price || 'Inquire'; priceEl.style.fontFamily = ''; priceEl.style.fontSize = ''; noteEl.textContent = w.price ? 'USD · Insured Shipping Included' : ''; }
+  var specs = [];
+  if (w.year) specs.push({l:'Year', v:w.year});
+  if (w.condition) specs.push({l:'Condition', v:w.condition});
+  if (w.boxPapers) specs.push({l:'Box & Papers', v:w.boxPapers});
+  specs.push({l:'Status', v:isSold ? 'Available to Source' : 'Available Now'});
+  if (specs.length % 2 !== 0) specs.push({l:'', v:''});
+  document.getElementById('d-specs').innerHTML = specs.map(function(s){return '<div class="spec-item"><div class="spec-label">'+s.l+'</div><div class="spec-value">'+s.v+'</div></div>';}).join('');
+  document.getElementById('d-inquire').onclick = function() { window.location.href = 'index.html#contact'; };
+  document.getElementById('d-photos').onclick = function() { window.location.href = 'index.html#contact'; };
+  syncDetail();
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function syncDetail() {
+  var total = dImages.length;
+  dMainImg.src = dImages[dIdx];
+  dCount.textContent = total > 1 ? 'Photo ' + (dIdx + 1) + ' of ' + total : '';
+  dPrev.classList.toggle('hidden', dIdx === 0);
+  dNext.classList.toggle('hidden', dIdx === total - 1);
+  dThumbs.innerHTML = dImages.map(function(src, j){return '<div class="thumb-item'+(j===dIdx?' active':'')+'" onclick="dGoTo('+j+')"><img src="'+src+'" alt="Photo '+(j+1)+'" /></div>';}).join('');
+}
+
+function dGoTo(i) {
+  if (i < 0 || i >= dImages.length) return;
+  dMainImg.classList.add('fading');
+  setTimeout(function() { dIdx = i; syncDetail(); dMainImg.classList.remove('fading'); }, 180);
+}
+
+function closeDetail() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.getElementById('d-close').onclick = closeDetail;
+dPrev.onclick = function() { dGoTo(dIdx - 1); };
+dNext.onclick = function() { dGoTo(dIdx + 1); };
+overlay.onclick = function(e) { if (e.target === overlay) closeDetail(); };
+document.addEventListener('keydown', function(e) {
+  if (!overlay.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') dGoTo(dIdx - 1);
+  if (e.key === 'ArrowRight') dGoTo(dIdx + 1);
+  if (e.key === 'Escape') closeDetail();
+});
+
+function getImages(w) { var p = w.image ? [w.image] : []; var x = Array.isArray(w.images) ? w.images : []; return p.concat(x).filter(function(v,i,a){return v&&a.indexOf(v)===i;}); }
+var camIcon = '<svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>';
+
+function renderCards(watches) {
+  var grid = document.getElementById('grid');
+  if (!watches.length) { grid.innerHTML = '<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">No pieces found.</p>'; return; }
+  grid.innerHTML = watches.map(function(w, i) {
+    var isSold = w.status === 'sold';
+    var images = getImages(w);
+    var imgSrc = images[0] || '';
+    var badge = images.length > 1 ? '<div class="img-count-badge">'+camIcon+' '+images.length+' photos</div>' : '';
+    var soldTag = isSold ? '<div class="sold-banner">Inquire to Source</div>' : '';
+    var newTag = (!isSold && isNew(w.date_added)) ? '<div class="new-badge">New</div>' : '';
+    var details = '';
+    if (w.year) details += '<div class="watch-detail"><strong>Year</strong>'+w.year+'</div>';
+    if (w.condition) details += '<div class="watch-detail"><strong>Condition</strong>'+w.condition+'</div>';
+    if (w.boxPapers) details += '<div class="watch-detail"><strong>Box &amp; Papers</strong>'+w.boxPapers+'</div>';
+    var footer = isSold ? '<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="index.html#contact">Source This</a>' : '<span class="watch-price">'+(w.price||'')+'</span><a class="watch-btn watch-btn-primary" href="index.html#contact">Inquire</a>';
     return '<div class="watch-card'+(isSold?' sold-out':'')+'" data-status="'+w.status+'">'+soldTag+'<div class="watch-img-wrap" onclick="handleClick('+i+')">'+newTag+'<img src="'+imgSrc+'" alt="'+w.brand+' '+w.model+'" loading="lazy" />'+badge+'</div><div class="watch-info"><span class="watch-brand">'+(w.brand||'')+'</span><h3 class="watch-model">'+(w.model||'')+'</h3><p class="watch-ref">'+(w.ref||'')+'</p><div class="watch-details">'+details+'</div><div class="watch-footer">'+footer+'</div></div></div>';
   }).join('');
 }
-function handleClick(i){var w=currentWatches[i];if(!w)return;var images=getImages(w);if(!images.length)return;openLightbox(images,w.brand||'',w.model||'');}
-function filterWatches(status,btn){document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');currentWatches=status==='all'?allWatches:allWatches.filter(function(w){return w.status===status;});renderCards(currentWatches);}
+
+function handleClick(i) { openDetail(i); }
+function filterWatches(status, btn) { document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); currentWatches = status === 'all' ? allWatches : allWatches.filter(function(w){return w.status===status;}); renderCards(currentWatches); }
 fetch('watches.json').then(function(r){return r.json();}).then(function(data){allWatches=data.watches||[];currentWatches=allWatches;renderCards(currentWatches);}).catch(function(){document.getElementById('grid').innerHTML='<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">Unable to load inventory. Please contact us directly.</p>';});
 </script>
 </body>
