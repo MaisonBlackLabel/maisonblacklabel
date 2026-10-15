@@ -1,0 +1,12 @@
+{
+  "name": "maisonblacklabel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Maison Black Label — luxury watch dealer, West Palm Beach FL",
+  "scripts": {
+    "build": "node scripts/generate-watch-pages.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
