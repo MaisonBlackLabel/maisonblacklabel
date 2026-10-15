@@ -64,21 +64,6 @@
       "year": "2023"
     },
     {
-      "brand": "Audemars Piguet",
-      "price": "$40,750",
-      "model": "Royal Oak",
-      "boxPapers": "Full Set",
-      "status": "available",
-      "ref": "15500ST Grey Dial / Stainless steel",
-      "images": [
-        "/uploads/dsc02704.jpg",
-        "/uploads/img_4641.jpg"
-      ],
-      "condition": "Mint",
-      "image": "/uploads/dsc02702.jpg",
-      "year": "2021"
-    },
-    {
       "brand": "Patek Philippe",
       "price": "$28,549",
       "model": "Calatrava",
@@ -186,6 +171,21 @@
       "condition": null,
       "image": "/uploads/img_0372.webp",
       "year": ""
+    },
+    {
+      "brand": "Audemars Piguet",
+      "price": "",
+      "model": "Royal Oak",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "15500ST Grey Dial / Stainless steel",
+      "images": [
+        "/uploads/dsc02704.jpg",
+        "/uploads/img_4641.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02702.jpg",
+      "year": "2021+"
     },
     {
       "brand": "Audemars Piguet",
