@@ -1,0 +1,3 @@
+[build]
+  command = "node scripts/generate-watch-pages.js"
+  publish = "."
