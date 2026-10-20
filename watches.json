@@ -4,6 +4,7 @@
       "brand": "Audemars Piguet",
       "price": "$47,889",
       "model": "Royal Oak Offshore Chronograph",
+      "date_added": "2026-10-13",
       "boxPapers": "Full Set",
       "status": "available",
       "ref": "26420CE.OO.A043VE.01 / Blue Ceramic Dial",
@@ -17,8 +18,7 @@
       ],
       "condition": "Excellent",
       "image": "https://i.ebayimg.com/images/g/N1cAAeSwfBJqqZoM/s-l1600.jpg",
-      "year": "2023",
-      "date_added": "2026-10-13"
+      "year": "2023"
     },
     {
       "brand": "Rolex ",
@@ -46,21 +46,6 @@
       "condition": "Mint",
       "image": "/uploads/dsc02695.jpg",
       "year": "2023"
-    },
-    {
-      "brand": "Audemars Piguet",
-      "price": "$40,750",
-      "model": "Royal Oak",
-      "boxPapers": "Full Set",
-      "status": "available",
-      "ref": "15500ST Grey Dial / Stainless steel",
-      "images": [
-        "/uploads/dsc02704.jpg",
-        "/uploads/img_4641.jpg"
-      ],
-      "condition": "Mint",
-      "image": "/uploads/dsc02702.jpg",
-      "year": "2021"
     },
     {
       "brand": "Patek Philippe",
@@ -169,6 +154,21 @@
       "ref": "126506 / Platinum",
       "condition": null,
       "image": "/uploads/img_0372.webp",
+      "year": ""
+    },
+    {
+      "brand": "Audemars Piguet",
+      "price": "",
+      "model": "Royal Oak",
+      "boxPapers": "Full Set",
+      "status": "sold",
+      "ref": "15500ST Grey Dial / Stainless steel",
+      "images": [
+        "/uploads/dsc02704.jpg",
+        "/uploads/img_4641.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02702.jpg",
       "year": ""
     },
     {
