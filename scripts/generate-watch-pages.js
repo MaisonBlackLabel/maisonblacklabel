@@ -25,8 +25,8 @@ function sanitize(str) {
   return (str || '')
     .trim()
     .toLowerCase()
-    .replace(/['"""'']/g, '')        // remove quotes
-    .replace(/[^a-z0-9\s-]/g, ' ')  // non-alphanum → space
+    .replace(/['"""'']/g, '')
+    .replace(/[^a-z0-9\s-]/g, ' ')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
@@ -35,20 +35,14 @@ function sanitize(str) {
 /**
  * Build a URL slug from a watch object.
  * Pattern: {brand}-{model}-{base-ref}
- * e.g. "audemars-piguet-royal-oak-offshore-chronograph-26420ce"
  */
 function generateSlug(watch) {
   const brand = sanitize(watch.brand || '');
   const model = sanitize(watch.model || '');
-
-  // ref field can look like "26420CE.OO.A043VE.01 / Blue Ceramic Dial"
-  // Take everything before " / ", then the first space-separated token,
-  // then strip dots so "126719BLRO" stays intact but "26420CE.OO…" → "26420ce"
-  const refRaw  = (watch.ref || '').split(' / ')[0].trim();   // "26420CE.OO.A043VE.01"
-  const refToken = refRaw.split(/\s+/)[0];                    // first word only
-  const refBase  = refToken.split('.')[0];                     // before first dot → "26420CE"
-  const ref      = refBase.toLowerCase().replace(/[^a-z0-9]/g, '');
-
+  const refRaw   = (watch.ref || '').split(' / ')[0].trim();
+  const refToken  = refRaw.split(/\s+/)[0];
+  const refBase   = refToken.split('.')[0];
+  const ref       = refBase.toLowerCase().replace(/[^a-z0-9]/g, '');
   return [brand, model, ref].filter(Boolean).join('-');
 }
 
@@ -59,7 +53,7 @@ function getImages(watch) {
   return [...new Set([...primary, ...extra])].filter(Boolean);
 }
 
-/** Absolute URL for an image (handles /uploads/… and external URLs) */
+/** Absolute URL for an image */
 function absImg(src) {
   if (!src) return '';
   return src.startsWith('http') ? src : `${SITE_URL}${src}`;
@@ -84,11 +78,11 @@ function esc(str) {
 /** Build spec rows for the grid */
 function buildSpecs(watch, isSold) {
   const rows = [];
-  if (watch.year)       rows.push({ label: 'Year',        value: watch.year });
-  if (watch.condition)  rows.push({ label: 'Condition',   value: watch.condition });
-  if (watch.boxPapers)  rows.push({ label: 'Box & Papers',value: watch.boxPapers });
+  if (watch.year)       rows.push({ label: 'Year',         value: watch.year });
+  if (watch.condition)  rows.push({ label: 'Condition',    value: watch.condition });
+  if (watch.boxPapers)  rows.push({ label: 'Box & Papers', value: watch.boxPapers });
   rows.push({ label: 'Status', value: isSold ? 'Available to Source' : 'Available Now' });
-  if (rows.length % 2 !== 0) rows.push({ label: '', value: '' }); // keep grid even
+  if (rows.length % 2 !== 0) rows.push({ label: '', value: '' });
   return rows;
 }
 
@@ -146,15 +140,34 @@ function generatePage(watch, slug) {
     }
   };
 
-  const specs   = buildSpecs(watch, isSold);
+  const specs     = buildSpecs(watch, isSold);
   const specsHtml = specs.map(s =>
     `<div class="spec-item"><div class="spec-label">${esc(s.label)}</div><div class="spec-value">${esc(s.value)}</div></div>`
   ).join('');
 
-  const thumbsHtml = images.length > 1
+  // Cinematic slides
+  const slidesHtml = images.length
     ? images.map((src, i) =>
-        `<img class="thumb${i === 0 ? ' active' : ''}" src="${esc(src)}" alt="${esc(brandTrim)} ${esc(watch.model)} photo ${i + 1}" onclick="showImg(${i})" loading="lazy" />`
+        `<div class="slide${i === 0 ? ' active' : ''}" style="background-image:url('${esc(src)}')" role="img" aria-label="${esc(brandTrim)} ${esc(watch.model || '')} photo ${i + 1}"></div>`
       ).join('')
+    : `<div class="slide active slide--empty"></div>`;
+
+  // Dots (only if multiple images)
+  const dotsHtml = images.length > 1
+    ? `<div class="cin-dots" id="cinDots">${images.map((_,i) =>
+        `<button class="cin-dot${i===0?' active':''}" onclick="cinGo(${i})" aria-label="Photo ${i+1}"></button>`
+      ).join('')}</div>`
+    : '';
+
+  // Arrows (only if multiple images)
+  const arrowsHtml = images.length > 1
+    ? `<button class="cin-arrow cin-prev" onclick="cinNav(-1)" aria-label="Previous photo">&#8592;</button>
+       <button class="cin-arrow cin-next" onclick="cinNav(1)"  aria-label="Next photo">&#8594;</button>`
+    : '';
+
+  // Counter (only if multiple images)
+  const counterHtml = images.length > 1
+    ? `<div class="cin-counter" id="cinCounter">1 / ${images.length}</div>`
     : '';
 
   let priceBlock;
@@ -171,7 +184,7 @@ function generatePage(watch, slug) {
     priceBlock = `<div class="price-row"><span class="price-alt">Price on Request</span></div>`;
   }
 
-  const waText = encodeURIComponent(`Hi, I'm interested in the ${brandTrim} ${watch.model} ${canonRef}.`);
+  const waText  = encodeURIComponent(`Hi, I'm interested in the ${brandTrim} ${watch.model} ${canonRef}.`);
   const ctaHtml = isSold
     ? `<a class="cta-primary" href="/index.html#contact">Inquire to Source This Watch</a>`
     : `<a class="cta-primary" href="/index.html#contact">Inquire About This Watch</a>
@@ -204,6 +217,8 @@ ${mainImage ? `<meta property="og:image" content="${esc(absImg(mainImage))}" />`
 :root{--black:#0a0a0a;--charcoal:#141414;--border:#2a2a2a;--gold:#c9a84c;--gold-light:#e0c070;--white:#f5f3ef;--muted:#999;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',sans-serif}
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* ── Nav ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:var(--serif);font-size:1.2rem;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);text-decoration:none}
 .nav-logo span{color:var(--gold)}
@@ -212,15 +227,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-links a:hover,.nav-links a.active{color:var(--white)}
 .nav-cta{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold);padding:8px 20px;transition:all 0.25s}
 .nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* ── Breadcrumb ── */
 .breadcrumb{padding:96px 48px 24px;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
 .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover,.breadcrumb span{color:var(--gold)}
+
+/* ── Page grid ── */
 .watch-page{display:grid;grid-template-columns:58% 42%;max-width:1400px;margin:0 auto;padding:0 48px 80px}
-.gallery{background:#0d0d0d}
-.main-img{width:100%;aspect-ratio:1/1;object-fit:contain;display:block}
-.thumb-row{display:flex;gap:6px;padding:12px;overflow-x:auto;scrollbar-width:none;background:var(--black);border-top:1px solid var(--border)}
-.thumb-row::-webkit-scrollbar{display:none}
-.thumb{width:68px;height:68px;object-fit:cover;cursor:pointer;border:1px solid transparent;opacity:0.5;transition:opacity 0.2s,border-color 0.2s;flex-shrink:0}
-.thumb.active,.thumb:hover{border-color:var(--gold);opacity:1}
+
+/* ── Cinematic gallery ── */
+.gallery{position:relative;overflow:hidden;background:#080808;aspect-ratio:1/1;align-self:start}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 0.65s ease;background-size:cover;background-position:center;background-repeat:no-repeat}
+.slide.active{opacity:1}
+.slide--empty{background:#111}
+
+/* Bottom gradient for overlay legibility */
+.gallery::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.55) 0%,transparent 40%);pointer-events:none;z-index:1}
+
+/* Arrows */
+.cin-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(10,10,10,0.55);border:1px solid rgba(201,168,76,0.35);color:var(--gold);width:46px;height:46px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all 0.22s;backdrop-filter:blur(6px);font-family:var(--sans)}
+.cin-arrow:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.cin-prev{left:16px}
+.cin-next{right:16px}
+
+/* Dot nav */
+.cin-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10}
+.cin-dot{width:5px;height:5px;border-radius:50%;background:rgba(201,168,76,0.3);cursor:pointer;border:none;transition:all 0.22s;padding:0}
+.cin-dot.active{background:var(--gold);width:22px;border-radius:3px}
+
+/* Counter */
+.cin-counter{position:absolute;bottom:20px;right:18px;z-index:10;font-size:0.5rem;letter-spacing:0.18em;color:rgba(245,243,239,0.5);font-family:var(--sans)}
+
+/* ── Info panel ── */
 .watch-info{padding:48px 40px 40px;display:flex;flex-direction:column;background:var(--charcoal);border-left:1px solid var(--border)}
 .eyebrow{font-size:0.55rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .eyebrow::after{content:'';flex:1;height:1px;background:rgba(201,168,76,0.2)}
@@ -251,17 +289,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .g-text{font-size:0.46rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);line-height:1.4}
 .cross-link{font-size:0.6rem;letter-spacing:0.12em;color:var(--muted);text-align:center;margin-top:auto}
 .cross-link a{color:var(--gold);text-decoration:none}
+
+/* ── Footer ── */
 footer{background:var(--charcoal);border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.6rem;letter-spacing:0.12em;color:var(--muted)}
 footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--gold)}
+
+/* ── Quick contact ── */
 .qc{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;gap:12px}
 .qc a{width:52px;height:52px;border-radius:50%;background:var(--black);border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.25s;box-shadow:0 4px 14px rgba(0,0,0,0.4);font-family:var(--sans);font-size:0.56rem;font-weight:600}
 .qc a:hover{background:var(--gold);color:var(--black);transform:translateY(-2px)}
+
+/* ── Responsive ── */
 @media(max-width:900px){
   nav{padding:0 24px}.nav-links{display:none}
   .breadcrumb{padding:88px 24px 16px}
   .watch-page{grid-template-columns:1fr;padding:0 0 60px}
+  .gallery{aspect-ratio:4/3}
   .watch-info{padding:32px 24px;border-left:none;border-top:1px solid var(--border)}
   footer{flex-direction:column;text-align:center;padding:24px}
+  .qc{bottom:20px;right:16px}
 }
 </style>
 </head>
@@ -285,11 +331,11 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--gold
 </p>
 
 <div class="watch-page">
-  <div class="gallery">
-    <img class="main-img" id="mainImg"
-      src="${esc(mainImage)}"
-      alt="${esc(brandTrim)} ${esc(watch.model || '')} ${esc(canonRef)}" />
-    <div class="thumb-row" id="thumbRow">${thumbsHtml}</div>
+  <div class="gallery" id="gallery">
+    ${slidesHtml}
+    ${arrowsHtml}
+    ${dotsHtml}
+    ${counterHtml}
   </div>
 
   <div class="watch-info">
@@ -335,13 +381,40 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--gold
 
 <script>
 (function(){
-  var images = ${JSON.stringify(images)};
-  var mainImg = document.getElementById('mainImg');
-  function showImg(i) {
-    mainImg.src = images[i];
-    document.querySelectorAll('#thumbRow .thumb').forEach(function(t,j){ t.classList.toggle('active', j===i); });
+  var total = ${images.length};
+  if (total < 2) return;
+  var current = 0;
+  var slides  = document.querySelectorAll('#gallery .slide');
+  var dots    = document.querySelectorAll('#gallery .cin-dot');
+  var counter = document.getElementById('cinCounter');
+
+  function cinGo(n) {
+    slides[current].classList.remove('active');
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    if (dots[current]) dots[current].classList.add('active');
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
   }
-  window.showImg = showImg;
+
+  window.cinGo  = cinGo;
+  window.cinNav = function(d) { cinGo(current + d); };
+
+  // Touch/swipe support
+  var gallery = document.getElementById('gallery');
+  var tx = 0;
+  gallery.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, { passive: true });
+  gallery.addEventListener('touchend',   function(e){
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) cinNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  // Auto-advance every 6s (pauses on interaction)
+  var timer = setInterval(function(){ cinNav(1); }, 6000);
+  gallery.addEventListener('touchstart', function(){ clearInterval(timer); }, { passive: true });
+  document.querySelectorAll('.cin-arrow, .cin-dot').forEach(function(el){
+    el.addEventListener('click', function(){ clearInterval(timer); });
+  });
 })();
 </script>
 </body>
@@ -360,11 +433,10 @@ const data    = JSON.parse(fs.readFileSync(WATCHES_FILE, 'utf8'));
 const watches = data.watches || [];
 console.log(`Found ${watches.length} watches in watches.json\n`);
 
-// Ensure output directory exists
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-const seen  = new Set();
-let   count = 0;
+const seen    = new Set();
+let   count   = 0;
 let   skipped = 0;
 
 watches.forEach((watch, idx) => {
@@ -383,7 +455,6 @@ watches.forEach((watch, idx) => {
   }
 
   if (seen.has(slug)) {
-    // Append index to deduplicate
     const uniqueSlug = `${slug}-${idx}`;
     console.warn(`  [${idx}] DUPLICATE slug "${slug}" → using "${uniqueSlug}"`);
     seen.add(uniqueSlug);
