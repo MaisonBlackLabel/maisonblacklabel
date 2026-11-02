@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Maison Black Label</title>
+<link rel="canonical" href="https://maisonblacklabel.com/about.html" />
+<meta name="description" content="The story behind Maison Black Label — a West Palm Beach luxury watch specialist built on trust, relationships, and relentless execution for every client." />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2JE3JNYFPL"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-2JE3JNYFPL");
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--black: #0a0a0a;
+--charcoal: #141414;
+--card: #1a1a1a;
+--border: #2a2a2a;
+--gold: #c9a84c;
+--gold-light: #e0c070;
+--white: #f5f3ef;
+--muted: #888;
+--serif: 'Cormorant Garamond', Georgia, serif;
+--sans: 'Montserrat', sans-serif;
+--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+background: var(--black);
+color: var(--white);
+font-family: var(--sans);
+font-weight: 300;
+line-height: 1.7;
+-webkit-font-smoothing: antialiased;
+cursor: none;
+overflow-x: hidden;
+}
+body:not(.loaded) { overflow: hidden; }
+
+/* ── GRAIN OVERLAY ── */
+#grain {
+position: fixed; inset: -50%; width: 200%; height: 200%;
+opacity: 0.028; pointer-events: none; z-index: 9997;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor-dot {
+position: fixed; width: 6px; height: 6px; background: var(--gold);
+border-radius: 50%; pointer-events: none; z-index: 9999;
+transform: translate(-50%, -50%);
+transition: width 0.2s, height 0.2s, background 0.2s; will-change: transform;
+}
+#cursor-ring {
+position: fixed; width: 32px; height: 32px; border: 1px solid var(--gold);
+border-radius: 50%; pointer-events: none; z-index: 9998;
+transform: translate(-50%, -50%); opacity: 0.6;
+transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), opacity 0.2s;
+will-change: transform;
+}
+body.cursor-hover #cursor-ring { width: 52px; height: 52px; opacity: 0.4; }
+body.cursor-hover #cursor-dot { width: 3px; height: 3px; }
+
+/* ── PRELOADER ── */
+#preloader { position: fixed; inset: 0; z-index: 10000; pointer-events: none; }
+.pre-curtain { position: absolute; left: 0; right: 0; background: var(--black); transition: transform 1.3s var(--ease-in-out-quart); }
+.pre-curtain-top { top: 0; height: 51vh; transform-origin: top; }
+.pre-curtain-bottom { bottom: 0; height: 51vh; transform-origin: bottom; }
+.pre-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; transition: opacity 0.5s ease; }
+.pre-maison { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4vw, 3rem); font-weight: 300; letter-spacing: 0.62em; color: var(--white); display: block; opacity: 0; transform: translateY(12px); animation: preFadeUp 0.9s 0.2s var(--ease-out-expo) forwards; }
+.pre-gold-line { width: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 18px auto 14px; animation: preLineExpand 1.1s 0.5s ease forwards; }
+.pre-subtitle { font-family: var(--sans); font-size: 0.55rem; letter-spacing: 0.65em; text-transform: uppercase; color: var(--gold); opacity: 0; animation: preFadeUp 0.8s 0.8s var(--ease-out-expo) forwards; }
+@keyframes preFadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes preLineExpand { to { width: 100px; } }
+#preloader.exit .pre-curtain-top { transform: translateY(-100%); }
+#preloader.exit .pre-curtain-bottom { transform: translateY(100%); }
+#preloader.exit .pre-content { opacity: 0; transition-duration: 0.3s; }
+#preloader.gone { display: none; }
+
+/* ── NAV ── */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+display: flex; align-items: center; justify-content: space-between;
+padding: 0 52px; height: 72px;
+background: rgba(10,10,10,0.93);
+backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); padding: 8px 22px; transition: all 0.25s; }
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.32s; }
+.reveal-delay-4 { transition-delay: 0.46s; }
+.reveal-delay-5 { transition-delay: 0.58s; }
+.reveal-clip { overflow: hidden; }
+.reveal-clip-inner { transform: translateY(100%); transition: transform 1s var(--ease-out-expo); }
+.reveal-clip.visible .reveal-clip-inner { transform: translateY(0); }
+
+/* ── SECTION COMMONS ── */
+section { padding: 110px 80px; }
+.section-eyebrow { font-size: 0.58rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 18px; }
+.section-title { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 300; line-height: 1.08; margin-bottom: 24px; }
+.divider { width: 48px; height: 1px; background: var(--gold); margin-bottom: 36px; }
+.btn-primary { display: inline-block; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 16px 38px; text-decoration: none; transition: background 0.25s; }
+.btn-primary:hover { background: var(--gold-light); }
+.btn-outline { display: inline-block; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(245,243,239,0.35); padding: 16px 38px; text-decoration: none; transition: all 0.25s; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+position: relative;
+padding: 180px 80px 120px;
+background: var(--charcoal);
+overflow: hidden;
+border-bottom: 1px solid var(--border);
+}
+.page-hero::before {
+content: '';
+position: absolute;
+inset: 0;
+background: url('https://images.pexels.com/photos/37900999/pexels-photo-37900999.jpeg?auto=compress&cs=tinysrgb&w=1400') center/cover no-repeat;
+opacity: 0.06;
+}
+.page-hero-inner {
+position: relative;
+z-index: 1;
+max-width: 800px;
+}
+.page-hero-eyebrow {
+font-size: 0.58rem;
+letter-spacing: 0.45em;
+text-transform: uppercase;
+color: var(--gold);
+display: block;
+margin-bottom: 24px;
+opacity: 0;
+transform: translateY(16px);
+transition: opacity 0.9s 0.2s var(--ease-out-expo), transform 0.9s 0.2s var(--ease-out-expo);
+}
+body.loaded .page-hero-eyebrow { opacity: 1; transform: translateY(0); }
+.page-hero-title {
+font-family: var(--serif);
+font-size: clamp(3rem, 6vw, 5.5rem);
+font-weight: 300;
+line-height: 1.0;
+letter-spacing: 0.04em;
+margin-bottom: 32px;
+overflow: hidden;
+}
+.page-hero-title-inner {
+transform: translateY(110%);
+transition: transform 1.2s 0.3s var(--ease-out-expo);
+display: block;
+}
+body.loaded .page-hero-title-inner { transform: translateY(0); }
+.page-hero-sub {
+font-size: 0.88rem;
+color: rgba(245,243,239,0.55);
+line-height: 2;
+max-width: 560px;
+opacity: 0;
+transform: translateY(12px);
+transition: opacity 0.9s 0.55s var(--ease-out-expo), transform 0.9s 0.55s var(--ease-out-expo);
+}
+body.loaded .page-hero-sub { opacity: 1; transform: translateY(0); }
+.page-hero-line {
+position: absolute;
+right: 80px;
+top: 50%;
+transform: translateY(-50%);
+width: 1px;
+height: 0;
+background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+transition: height 1.4s 0.8s var(--ease-out-expo);
+}
+body.loaded .page-hero-line { height: 220px; }
+
+/* ── ORIGIN SECTION ── */
+.origin-section { background: var(--black); }
+.origin-inner {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr 1.1fr;
+gap: 100px;
+align-items: start;
+}
+.origin-img-col { position: relative; }
+.origin-img-wrap {
+position: relative;
+overflow: hidden;
+}
+.origin-img-wrap::before {
+content: '';
+position: absolute;
+top: -16px; left: -16px; right: 16px; bottom: 16px;
+border: 1px solid rgba(201,168,76,0.18);
+z-index: 0;
+pointer-events: none;
+}
+.origin-img {
+width: 100%;
+aspect-ratio: 3/4;
+object-fit: cover;
+filter: brightness(0.8) contrast(1.05) saturate(0.85);
+position: relative;
+z-index: 1;
+transform: scale(1.04);
+transition: transform 1.4s var(--ease-out-expo);
+}
+.origin-img-wrap.visible .origin-img { transform: scale(1); }
+.origin-caption {
+font-size: 0.52rem;
+letter-spacing: 0.3em;
+text-transform: uppercase;
+color: rgba(201,168,76,0.5);
+margin-top: 20px;
+display: block;
+}
+.origin-text p {
+font-family: var(--serif);
+font-size: 1.12rem;
+font-weight: 300;
+line-height: 1.95;
+color: rgba(245,243,239,0.82);
+margin-bottom: 28px;
+}
+.origin-text p:last-of-type { margin-bottom: 0; }
+.origin-text p em { font-style: italic; color: var(--gold-light); }
+
+/* ── PULLQUOTE ── */
+.pullquote-section {
+background: var(--charcoal);
+padding: 88px 80px;
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+text-align: center;
+}
+.pullquote {
+font-family: var(--serif);
+font-size: clamp(1.6rem, 3vw, 2.6rem);
+font-weight: 300;
+font-style: italic;
+line-height: 1.5;
+color: var(--white);
+max-width: 860px;
+margin: 0 auto 24px;
+}
+.pullquote::before { content: '\201C'; color: var(--gold); margin-right: 4px; }
+.pullquote::after  { content: '\201D'; color: var(--gold); margin-left: 4px; }
+.pullquote-attr {
+font-size: 0.55rem;
+letter-spacing: 0.38em;
+text-transform: uppercase;
+color: var(--gold);
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy-section { background: var(--black); }
+.philosophy-inner { max-width: 1200px; margin: 0 auto; }
+.philosophy-header { margin-bottom: 72px; }
+.philosophy-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 2px;
+background: var(--border);
+}
+.philosophy-card {
+background: var(--card);
+padding: 52px 44px;
+position: relative;
+overflow: hidden;
+transition: background 0.3s;
+}
+.philosophy-card:hover { background: #202020; }
+.philosophy-card::before {
+content: '';
+position: absolute;
+top: 0; left: 0;
+width: 36px; height: 36px;
+border-top: 1px solid rgba(201,168,76,0.4);
+border-left: 1px solid rgba(201,168,76,0.4);
+transition: width 0.4s, height 0.4s;
+}
+.philosophy-card:hover::before { width: 56px; height: 56px; }
+.philosophy-num {
+font-family: var(--serif);
+font-size: 3.2rem;
+font-weight: 300;
+color: rgba(201,168,76,0.12);
+line-height: 1;
+margin-bottom: 28px;
+letter-spacing: -0.02em;
+display: block;
+}
+.philosophy-card h3 {
+font-family: var(--serif);
+font-size: 1.5rem;
+font-weight: 300;
+color: var(--white);
+margin-bottom: 18px;
+line-height: 1.2;
+}
+.philosophy-card p {
+font-size: 0.82rem;
+color: rgba(245,243,239,0.6);
+line-height: 1.95;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+background: var(--charcoal);
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+padding: 52px 80px;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 0;
+}
+.stat { text-align: center; padding: 0 24px; border-right: 1px solid var(--border); }
+.stat:last-child { border-right: none; }
+.stat-number { font-family: var(--serif); font-size: 3.2rem; font-weight: 300; color: var(--gold); display: block; line-height: 1; margin-bottom: 12px; }
+.stat-label { font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
+
+/* ── DIFFERENCE SECTION ── */
+.difference-section { background: var(--black); }
+.difference-inner {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1.1fr 1fr;
+gap: 100px;
+align-items: center;
+}
+.difference-text p {
+font-size: 0.88rem;
+color: rgba(245,243,239,0.72);
+line-height: 1.95;
+margin-bottom: 20px;
+}
+.difference-text p:last-of-type { margin-bottom: 36px; }
+.difference-list {
+display: flex;
+flex-direction: column;
+gap: 0;
+border: 1px solid var(--border);
+}
+.diff-item {
+padding: 24px 28px;
+border-bottom: 1px solid var(--border);
+display: flex;
+gap: 20px;
+align-items: flex-start;
+transition: background 0.2s;
+}
+.diff-item:last-child { border-bottom: none; }
+.diff-item:hover { background: var(--charcoal); }
+.diff-num {
+font-family: var(--serif);
+font-size: 1.1rem;
+color: rgba(201,168,76,0.4);
+flex-shrink: 0;
+line-height: 1.4;
+min-width: 28px;
+}
+.diff-content strong {
+display: block;
+font-size: 0.62rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--white);
+font-weight: 500;
+margin-bottom: 6px;
+}
+.diff-content span {
+font-size: 0.78rem;
+color: var(--muted);
+line-height: 1.8;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+background: var(--charcoal);
+padding: 110px 80px;
+text-align: center;
+border-top: 1px solid var(--border);
+}
+.cta-inner { max-width: 640px; margin: 0 auto; }
+.cta-inner .section-title { margin-bottom: 20px; }
+.cta-inner p { color: rgba(245,243,239,0.55); font-size: 0.86rem; line-height: 1.95; margin-bottom: 48px; }
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer { background: var(--black); border-top: 1px solid var(--border); padding: 72px 80px 44px; }
+.footer-top { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; padding-bottom: 60px; border-bottom: 1px solid var(--border); }
+.footer-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); margin-bottom: 18px; display: block; }
+.footer-logo span { color: var(--gold); }
+.footer-tagline { font-size: 0.75rem; color: var(--muted); line-height: 1.9; margin-bottom: 28px; max-width: 280px; }
+.footer-col-title { font-size: 0.52rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: block; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 0.76rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+.footer-copy { font-size: 0.62rem; color: rgba(245,243,239,0.3); }
+.footer-legal { font-size: 0.58rem; color: rgba(245,243,239,0.2); line-height: 1.8; max-width: 620px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+section { padding: 88px 48px; }
+.page-hero { padding: 160px 48px 100px; }
+.page-hero-line { right: 48px; }
+.stats-bar { padding: 48px 48px; }
+footer { padding: 60px 48px 36px; }
+}
+@media (max-width: 900px) {
+body { cursor: auto; }
+#cursor-dot, #cursor-ring { display: none; }
+nav { padding: 0 24px; }
+.nav-links { display: none; }
+section { padding: 72px 28px; }
+.page-hero { padding: 140px 28px 80px; }
+.page-hero-line { display: none; }
+.origin-inner { grid-template-columns: 1fr; gap: 48px; }
+.origin-img { aspect-ratio: 16/9; }
+.philosophy-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+.difference-inner { grid-template-columns: 1fr; gap: 56px; }
+.cta-section { padding: 72px 28px; }
+.footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+.footer-bottom { flex-direction: column; gap: 20px; }
+.stats-bar { grid-template-columns: repeat(2, 1fr); padding: 40px 28px; gap: 24px; }
+.stat { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 0; }
+.stat:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+/* ── QUICK CONTACT ── */
+.quick-contact { position: fixed; bottom: 28px; right: 28px; z-index: 500; display: flex; flex-direction: column; gap: 12px; }
+.qc-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--black); border: 1px solid var(--gold); color: var(--gold); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.25s; box-shadow: 0 4px 14px rgba(0,0,0,0.4); font-family: var(--sans); font-size: 0.56rem; font-weight: 600; cursor: pointer; }
+.qc-btn:hover { background: var(--gold); color: var(--black); transform: translateY(-2px); }
+@media (max-width: 900px) { .quick-contact { bottom: 18px; right: 18px; } .qc-btn { width: 46px; height: 46px; } }
+</style>
+</head>
+<body>
+
+<!-- ── GRAIN OVERLAY ── -->
+<svg id="grain" aria-hidden="true">
+<filter id="noise">
+<feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" seed="2" stitchTiles="stitch"/>
+<feColorMatrix type="saturate" values="0"/>
+</filter>
+<rect width="100%" height="100%" filter="url(#noise)"/>
+</svg>
+
+<!-- ── CUSTOM CURSOR ── -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ── PRELOADER ── -->
+<div id="preloader" aria-hidden="true">
+<div class="pre-curtain pre-curtain-top"></div>
+<div class="pre-curtain pre-curtain-bottom"></div>
+<div class="pre-content">
+<span class="pre-maison">Maison</span>
+<div class="pre-gold-line"></div>
+<span class="pre-subtitle">Black Label &nbsp;&middot;&nbsp; West Palm Beach</span>
+</div>
+</div>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+<a class="nav-logo" href="index.html"><span>Maison</span> Black Label</a>
+<ul class="nav-links">
+<li><a href="index.html#about" class="active">About</a></li>
+<li><a href="index.html#services">Services</a></li>
+<li><a href="index.html#process">Process</a></li>
+<li><a href="index.html#testimonials">Reviews</a></li>
+<li><a href="collection.html" style="color:var(--gold);">Curate</a></li>
+</ul>
+<a class="nav-cta" href="index.html#contact">Get in Touch</a>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+<div class="page-hero-line"></div>
+<div class="page-hero-inner">
+<span class="page-hero-eyebrow">West Palm Beach, FL &nbsp;&middot;&nbsp; The Story</span>
+<h1 class="page-hero-title">
+<span class="page-hero-title-inner">The Man<br>Behind the Label.</span>
+</h1>
+<p class="page-hero-sub">Built on a genuine passion for timepieces. Refined by years of learning who to trust, and who not to. Defined by the relationships that last long after the deal is done.</p>
+</div>
+</div>
+
+<!-- ── ORIGIN SECTION ── -->
+<section class="origin-section">
+<div class="origin-inner">
+
+<div class="origin-img-col reveal">
+<div class="origin-img-wrap">
+<img class="origin-img" src="makoa.jpg" alt="Makoa — Founder, Maison Black Label" loading="lazy" decoding="async" />
+</div>
+<span class="origin-caption">Makoa &nbsp;&middot;&nbsp; Founder, Maison Black Label</span>
+</div>
+
+<div class="origin-text">
+<div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><span class="section-eyebrow">The Origin</span></div></div>
+<div class="reveal-clip reveal reveal-delay-2"><div class="reveal-clip-inner"><h2 class="section-title">It Started on the Wrist.</h2></div></div>
+<div class="reveal reveal-delay-2"><div class="divider"></div></div>
+<div class="reveal reveal-delay-3">
+<p>Long before Maison Black Label existed, there was just a kid in South Florida who liked wearing watches. Middle school, high school — it wasn't a trend for me, it was something I was genuinely drawn to. The craft behind a timepiece, the weight of it, the idea that something mechanical could be that precise and that beautiful at the same time.</p>
+<p>After graduating, I picked up my first serious piece. Held onto it for about a year, then decided it was time to move on. Listed it, and instead of a straight sale, someone offered me a trade — a different watch for mine. I took it. <em>That deal changed everything.</em></p>
+<p>What followed wasn't a business plan. It was curiosity turning into action. I started exploring the space, understanding how watches moved, who was buying, who was selling, and where the real value lived. What I found was an industry full of potential — and a meaningful gap between what buyers and sellers deserved and what they were actually getting.</p>
+<p>Maison Black Label was built to close that gap.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ── PULLQUOTE ── -->
+<div class="pullquote-section">
+<p class="pullquote reveal">Every client gets the same relentless attention — whether the deal is $5,000 or $100,000+. Every experience is executed in the Maison Black Label fashion.</p>
+<span class="pullquote-attr reveal reveal-delay-1">Makoa &nbsp;&middot;&nbsp; Founder, Maison Black Label</span>
+</div>
+
+<!-- ── PHILOSOPHY CARDS ── -->
+<section class="philosophy-section">
+<div class="philosophy-inner">
+<div class="philosophy-header">
+<div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow">The Standard</span></div></div>
+<div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title">The 4 Pillars of Maison Black Label.</h2></div></div>
+<div class="reveal reveal-delay-2"><div class="divider"></div></div>
+<div class="reveal reveal-delay-3"><p style="color:rgba(245,243,239,0.45); font-size:0.84rem; line-height:1.95; max-width:640px;">These are not aspirations. They are the non-negotiables that govern every inquiry, every transaction, and every relationship built under the Maison Black Label name.</p></div>
+</div>
+<div class="philosophy-grid">
+
+<div class="philosophy-card reveal reveal-delay-1">
+<span class="philosophy-num">01</span>
+<h3>Trust Is the Transaction</h3>
+<p>Before the price, before the piece — there has to be trust. Years of navigating the best and worst actors in this industry have shaped a network that is tightly held and carefully earned. When you work with Maison Black Label, every deal is backed by the full weight of our reputation, our expertise, and our relationships with some of the most respected watchmakers in the space. You are never on your own.</p>
+</div>
+
+<div class="philosophy-card reveal reveal-delay-2">
+<span class="philosophy-num">02</span>
+<h3>Certainty Is the Standard</h3>
+<p>From the moment you reach out, nothing is ambiguous. You know the price, the provenance, the condition, and what happens next — before anything moves. No chasing for updates. No reading between the lines. Every deal is communicated with the kind of directness that lets you stay focused on your life, not the logistics of a transaction. Uncertainty is not a service we provide.</p>
+</div>
+
+<div class="philosophy-card reveal reveal-delay-3">
+<span class="philosophy-num">03</span>
+<h3>Your Time Is the Premium</h3>
+<p>People who invest in serious timepieces are not looking for more complexity — they are looking for less. The entire Maison Black Label process is engineered around that reality. Streamlined from first inquiry to final delivery. No friction, no noise, no unnecessary steps. You deserve a transaction as refined as the piece you're acquiring.</p>
+</div>
+
+<div class="philosophy-card reveal reveal-delay-4">
+<span class="philosophy-num">04</span>
+<h3>Relationships Over Revenue</h3>
+<p>The thrill of the deal is real — but it is not what drives this. The clients encountered, the conversations shared, and the trust cultivated over time are what define Maison Black Label. Whether a transaction is $5,000 or $100,000+, the attention, care, and execution are identical. Every client matters. Every experience carries the Maison Black Label standard — without exception.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+<div class="stat reveal reveal-delay-1">
+<span class="stat-number" data-target="500" data-suffix="+">500+</span>
+<span class="stat-label">Transactions Completed</span>
+</div>
+<div class="stat reveal reveal-delay-2">
+<span class="stat-number" data-target="100" data-suffix="%">100%</span>
+<span class="stat-label">Insured Shipping</span>
+</div>
+<div class="stat reveal reveal-delay-3">
+<span class="stat-number" data-target="24" data-suffix="hr">24hr</span>
+<span class="stat-label">Quote Turnaround</span>
+</div>
+<div class="stat reveal reveal-delay-4">
+<span class="stat-number" data-target="5" data-suffix="&#9733;">5&#9733;</span>
+<span class="stat-label">Client Satisfaction</span>
+</div>
+</div>
+
+<!-- ── DIFFERENCE SECTION ── -->
+<section class="difference-section">
+<div class="difference-inner">
+
+<div class="difference-text">
+<div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow">The Difference</span></div></div>
+<div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title">What Working With Maison Actually Looks Like.</h2></div></div>
+<div class="reveal reveal-delay-1"><div class="divider"></div></div>
+<div class="reveal reveal-delay-2">
+<p>I've seen how this industry operates at its best and at its worst. That experience shaped the way I work — a process fine-tuned to give every client exactly what they deserve: personalized attention, straight answers, and a deal they feel good about long after it's closed.</p>
+<p>This isn't a marketplace where you're one of thousands of listings. It's one person, fully invested, working to place the right piece with the right person at the right price.</p>
+<a class="btn-primary" href="index.html#contact" style="display:inline-block;">Start a Conversation</a>
+</div>
+</div>
+
+<div class="reveal reveal-delay-2">
+<div class="difference-list">
+<div class="diff-item">
+<span class="diff-num">01</span>
+<div class="diff-content">
+<strong>Personalized Sourcing</strong>
+<span>Every search is tailored to your specific reference, budget, and timeline — not a filtered catalog.</span>
+</div>
+</div>
+<div class="diff-item">
+<span class="diff-num">02</span>
+<div class="diff-content">
+<strong>Vetted Network</strong>
+<span>Years of operating in this space means knowing who to work with and who to walk away from. That judgment protects you.</span>
+</div>
+</div>
+<div class="diff-item">
+<span class="diff-num">03</span>
+<div class="diff-content">
+<strong>Fully Insured Delivery</strong>
+<span>Every transaction ships fully insured — or is handled in person. Your piece is protected, every step of the way.</span>
+</div>
+</div>
+<div class="diff-item">
+<span class="diff-num">04</span>
+<div class="diff-content">
+<strong>Direct Communication</strong>
+<span>No handoffs, no assistants. You deal with the same person from first message to final delivery.</span>
+</div>
+</div>
+<div class="diff-item">
+<span class="diff-num">05</span>
+<div class="diff-content">
+<strong>Reputation on the Line</strong>
+<span>Every deal carries my name. That accountability isn't a policy — it's personal.</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+<div class="cta-inner">
+<div class="reveal-clip reveal"><div class="reveal-clip-inner"><span class="section-eyebrow">Ready When You Are</span></div></div>
+<div class="reveal-clip reveal reveal-delay-1"><div class="reveal-clip-inner"><h2 class="section-title">Let's Find Your Next Piece.</h2></div></div>
+<div class="reveal reveal-delay-2">
+<p>Whether you're buying, selling, trading, or looking to consign — every inquiry is met with the same care. Reach out and let's start the conversation.</p>
+<div class="cta-actions">
+<a class="btn-primary" href="index.html#contact">Get in Touch</a>
+<a class="btn-outline" href="collection.html">View the Collection</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+<div class="footer-top">
+<div>
+<span class="footer-logo"><span>Maison</span> Black Label</span>
+<p class="footer-tagline">Curating the world's most exclusive timepieces and exotic assets from West Palm Beach, FL.</p>
+</div>
+<div>
+<span class="footer-col-title">Services</span>
+<ul class="footer-links">
+<li><a href="index.html#services">Source a Timepiece</a></li>
+<li><a href="index.html#services">Buy &middot; Sell &middot; Trade</a></li>
+<li><a href="index.html#services">Consignment</a></li>
+<li><a href="collection.html">Curated Collection</a></li>
+</ul>
+</div>
+<div>
+<span class="footer-col-title">Info</span>
+<ul class="footer-links">
+<li><a href="about.html">About</a></li>
+<li><a href="index.html#contact">Contact</a></li>
+<li><a href="privacy-policy.html">Privacy Policy</a></li>
+<li><a href="shipping-policy.html">Shipping Policy</a></li>
+<li><a href="return-policy.html">Return Policy</a></li>
+</ul>
+</div>
+<div>
+<span class="footer-col-title">Connect</span>
+<ul class="footer-links">
+<li><a href="https://instagram.com/maisonblacklabel" target="_blank">Instagram</a></li>
+<li><a href="https://www.facebook.com/MaisonBlackLabel" target="_blank">Facebook</a></li>
+<li><a href="https://linktr.ee/maisonblacklabel" target="_blank">Linktree</a></li>
+<li><a href="https://share.google/pDrUYRPC0NdYfxpxY" target="_blank">Google Reviews</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="footer-copy">&copy; 2026 Maison Black Label. All Rights Reserved.</p>
+<p class="footer-legal">Maison Black Label specializes in the retail of premium Swiss luxury watches. We are not an authorized dealer for Rolex, Audemars Piguet, Richard Mille, or any other brands listed on this website. All trademarks are property of their respective owners, which have no affiliation with Maison Black Label. Warranties are exclusively offered by Maison Black Label and are not associated with original manufacturers.</p>
+</div>
+</footer>
+
+<!-- ── QUICK CONTACT ── -->
+<div class="quick-contact" aria-label="Quick contact options">
+<a class="qc-btn" href="https://wa.me/15613897382?text=Hi%20Maison%20Black%20Label%2C%20I%20have%20a%20question%20about%20a%20watch." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp">WA</a>
+<a class="qc-btn" href="https://ig.me/m/maisonblacklabel" target="_blank" rel="noopener" aria-label="Message on Instagram" title="Instagram DM">IG</a>
+<a class="qc-btn" href="sms:+15613897382" aria-label="Text us" title="Text Us">SMS</a>
+</div>
+
+<!-- ── SCRIPTS ── -->
+<script>
+(function() {
+
+/* ── PRELOADER ── */
+var preloader = document.getElementById('preloader');
+setTimeout(function() {
+  preloader.classList.add('exit');
+  setTimeout(function() {
+    preloader.classList.add('gone');
+    document.body.classList.add('loaded');
+  }, 1300);
+}, 800);
+
+/* ── CUSTOM CURSOR ── */
+var dot = document.getElementById('cursor-dot');
+var ring = document.getElementById('cursor-ring');
+var mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', function(e) {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+});
+function lerpCursor() {
+  rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(lerpCursor);
+}
+lerpCursor();
+document.querySelectorAll('a, button').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { document.body.classList.add('cursor-hover'); });
+  el.addEventListener('mouseleave', function() { document.body.classList.remove('cursor-hover'); });
+});
+
+/* ── GRAIN ── */
+var turbulence = document.querySelector('#noise feTurbulence');
+if (turbulence) {
+  var seed = 0;
+  setInterval(function() { seed = (seed + 1) % 500; turbulence.setAttribute('seed', seed); }, 80);
+}
+
+/* ── SCROLL REVEALS ── */
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-clip, .origin-img-wrap').forEach(function(el) {
+  revealObserver.observe(el);
+});
+
+/* ── STAT COUNT-UP ── */
+var statObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (!entry.isIntersecting) return;
+    var numEl = entry.target.querySelector('.stat-number');
+    if (!numEl || numEl.dataset.counted) return;
+    numEl.dataset.counted = '1';
+    var target = parseInt(numEl.dataset.target, 10);
+    var suffix = numEl.dataset.suffix || '';
+    var start = null;
+    function animStat(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / 1600, 1);
+      var ease = 1 - Math.pow(1 - p, 3);
+      numEl.textContent = Math.floor(ease * target) + suffix;
+      if (p < 1) requestAnimationFrame(animStat);
+      else numEl.textContent = target + suffix;
+    }
+    requestAnimationFrame(animStat);
+    statObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat').forEach(function(el) { statObserver.observe(el); });
+
+})();
+</script>
+
+</body>
+</html>
