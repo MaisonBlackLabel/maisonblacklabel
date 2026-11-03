@@ -227,6 +227,87 @@ opacity: 0;
 .nav-cta:hover { background: var(--gold); color: var(--black); }
 body.loaded .nav-cta { opacity: 1; transition-delay: 0.9s; }
 
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+  z-index: 201;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--white);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE NAV OVERLAY ── */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(7,7,10,0.97);
+  backdrop-filter: blur(24px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.mobile-nav-overlay.open { transform: translateX(0); }
+.mobile-nav-links {
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.mobile-nav-links li a {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,243,239,0.55);
+  text-decoration: none;
+  display: block;
+  padding: 10px 32px;
+  transition: color 0.2s;
+}
+.mobile-nav-links li a:hover,
+.mobile-nav-links li a.gold { color: var(--gold); }
+.mobile-nav-cta {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  padding: 14px 36px;
+  margin-top: 16px;
+  transition: all 0.25s;
+}
+.mobile-nav-cta:hover { background: var(--gold); color: var(--black); }
+.mobile-nav-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+  margin: 8px auto 24px;
+}
+
 /* ── HERO ── */
 .hero {
 position: relative;
@@ -656,6 +737,9 @@ body { cursor: auto; }
 #cursor-dot, #cursor-ring { display: none; }
 nav { padding: 0 24px; }
 .nav-links { display: none; }
+.nav-cta { display: none; }
+.nav-toggle { display: flex; }
+.mobile-nav-overlay { display: flex; }
 section { padding: 72px 28px; }
 .hero-content { padding: 0 28px; }
 .hero-accent-line { display: none; }
@@ -746,7 +830,23 @@ section { padding: 72px 28px; }
 <li><a href="collection.html" style="color:var(--gold);">Curate</a></li>
 </ul>
 <a class="nav-cta" href="#contact">Get in Touch</a>
+<button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
 </nav>
+
+<!-- ── MOBILE NAV OVERLAY ── -->
+<div class="mobile-nav-overlay" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
+<ul class="mobile-nav-links">
+<li><a href="about.html">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#process">Process</a></li>
+<li><a href="#testimonials">Reviews</a></li>
+<li><a href="collection.html" class="gold">Curate</a></li>
+</ul>
+<div class="mobile-nav-divider"></div>
+<a class="mobile-nav-cta" href="#contact">Get in Touch</a>
+</div>
 
 <!-- ── HERO ── -->
 <section class="hero" id="home">
@@ -1500,6 +1600,40 @@ var nav = document.getElementById('nav');
 window.addEventListener('scroll', function() {
 nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
+
+/* ── MOBILE NAV HAMBURGER ── */
+(function() {
+  var toggle = document.getElementById('nav-toggle');
+  var overlay = document.getElementById('mobile-nav');
+  if (!toggle || !overlay) return;
+
+  function openMenu() {
+    toggle.classList.add('open');
+    overlay.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    toggle.classList.remove('open');
+    overlay.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', function() {
+    overlay.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close when a link is tapped
+  overlay.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
 
 /* ── GRAIN ANIMATION ── */
 var turbulence = document.querySelector('#noise feTurbulence');
