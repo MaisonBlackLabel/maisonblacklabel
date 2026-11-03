@@ -70,22 +70,18 @@ nav {
 .page-title { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
 .page-sub { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); max-width: 480px; margin: 0 auto; }
 
-.filters { display: flex; flex-direction: column; border-bottom: 1px solid var(--border); }
-.filter-row { display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; gap: 12px; flex-wrap: wrap; }
-.filter-row + .filter-row { border-top: 1px solid var(--border); }
+.filters { display: flex; border-bottom: 1px solid var(--border); }
+.filter-row { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; gap: 16px; flex-wrap: wrap; width: 100%; }
 .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 .filter-btn { font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 10px 24px; border: 1px solid var(--border); background: none; color: var(--muted); cursor: pointer; transition: all 0.2s; }
 .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
 .filter-btn.active { border-color: var(--gold); background: var(--gold); color: var(--black); }
-/* ── SORT CONTROL ── */
-.sort-control { display: flex; align-items: center; gap: 10px; }
-.sort-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.sort-select { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; background: var(--charcoal); border: 1px solid var(--border); color: var(--white); padding: 8px 30px 8px 14px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; min-width: 190px; }
-.sort-select:focus { outline: 1px solid var(--gold); outline-offset: 1px; }
-.sort-select option { background: var(--charcoal); }
-/* ── BRAND FILTER ROW ── */
-#brand-row { display: none; }
-#brand-row.visible { display: flex; }
+/* ── CONTROLS RIGHT ── */
+.controls-right { display: flex; align-items: center; }
+.ctrl-select { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; background: none; border: none; border-left: 1px solid var(--border); color: var(--muted); padding: 10px 32px 10px 20px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23666'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; transition: color 0.2s; white-space: nowrap; }
+.ctrl-select:hover, .ctrl-select:focus { color: var(--white); outline: none; }
+.ctrl-select.has-filter { color: var(--gold); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23c9a84c'/%3E%3C/svg%3E"); }
+.ctrl-select option { background: #141414; color: var(--white); }
 /* ── HAMBURGER ── */
 .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 6px; cursor: pointer; padding: 8px; background: none; border: none; z-index: 201; }
 .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--white); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; }
@@ -222,9 +218,10 @@ footer a:hover { color: var(--gold); }
   .nav-toggle { display: flex; }
   .mobile-nav-overlay { display: flex; }
   .collection-grid { grid-template-columns: 1fr 1fr; }
-  .filter-row { padding: 16px 24px; }
-  .sort-control { width: 100%; justify-content: flex-end; }
-  .sort-select { min-width: 0; flex: 1; }
+  .filter-row { padding: 14px 20px; gap: 10px; }
+  .filter-btns { gap: 6px; }
+  .filter-btn { padding: 8px 16px; font-size: 0.6rem; }
+  .ctrl-select { padding: 10px 28px 10px 14px; font-size: 0.58rem; }
   footer { flex-direction: column; gap: 12px; text-align: center; }
   .detail-panel { flex-direction: column; width: 96vw; height: 92vh; max-height: none; }
   .detail-left { flex: 0 0 46%; }
@@ -278,17 +275,16 @@ footer a:hover { color: var(--gold); }
       <button class="filter-btn" onclick="setStatus('available', this)">Available Now</button>
       <button class="filter-btn" onclick="setStatus('sold', this)">Inquire to Source</button>
     </div>
-    <div class="sort-control">
-      <span class="sort-label">Sort</span>
-      <select class="sort-select" id="sort-select" onchange="applyFilters()">
-        <option value="price-desc">Price: High to Low</option>
-        <option value="price-asc">Price: Low to High</option>
+    <div class="controls-right">
+      <select class="ctrl-select" id="brand-select" onchange="applyFilters()">
+        <option value="all">All Brands</option>
+      </select>
+      <select class="ctrl-select" id="sort-select" onchange="applyFilters()">
+        <option value="price-desc">Price: High → Low</option>
+        <option value="price-asc">Price: Low → High</option>
         <option value="newest">Newest First</option>
       </select>
     </div>
-  </div>
-  <div class="filter-row" id="brand-row">
-    <div class="filter-btns" id="brand-btns"></div>
   </div>
 </div>
 <div class="collection-grid" id="grid"></div>
@@ -452,18 +448,11 @@ function renderCards(watches) {
 function handleClick(i) { var w = currentWatches[i]; if(w) window.location.href='/watches/'+makeSlug(w)+'.html'; }
 
 /* ── FILTER + SORT STATE ── */
-var activeStatus = 'all', activeBrand = 'all';
+var activeStatus = 'all';
 
 function setStatus(status, btn) {
   activeStatus = status;
   document.querySelectorAll('#status-btns .filter-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  applyFilters();
-}
-
-function setBrand(brand, btn) {
-  activeBrand = brand;
-  document.querySelectorAll('#brand-btns .filter-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   applyFilters();
 }
@@ -474,10 +463,16 @@ function parsePrice(w) {
 }
 
 function applyFilters() {
-  var sort = document.getElementById('sort-select').value;
+  var brandSel = document.getElementById('brand-select');
+  var sortSel  = document.getElementById('sort-select');
+  var brand = brandSel ? brandSel.value : 'all';
+  var sort  = sortSel  ? sortSel.value  : 'price-desc';
+  // Gold tint when a non-default option is active
+  if (brandSel) brandSel.classList.toggle('has-filter', brand !== 'all');
+  if (sortSel)  sortSel.classList.toggle('has-filter', sort !== 'price-desc');
   var filtered = allWatches.filter(function(w){
     var statusOk = activeStatus === 'all' || w.status === activeStatus;
-    var brandOk  = activeBrand  === 'all' || (w.brand||'').toLowerCase() === activeBrand.toLowerCase();
+    var brandOk  = brand === 'all' || (w.brand||'').toLowerCase() === brand.toLowerCase();
     return statusOk && brandOk;
   });
   filtered = filtered.slice().sort(function(a, b){
@@ -494,29 +489,23 @@ function applyFilters() {
   renderCards(currentWatches);
 }
 
-function buildBrandButtons(watches) {
+function buildBrandSelect(watches) {
   var brands = [];
   watches.forEach(function(w){ if(w.brand && brands.indexOf(w.brand) === -1) brands.push(w.brand); });
   brands.sort();
-  if (brands.length < 2) return; // not worth showing if only one brand
-  var container = document.getElementById('brand-btns');
-  var row = document.getElementById('brand-row');
-  var all = document.createElement('button');
-  all.className = 'filter-btn active'; all.textContent = 'All Brands';
-  all.onclick = function(){ setBrand('all', this); };
-  container.appendChild(all);
+  if (brands.length < 2) return;
+  var sel = document.getElementById('brand-select');
+  if (!sel) return;
   brands.forEach(function(brand){
-    var btn = document.createElement('button');
-    btn.className = 'filter-btn'; btn.textContent = brand;
-    btn.onclick = function(){ setBrand(brand, this); };
-    container.appendChild(btn);
+    var opt = document.createElement('option');
+    opt.value = brand; opt.textContent = brand;
+    sel.appendChild(opt);
   });
-  row.classList.add('visible');
 }
 
 fetch('watches.json').then(function(r){return r.json();}).then(function(data){
   allWatches = data.watches || [];
-  buildBrandButtons(allWatches);
+  buildBrandSelect(allWatches);
   applyFilters();
 }).catch(function(){document.getElementById('grid').innerHTML='<p style="color:var(--muted);padding:60px;text-align:center;grid-column:1/-1;">Unable to load inventory. Please contact us directly.</p>';});
 
