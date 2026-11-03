@@ -476,6 +476,11 @@ function applyFilters() {
     return statusOk && brandOk;
   });
   filtered = filtered.slice().sort(function(a, b){
+    // Available pieces always before sourcing items
+    var aGroup = a.status !== 'sold' ? 0 : 1;
+    var bGroup = b.status !== 'sold' ? 0 : 1;
+    if (aGroup !== bGroup) return aGroup - bGroup;
+    // Then sort within each group
     if (sort === 'price-desc') return parsePrice(b) - parsePrice(a);
     if (sort === 'price-asc')  return parsePrice(a) - parsePrice(b);
     if (sort === 'newest') {
