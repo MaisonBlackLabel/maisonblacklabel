@@ -1,21 +1,15 @@
 {
   "watches": [
     {
-      "brand": "Rolex",
-      "price": "$23,500",
-      "model": "GMT-Master II \"Pepsi\"",
+      "brand": "Patek Philippe",
+      "price": "$28,549",
+      "model": "Calatrava",
       "boxPapers": "Full Set",
       "status": "available",
-      "ref": "126710BLRO / Stainless Steel",
-      "images": [
-        "/uploads/dsc02917.jpg",
-        "/uploads/dsc02918.jpg",
-        "/uploads/dsc02915.jpg",
-        "/uploads/dsc02878.jpg"
-      ],
-      "condition": "Mint",
-      "image": "/uploads/dsc02913.jpg",
-      "year": "2021"
+      "ref": "5227G 18k White Gold",
+      "condition": "Excellent",
+      "image": "/uploads/dsc02577.jpg",
+      "year": ""
     },
     {
       "brand": "Audemars Piguet",
@@ -36,6 +30,23 @@
       "condition": "Excellent",
       "image": "https://i.ebayimg.com/images/g/N1cAAeSwfBJqqZoM/s-l1600.jpg",
       "year": "2023"
+    },
+    {
+      "brand": "Rolex",
+      "price": "$23,500",
+      "model": "GMT-Master II \"Pepsi\"",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "126710BLRO / Stainless Steel",
+      "images": [
+        "/uploads/dsc02917.jpg",
+        "/uploads/dsc02918.jpg",
+        "/uploads/dsc02915.jpg",
+        "/uploads/dsc02878.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02913.jpg",
+      "year": "2021"
     },
     {
       "brand": "Rolex ",
@@ -65,15 +76,20 @@
       "year": "2023"
     },
     {
-      "brand": "Patek Philippe",
-      "price": "$28,549",
-      "model": "Calatrava",
+      "brand": "Rolex",
+      "price": "$30,500",
+      "model": "Daytona Black Dial",
       "boxPapers": "Full Set",
       "status": "available",
-      "ref": "5227G 18k White Gold",
-      "condition": "Excellent",
-      "image": "/uploads/dsc02577.jpg",
-      "year": ""
+      "ref": "126500LN / Stainless Steel",
+      "images": [
+        "/uploads/dsc02858.jpg",
+        "/uploads/dsc02856.jpg",
+        "/uploads/dsc02855.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02853.jpg",
+      "year": "2026"
     },
     {
       "brand": "Rolex",
@@ -115,6 +131,38 @@
       "year": "2026"
     },
     {
+      "brand": "Rolex",
+      "price": "$19,500",
+      "model": "Submariner \"Hulk\"",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "116610LV / Stainless Steel",
+      "images": [
+        "/uploads/dsc02931.jpg",
+        "/uploads/dsc02935.jpg",
+        "/uploads/dsc02930.jpg",
+        "/uploads/dsc02929.jpg",
+        "/uploads/dsc02877.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02927.jpg"
+    },
+    {
+      "brand": "Cartier",
+      "price": "$8,000",
+      "model": "Santos Medium",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "WSSA0029 / Stainless Steel",
+      "images": [
+        "/uploads/dsc02867.jpg",
+        "/uploads/dsc02866.jpg",
+        "/uploads/dsc02865.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02864.jpg"
+    },
+    {
       "brand": "Breilting",
       "price": "$4,850",
       "model": "Superocean Heritage II",
@@ -144,6 +192,58 @@
       ],
       "condition": "Excellent",
       "image": "/uploads/dsc02881.jpg"
+    },
+    {
+      "brand": "Omega",
+      "price": "$5,000",
+      "model": "Seamaster Diver 300m \"Summer Blue\"",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "210.30.42.20.03.003 / Stainless Steel",
+      "images": [
+        "/uploads/dsc02904.jpg",
+        "/uploads/dsc02907.jpg",
+        "/uploads/dsc02912.jpg",
+        "/uploads/dsc02911.jpg",
+        "/uploads/dsc02876.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02902.jpg"
+    },
+    {
+      "brand": "Omega",
+      "price": "$4,500",
+      "model": "Seamaster Diver 300m Black Wave Dial",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "210.30.42.20.01.001 / Stainless Steel",
+      "images": [
+        "/uploads/dsc02842.jpg",
+        "/uploads/dsc02845.jpg",
+        "/uploads/dsc02839.jpg",
+        "/uploads/dsc02852.jpg",
+        "/uploads/dsc02833.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02835.jpg"
+    },
+    {
+      "brand": "Tudor",
+      "price": "$5,850",
+      "model": "Black Bay Chronograph 41mm \"Panda\"",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "M79360N / Stainless Steel",
+      "images": [
+        "/uploads/dsc02943-2.jpg",
+        "/uploads/dsc02946-2.jpg",
+        "/uploads/dsc02950-2.jpg",
+        "/uploads/dsc02949-2.jpg",
+        "/uploads/dsc02937-2.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02939-2.jpg",
+      "year": "2026"
     },
     {
       "brand": "Tudor",
