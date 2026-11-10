@@ -13,6 +13,27 @@
     },
     {
       "brand": "Audemars Piguet",
+      "price": "$48,750",
+      "model": "Royal Oak Offshore Chronograph",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "26420CE / Green Ceramic",
+      "images": [
+        "/uploads/dsc02984.jpg",
+        "/uploads/dsc02983.jpg",
+        "/uploads/dsc02985.jpg",
+        "/uploads/dsc02986.jpg",
+        "/uploads/dsc02987.jpg",
+        "/uploads/dsc02988.jpg",
+        "/uploads/dsc02990.jpg",
+        "/uploads/img_5367.jpg"
+      ],
+      "condition": "Mint",
+      "image": "/uploads/dsc02996.jpg",
+      "year": "2025"
+    },
+    {
+      "brand": "Audemars Piguet",
       "price": "$47,889",
       "model": "Royal Oak Offshore Chronograph",
       "date_added": "2026-10-13",
@@ -30,6 +51,51 @@
       "condition": "Excellent",
       "image": "https://i.ebayimg.com/images/g/N1cAAeSwfBJqqZoM/s-l1600.jpg",
       "year": "2023"
+    },
+    {
+      "brand": "Rolex",
+      "price": "$41,500",
+      "model": "Yacht-Master II",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "116688 / 18k Yellow Gold",
+      "images": [
+        "/uploads/dsc02959.jpg",
+        "/uploads/dsc02958.jpg",
+        "/uploads/dsc02960.jpg",
+        "/uploads/dsc02956.jpg",
+        "/uploads/dsc02955.jpg",
+        "/uploads/dsc02957.jpg",
+        "/uploads/dsc02968.jpg",
+        "/uploads/dsc02963.jpg",
+        "/uploads/img_5301.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02953.jpg",
+      "year": "2021"
+    },
+    {
+      "brand": "Rolex",
+      "price": "$20,250",
+      "model": "GMT-Master II \"Batgirl\"",
+      "boxPapers": "Full Set",
+      "status": "available",
+      "ref": "126710BLNR / Stainless Steel",
+      "images": [
+        "/uploads/dsc02972.jpg",
+        "/uploads/dsc02971.jpg",
+        "/uploads/dsc02973.jpg",
+        "/uploads/dsc02975.jpg",
+        "/uploads/dsc02974.jpg",
+        "/uploads/dsc02976.jpg",
+        "/uploads/dsc02979.jpg",
+        "/uploads/dsc02978.jpg",
+        "/uploads/dsc02977.jpg",
+        "/uploads/img_5302.jpg"
+      ],
+      "condition": "Excellent",
+      "image": "/uploads/dsc02969.jpg",
+      "year": "2026"
     },
     {
       "brand": "Rolex",
