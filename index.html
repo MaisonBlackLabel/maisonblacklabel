@@ -1511,7 +1511,7 @@ if (!sold.length) sold = SOLD_FALLBACK;
 var html = '';
 sold.forEach(function(w, i) {
 var delay = (i % 4) + 1;
-var img = w.images && w.images[0] ? w.images[0] : '';
+var img = w.image || (w.images && w.images[0]) || '';
 html += '<div class="acq-card reveal reveal-delay-' + delay + '">';
 if (img) {
 html += '<img class="acq-img" src="' + img + '" alt="' + (w.brand||'') + ' ' + (w.model||'') + '" loading="lazy" decoding="async" />';
