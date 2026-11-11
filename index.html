@@ -1531,7 +1531,7 @@ revealObserver.observe(el);
 
 fetch('/watches.json')
 .then(function(r) { return r.json(); })
-.then(renderAcquisitions)
+.then(function(data) { renderAcquisitions(data.watches || data); })
 .catch(function() { renderAcquisitions(SOLD_FALLBACK); });
 })();
 </script>
