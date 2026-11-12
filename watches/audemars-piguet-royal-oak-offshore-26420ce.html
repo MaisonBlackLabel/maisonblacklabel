@@ -217,5 +217,26 @@ function buildThumbs(){thumbRow.innerHTML=images.map(function(src,i){return '<im
 function showImg(i){mainImg.src=images[i];document.querySelectorAll('.thumb').forEach(function(t,j){t.classList.toggle('active',j===i);});}
 buildThumbs();
 </script>
+<script>
+(function(){
+  var s=document.querySelector('script[type="application/ld+json"]');
+  if(!s)return;
+  var d;try{d=JSON.parse(s.textContent);}catch(e){return;}
+  var isSold=(d.offers&&d.offers.availability||'').indexOf('OutOfStock')!==-1;
+  var tab=isSold?'source':'inquire';
+  var p=['tab='+tab];
+  if(d.brand&&d.brand.name)p.push('brand='+encodeURIComponent(d.brand.name));
+  if(d.model)p.push('model='+encodeURIComponent(d.model));
+  var ref=(d.sku||d.productID||'').split('/')[0].trim();
+  if(ref)p.push('ref='+encodeURIComponent(ref));
+  if(d.offers&&d.offers.price)p.push('price='+encodeURIComponent('
+</html>
++Number(d.offers.price).toLocaleString()));
+  var url='/index.html?'+p.join('&');
+  document.querySelectorAll('a').forEach(function(a){
+    if(/inquire about/i.test(a.textContent))a.href=url;
+  });
+})();
+</script>
 </body>
 </html>
