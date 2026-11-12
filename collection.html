@@ -457,7 +457,7 @@ function buildInquireUrl(w) {
   var refClean = (w.ref || '').split('/')[0].split('·')[0].trim();
   if (refClean) p.push('ref=' + encodeURIComponent(refClean));
   if (w.price && w.price !== 'Inquire to Source') p.push('price=' + encodeURIComponent(w.price));
-  return 'index.html?' + p.join('&') + '#contact';
+  return 'index.html?' + p.join('&');
 }
 
 /* ── FILTER + SORT STATE ── */

@@ -1521,10 +1521,12 @@ panel.classList.toggle('active', panel.id === 'panel-' + tabId);
     if (reqEl) reqEl.value = 'I saw the ' + watchLabel + ' on your Curate page and would like to source a similar piece.';
   }
 
-  setTimeout(function() {
-    var section = document.getElementById('contact');
-    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 400);
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var section = document.getElementById('contact');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
+  });
 })();
 </script>
 
