@@ -1545,11 +1545,15 @@ panel.classList.toggle('active', panel.id === 'panel-' + tabId);
     if (reqEl) reqEl.value = 'I saw the ' + watchLabel + ' on your Curate page and would like to source a similar piece.';
   }
 
+  /* Defer scroll until after the acquisitions grid renders to avoid layout-shift misfire */
+  window.__scrollToContact = true;
   window.addEventListener('load', function() {
     setTimeout(function() {
+      if (!window.__scrollToContact) return;
+      window.__scrollToContact = false;
       var section = document.getElementById('contact');
       if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 150);
+    }, 2500); /* fallback: fires if acquisitions fetch takes >2.5s */
   });
 })();
 </script>
@@ -1597,10 +1601,19 @@ revealObserver.observe(el);
 });
 }
 
+function maybeScrollToContact() {
+  if (window.__scrollToContact) {
+    window.__scrollToContact = false;
+    setTimeout(function() {
+      var section = document.getElementById('contact');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+}
 fetch('/watches.json')
 .then(function(r) { return r.json(); })
-.then(function(data) { renderAcquisitions(data.watches || data); })
-.catch(function() { renderAcquisitions(SOLD_FALLBACK); });
+.then(function(data) { renderAcquisitions(data.watches || data); maybeScrollToContact(); })
+.catch(function() { renderAcquisitions(SOLD_FALLBACK); maybeScrollToContact(); });
 })();
 </script>
 
