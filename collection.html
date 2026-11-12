@@ -370,8 +370,9 @@ function openDetail(i) {
   specs.push({l:'Status', v:isSold ? 'Available to Source' : 'Available Now'});
   if (specs.length % 2 !== 0) specs.push({l:'', v:''});
   document.getElementById('d-specs').innerHTML = specs.map(function(s){return '<div class="spec-item"><div class="spec-label">'+s.l+'</div><div class="spec-value">'+s.v+'</div></div>';}).join('');
-  document.getElementById('d-inquire').onclick = function() { window.location.href = 'index.html#contact'; };
-  document.getElementById('d-photos').onclick = function() { window.location.href = 'index.html#contact'; };
+  var wUrl = buildInquireUrl(w);
+  document.getElementById('d-inquire').onclick = function() { window.location.href = wUrl; };
+  document.getElementById('d-photos').onclick = function() { window.location.href = wUrl + '&photos=1'; };
   syncDetail();
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -439,13 +440,25 @@ function renderCards(watches) {
     if (w.year) details += '<div class="watch-detail"><strong>Year</strong>'+w.year+'</div>';
     if (w.condition) details += '<div class="watch-detail"><strong>Condition</strong>'+w.condition+'</div>';
     if (w.boxPapers) details += '<div class="watch-detail"><strong>Box &amp; Papers</strong>'+w.boxPapers+'</div>';
-    var footer = isSold ? '<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="index.html#contact">Source This</a>' : '<span class="watch-price">'+(w.price||'')+'</span><a class="watch-btn watch-btn-primary" href="index.html#contact">Inquire</a>';
+    var inquireUrl = buildInquireUrl(w);
+    var footer = isSold ? '<span class="watch-price sourcing">Available to Source</span><a class="watch-btn watch-btn-outline" href="'+inquireUrl+'">Source This</a>' : '<span class="watch-price">'+(w.price||'')+'</span><a class="watch-btn watch-btn-primary" href="'+inquireUrl+'">Inquire</a>';
     var slug = makeSlug(w);
     return '<div class="watch-card'+(isSold?' sold-out':'')+'" data-status="'+w.status+'">'+soldTag+'<a class="watch-img-wrap" href="/watches/'+slug+'.html">'+newTag+'<img src="'+imgSrc+'" alt="'+w.brand+' '+w.model+'" loading="lazy" />'+badge+'</a><div class="watch-info"><span class="watch-brand">'+(w.brand||'')+'</span><h3 class="watch-model">'+(w.model||'')+'</h3><p class="watch-ref">'+(w.ref||'')+'</p><div class="watch-details">'+details+'</div><div class="watch-footer">'+footer+'</div></div></div>';
   }).join('');
 }
 
 function handleClick(i) { var w = currentWatches[i]; if(w) window.location.href='/watches/'+makeSlug(w)+'.html'; }
+
+function buildInquireUrl(w) {
+  var tab = w.status === 'sold' ? 'source' : 'inquire';
+  var p = ['tab=' + tab];
+  if (w.brand) p.push('brand=' + encodeURIComponent(w.brand.trim()));
+  if (w.model) p.push('model=' + encodeURIComponent(w.model));
+  var refClean = (w.ref || '').split('/')[0].split('·')[0].trim();
+  if (refClean) p.push('ref=' + encodeURIComponent(refClean));
+  if (w.price && w.price !== 'Inquire to Source') p.push('price=' + encodeURIComponent(w.price));
+  return 'index.html?' + p.join('&') + '#contact';
+}
 
 /* ── FILTER + SORT STATE ── */
 var activeStatus = 'all';

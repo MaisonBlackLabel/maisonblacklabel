@@ -1484,6 +1484,48 @@ document.querySelectorAll('.form-tab-panel').forEach(function(panel) {
 panel.classList.toggle('active', panel.id === 'panel-' + tabId);
 });
 }
+
+/* ── WATCH INQUIRY AUTO-FILL ── */
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var tab    = params.get('tab');
+  var brand  = params.get('brand') || '';
+  var model  = params.get('model') || '';
+  var ref    = params.get('ref')   || '';
+  var price  = params.get('price') || '';
+  var photos = params.get('photos');
+  if (!tab) return;
+
+  setContactTab(tab);
+
+  function q(panel, sel) { return document.querySelector('#panel-' + panel + ' ' + sel); }
+  var watchLabel = [brand, model].filter(Boolean).join(' ') + (ref ? ' (Ref. ' + ref + ')' : '');
+
+  if (tab === 'inquire') {
+    var typeEl = q('inquire', 'select[name="inquiry-type"]');
+    if (typeEl) typeEl.value = 'Specific Piece — I have a reference in mind';
+    var msgEl = q('inquire', 'textarea[name="message"]');
+    if (msgEl) {
+      var txt = 'I’m interested in the ' + watchLabel;
+      if (price) txt += ', listed at ' + price;
+      txt += '. Please let me know availability and next steps.';
+      if (photos) txt += '\n\nI’d also like to see additional photos.';
+      msgEl.value = txt;
+    }
+  } else if (tab === 'source') {
+    var brandEl = q('source', 'input[name="brand-preference"]');
+    if (brandEl && brand) brandEl.value = brand;
+    var modelEl = q('source', 'input[name="model-ref"]');
+    if (modelEl) modelEl.value = [model, ref ? 'Ref. ' + ref : ''].filter(Boolean).join(' — ');
+    var reqEl = q('source', 'textarea[name="requirements"]');
+    if (reqEl) reqEl.value = 'I saw the ' + watchLabel + ' on your Curate page and would like to source a similar piece.';
+  }
+
+  setTimeout(function() {
+    var section = document.getElementById('contact');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 400);
+})();
 </script>
 
 <!-- ── PAST ACQUISITIONS LOADER ── -->
