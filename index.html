@@ -1364,6 +1364,16 @@ section { padding: 72px 28px; }
 <form class="contact-form" name="private-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field-inquire">
 <input type="hidden" name="form-name" value="private-inquiry" />
 <input type="hidden" name="bot-field-inquire" />
+<div class="form-row" id="pi-watch-row" style="display:none;">
+<div class="form-group">
+<label class="form-label">Watch</label>
+<input class="form-input" type="text" name="watch-interest" id="pi-watch" placeholder="e.g. Rolex GMT-Master II" readonly style="background:rgba(255,255,255,0.03);cursor:default;" />
+</div>
+<div class="form-group">
+<label class="form-label">Reference</label>
+<input class="form-input" type="text" name="watch-reference" id="pi-ref" placeholder="e.g. 126710GRNR" readonly style="background:rgba(255,255,255,0.03);cursor:default;" />
+</div>
+</div>
 <div class="form-group">
 <label class="form-label">Nature of Inquiry</label>
 <select class="form-select" name="inquiry-type">
@@ -1502,8 +1512,22 @@ panel.classList.toggle('active', panel.id === 'panel-' + tabId);
   var watchLabel = [brand, model].filter(Boolean).join(' ') + (ref ? ' (Ref. ' + ref + ')' : '');
 
   if (tab === 'inquire') {
+    /* Show and populate the watch context fields */
+    var watchRow = document.getElementById('pi-watch-row');
+    if (watchRow && (brand || model || ref)) {
+      watchRow.style.display = '';
+      var watchField = document.getElementById('pi-watch');
+      if (watchField) watchField.value = [brand, model].filter(Boolean).join(' ');
+      var refField = document.getElementById('pi-ref');
+      if (refField && ref) refField.value = ref;
+    }
     var typeEl = q('inquire', 'select[name="inquiry-type"]');
-    if (typeEl) typeEl.value = 'Specific Piece — I have a reference in mind';
+    if (typeEl) {
+      var opts = typeEl.options;
+      for (var i = 0; i < opts.length; i++) {
+        if (opts[i].text.indexOf('Specific Piece') !== -1) { typeEl.selectedIndex = i; break; }
+      }
+    }
     var msgEl = q('inquire', 'textarea[name="message"]');
     if (msgEl) {
       var txt = 'I’m interested in the ' + watchLabel;
@@ -1512,7 +1536,7 @@ panel.classList.toggle('active', panel.id === 'panel-' + tabId);
       if (photos) txt += '\n\nI’d also like to see additional photos.';
       msgEl.value = txt;
     }
-  } else if (tab === 'source') {
+    } else if (tab === 'source') {
     var brandEl = q('source', 'input[name="brand-preference"]');
     if (brandEl && brand) brandEl.value = brand;
     var modelEl = q('source', 'input[name="model-ref"]');
